@@ -11,3 +11,5 @@ function App() {
     </Layout>
   );
 }
+
+export default App;
