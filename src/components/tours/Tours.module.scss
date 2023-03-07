@@ -1,0 +1,21 @@
+.tours-container {
+  padding-inline: 1rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  justify-items: center;
+  grid-gap: 2rem;
+}
+@media only screen and (min-width:768px){
+    .tours-container{
+        padding-inline: 2.5rem;
+        grid-template-columns: 1fr 1fr;
+        grid-gap:4rem;
+    }
+}
+@media only screen and (min-width:1024px){
+    .tours-container{
+        padding-inline: 3rem;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-gap:5rem;
+    }
+}
