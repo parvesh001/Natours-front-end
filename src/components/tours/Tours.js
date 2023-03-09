@@ -40,6 +40,7 @@ export default function Tours() {
             price={tour.price}
             ratingsAverage={tour.ratingsAverage}
             ratingsQuantity={tour.ratingsQuantity}
+            slug={tour.slug}
           />
         );
       })}

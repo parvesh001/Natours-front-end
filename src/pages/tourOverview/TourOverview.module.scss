@@ -1,0 +1,14 @@
+.reviews{
+    display: flex;
+    padding:2rem 3.5rem;
+    width: 100%;
+    overflow: scroll;
+    gap: 5rem;
+    background: linear-gradient(to right bottom, #519946, #27ab81);
+}
+
+@media screen and (min-width:768px) {
+    .reviews{
+        padding:5rem 10rem;
+    }
+}

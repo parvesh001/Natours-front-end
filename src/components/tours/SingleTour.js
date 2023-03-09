@@ -1,16 +1,22 @@
 import React from "react";
 import style from "./SingleTour.module.scss";
+import { useNavigate } from "react-router-dom";
 import { BiCurrentLocation } from "react-icons/bi";
 import { AiOutlineCalendar, AiOutlineFlag } from "react-icons/ai";
 import { BsFillPeopleFill } from "react-icons/bs";
 
+
 export default function SingleTour(props) {
+  const navigate = useNavigate()
   return (
     <div className={style["card"]}>
       <div className={style["card-header"]}>
         <div className={style["card-picture"]}>
           <div className={style["card-picture-overlay"]} />
-          <img src={`http://localhost:8080/img/tours/${props.imageCover}`} alt={props.name} />
+          <img
+            src={`http://localhost:8080/img/tours/${props.imageCover}`}
+            alt={props.name}
+          />
         </div>
         <div className={style["card-heading"]}>
           <h2>{props.name}</h2>
@@ -28,11 +34,16 @@ export default function SingleTour(props) {
           </div>
           <div className={style["card-data-item"]}>
             <AiOutlineCalendar />
-            <span>{props.startDates[0]}</span>
+            <span>
+              {new Date(props.startDates[0]).toLocaleString("ind", {
+                month: "short",
+                year: "numeric",
+              })}
+            </span>
           </div>
           <div className={style["card-data-item"]}>
             <AiOutlineFlag />
-            <span>{props.locations.length} stops</span>
+            <span>{props.locations.length} Stops</span>
           </div>
           <div className={style["card-data-item"]}>
             <BsFillPeopleFill />
@@ -52,7 +63,7 @@ export default function SingleTour(props) {
           </div>
         </div>
         <div className={style["controller"]}>
-          <button>Details</button>
+          <button onClick={()=>navigate(`/tour/${props.slug}`)}>Details</button>
         </div>
       </div>
     </div>

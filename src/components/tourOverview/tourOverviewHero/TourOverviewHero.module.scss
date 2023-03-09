@@ -1,0 +1,55 @@
+.tour-overview-hero {
+    position: relative;
+    height: 44vh;
+    width: 100vw;
+    .hero-img {
+      width: 100%;
+      height: 100%;
+      .hero-img-overlay {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        background-image: linear-gradient(to bottom right, #7dd56fd9, #28b487d9);
+      }
+      img {
+        -o-object-fit: cover;
+        object-fit: cover;
+        height: 100%;
+        width: 100%;
+        -o-object-position: 50% 25%;
+        object-position: 50% 25%;
+      }
+    }
+    .hero-content {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      .hero-content-title {
+        color: #fff;
+        padding: 5px 10px;
+        background-image: linear-gradient(to bottom right, #7dd56fd9, #28b487d9);
+      }
+      .hero-content-body{
+        display: flex;
+        color: #fff;
+        font-size: 1.2rem;
+        gap: 1rem;
+        margin-top: 1rem;
+        justify-content: center;
+        .hero-content-text {
+          display: flex;
+          align-items: center;
+          gap: 5px;
+          font-weight: 800;
+        }
+      }
+    }
+  }
+  
+  @media only screen and(min-width:768px) {
+    .tour-overview-hero {
+      position: relative;
+      height: 100vh;
+    }
+  }
