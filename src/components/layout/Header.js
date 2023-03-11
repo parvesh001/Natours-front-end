@@ -31,20 +31,20 @@ export default function Header() {
         {!loggedIn && (
           <ul className={style["main-nav-list"]}>
             <li className={style["main-nav-list-item"]}>
-              <a href="/">Login</a>
+              <Link to="/login">Login</Link>
             </li>
             <li className={style["main-nav-list-item"]}>
-              <a href="/">Sign Up</a>
+              <Link to="/signup">Sign Up</Link>
             </li>
           </ul>
         )}
         {loggedIn && (
           <ul className={style["main-nav-list"]}>
             <li className={style["main-nav-list-item"]}>
-              <a href="/">Logout</a>
+              <Link to="/">Logout</Link>
             </li>
             <li className={style["main-nav-list-item"]}>
-              <a href="/">Profile</a>
+              <Link to="/">Profile</Link>
             </li>
           </ul>
         )}

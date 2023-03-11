@@ -62,10 +62,10 @@ export default function TourOverviewBody(props) {
         </div>
       </div>
       <div className={style["body-section-b2"]}>
-        <h2 className={style["heading"]}>ABOUT {props.name} Tour</h2>
-        <p className={style["text"]}>
-          {props.description}
-        </p>
+        <div className={style["sub-box"]}>
+          <h2 className={style["heading"]}>ABOUT {props.name} Tour</h2>
+          <p className={style["text"]}>{props.description}</p>
+        </div>
       </div>
     </section>
   );

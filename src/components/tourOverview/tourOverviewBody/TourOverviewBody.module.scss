@@ -1,6 +1,8 @@
 .tour-overview-body {
   display: flex;
   flex-direction: column;
+  transform: skewY(-6deg);
+  transform-origin: bottom left;
   .body-section-b1 {
     width: 100%;
     background-color: #f1f1f1;
@@ -9,6 +11,7 @@
     flex-direction: column;
     align-items: center;
     .sub-box {
+      transform: skewY(6deg);
       .heading {
         font-weight: 800;
         font-size: 1.2rem;
@@ -52,21 +55,23 @@
     width: 100%;
     background-color: #fff;
     padding: 5rem;
-
-    .heading {
-      text-align: center;
-      font-weight: 800;
-      font-size: 1.2rem;
-      background: linear-gradient(to right bottom, #519946, #27ab81);
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
-      margin-bottom: 1.5rem;
-      text-transform: uppercase;
-    }
-    .text {
-      color: #666;
-      font-weight: 500;
+    .sub-box {
+      transform:skewY(6deg);
+      .heading {
+        text-align: center;
+        font-weight: 800;
+        font-size: 1.2rem;
+        background: linear-gradient(to right bottom, #519946, #27ab81);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin-bottom: 1.5rem;
+        text-transform: uppercase;
+      }
+      .text {
+        color: #666;
+        font-weight: 500;
+      }
     }
   }
 }
@@ -77,6 +82,7 @@
     .body-section-b1,
     .body-section-b2 {
       width: 50%;
+      padding:10rem 5rem;
     }
   }
 }

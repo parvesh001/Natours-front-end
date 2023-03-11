@@ -1,6 +1,8 @@
 .tour-overview-template{
     display: flex;
     width: 100vw;
+    transform:skewY(-6deg);
+    transform-origin: bottom left;
     .template-image{
           width: 33.3%;
           img{

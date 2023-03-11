@@ -2,13 +2,16 @@
     display: flex;
     padding:2rem 3.5rem;
     width: 100%;
-    overflow: scroll;
+    overflow-x: scroll;
     gap: 5rem;
     background: linear-gradient(to right bottom, #519946, #27ab81);
+    transform:skewY(-6deg);
+    transform-origin: bottom left;
+
 }
 
 @media screen and (min-width:768px) {
     .reviews{
-        padding:5rem 10rem;
+        padding:10rem 5rem;
     }
 }

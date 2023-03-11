@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import TourOverviewBody from "../../components/tourOverview/tourOverviewBody/TourOverviewBody";
 import TourOverviewHero from "../../components/tourOverview/tourOverviewHero/TourOverviewHero";
+import TourOverviewMap from "../../components/tourOverview/tourOverviewMap/TourOverviewMap";
 import TourOverviewProductCard from "../../components/tourOverview/tourOverviewProductCard/TourOverviewProductCard";
 import TourOverviewReview from "../../components/tourOverview/tourOverviewReview/TourOverviewReview";
 import TourOverviewTemplate from "../../components/tourOverview/tourOverviewTemplate/TourOverviewTemplate";
@@ -71,8 +72,9 @@ export default function TourOverview() {
         description={tour.description}
       />
       <TourOverviewTemplate images={tour.images} name={tour.name} />
+      <TourOverviewMap/>
       <section className={style["reviews"]}>{tourOverviewReviews}</section>
-      <TourOverviewProductCard images={tour.images} duration={tour.duration}/>
+      <TourOverviewProductCard images={tour.images} duration={tour.duration} />
     </>
   );
 }

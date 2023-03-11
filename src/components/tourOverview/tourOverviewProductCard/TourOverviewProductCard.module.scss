@@ -1,7 +1,10 @@
 .tour-overview-product-card {
   padding: 2rem 1rem;
   background-color: #ebebeb;
+  transform: skewY(-6deg);
+  transform-origin: bottom left;
   .product-card {
+    transform: skewY(6deg);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -44,9 +47,9 @@
         background-clip: text;
         -webkit-text-fill-color: transparent;
       }
-      p{
-        color:#666;
-        margin-top: .5rem;
+      p {
+        color: #666;
+        margin-top: 0.5rem;
       }
     }
     .card-controller {
@@ -63,14 +66,15 @@
   }
 }
 
-
 @media screen and(min-width:768px) {
-    .tour-overview-product-card {
-        padding: 5rem 10rem;
-        .product-card {
-            height: 9.5rem;
-            flex-direction: row;
-            padding: 1rem 1rem 1rem 0;
-        }
+  .tour-overview-product-card {
+    margin-bottom: 3.5rem;
+    padding: 10rem 5rem;
+    .product-card {
+      height: 9.5rem;
+      width: 70%;
+      flex-direction: row;
+      padding: 1rem 1rem 1rem 0;
     }
+  }
 }
