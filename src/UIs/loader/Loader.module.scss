@@ -1,0 +1,37 @@
+
+.loader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+  }
+  
+  .line {
+    width: 10px;
+    height: 30px;
+    margin: 0 10px;
+    background: linear-gradient(#7dd56f, #28b487);
+    animation: loading 1s ease-in-out infinite;
+  }
+
+  .line:nth-child(2){
+    animation-delay: .1s;
+  }
+  .line:nth-child(3){
+    animation-delay: .2s;
+  }
+  .line:nth-child(4){
+    animation-delay: .3s;
+  }
+  
+  @keyframes loading {
+    0% {
+      transform: scaleY(0);
+    }
+    50% {
+      transform: scaleY(1);
+    }
+    100% {
+      transform: scaleY(0);
+    }
+  }

@@ -1,0 +1,14 @@
+.backdrop{
+    background-color: rgba(0, 0, 0, 0.598);
+    position:fixed;
+    inset: 0 0 0 0;
+    z-index: 999;
+}
+
+.model-content{
+    color:#fff;
+    position: fixed;
+    top:50%;
+    left: 50%;
+    z-index: 9999;
+}

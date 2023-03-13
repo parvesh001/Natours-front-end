@@ -1,7 +1,7 @@
 import React from "react";
 import AuthForm from "../../UIs/authForm/AuthForm";
 import useInput from "../../hooks/use-input";
-import style from "./SignupForm.module.scss";
+import Input from "../../UIs/Input/Input";
 
 export default function SignupForm() {
   const {
@@ -77,50 +77,51 @@ export default function SignupForm() {
     }
   };
 
-  const nameInputClasses = nameInputHasError
-    ? `${style["form-control"]} ${style["invalid"]}`
-    : style["form-control"];
-  const emailInputClasses = emailInputHasError
-    ? `${style["form-control"]} ${style["invalid"]}`
-    : style["form-control"];
-  const passwordInputClasses = passwordInputHasError
-    ? `${style["form-control"]} ${style["invalid"]}`
-    : style["form-control"];
+  const nameInputClasses = nameInputHasError ? "invalid" : "";
+  const emailInputClasses = emailInputHasError ? "invalid" : "";
+  const passwordInputClasses = passwordInputHasError ? "invalid" : "";
   const confirmPasswordInputClasses = confirmPasswordInputHasError
-    ? `${style["form-control"]} ${style["invalid"]}`
-    : style["form-control"];
+    ? "invalid"
+    : "";
+
+  const signupFormStyle = {
+    backgroundColor: " #f2f2f2",
+    width: " 100vw",
+    height: "100vh",
+    padding: "10rem 3rem",
+  };
 
   return (
-    <AuthForm
-      onSubmit={formSubmitHandler}
-      authFormTitle="CREATE YOUR ACCOUNT"
-      authFormBtn="Signup"
-    >
-      <div className={nameInputClasses}>
-        <label htmlFor="user-name">Name</label>
-        <input
+    <div style={signupFormStyle}>
+      <AuthForm
+        onSubmit={formSubmitHandler}
+        authFormTitle="CREATE YOUR ACCOUNT"
+        authFormBtn="Signup"
+      >
+        <Input
+          className={nameInputClasses}
           type="text"
           id="user-name"
           name="user-name"
           onChange={nameChangeHandler}
           onBlur={nameBlurHandler}
           value={nameInput}
+          label="Name"
         />
-      </div>
-      <div className={emailInputClasses}>
-        <label htmlFor="user-email">Email</label>
-        <input
+
+        <Input
+          className={emailInputClasses}
           type="email"
           id="user-email"
           name="user-email"
           onChange={emailChangeHandler}
           onBlur={emailBlurHandler}
           value={emailInput}
+          label="Email"
         />
-      </div>
-      <div className={passwordInputClasses}>
-        <label htmlFor="user-password">Password</label>
-        <input
+
+        <Input
+          className={passwordInputClasses}
           type="password"
           id="user-password"
           name="user-password"
@@ -128,11 +129,11 @@ export default function SignupForm() {
           onBlur={passwordBlurHandler}
           value={passwordInput}
           autoComplete="new-password"
+          label="Password"
         />
-      </div>
-      <div className={confirmPasswordInputClasses}>
-        <label htmlFor="user-Confirmpassword">Confrim Password</label>
-        <input
+
+        <Input
+          className={confirmPasswordInputClasses}
           type="password"
           id="user-Confirmpassword"
           name="user-Confirmpassword"
@@ -140,8 +141,9 @@ export default function SignupForm() {
           onBlur={confirmPasswordBlurHandler}
           value={confirmPasswordInput}
           autoComplete="new-password"
+          label="Confirm Password"
         />
-      </div>
-    </AuthForm>
+      </AuthForm>
+    </div>
   );
 }

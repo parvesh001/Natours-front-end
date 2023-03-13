@@ -6,12 +6,16 @@ import TourOverviewMap from "../../components/tourOverview/tourOverviewMap/TourO
 import TourOverviewProductCard from "../../components/tourOverview/tourOverviewProductCard/TourOverviewProductCard";
 import TourOverviewReview from "../../components/tourOverview/tourOverviewReview/TourOverviewReview";
 import TourOverviewTemplate from "../../components/tourOverview/tourOverviewTemplate/TourOverviewTemplate";
+import Model from '../../UIs/Model/Model'
+import Loader from '../../UIs/loader/Loader'
+import HasError from "../../components/error/HasError";
 import style from "./TourOverview.module.scss";
 
 export default function TourOverview() {
   const { slug } = useParams();
-  const [tour, setTour] = useState({});
+  const [tour, setTour] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(false)
 
   useEffect(() => {
     async function fetchTour() {
@@ -27,17 +31,19 @@ export default function TourOverview() {
         const { data } = await response.json();
         setTour(data.data);
       } catch (err) {
-        console.log(err.message);
+        setError(err.message)
       }
       setIsLoading(false);
     }
     fetchTour();
   }, [slug]);
 
-  if (isLoading) return <p>Loading....</p>;
+  if (isLoading) return <Model><Loader/></Model>;
+
+  if(error)return <HasError message={error}/>
 
   let tourOverviewReviews;
-  if (!isLoading) {
+  if (!isLoading && !error) {
     tourOverviewReviews = tour.reviews.map((review) => {
       return (
         <TourOverviewReview

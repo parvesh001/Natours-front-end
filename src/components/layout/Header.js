@@ -1,13 +1,15 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../context/auth-ctx";
 import style from "./Header.module.scss";
 
 export default function Header() {
+  const authCtx = useContext(AuthContext);
   const [isOpen, setIsOpen] = useState(false);
   const navbarToggleHandler = () => {
     setIsOpen(!isOpen);
   };
-  const loggedIn = false;
+
   return (
     <header className={style["main-header"]}>
       <h4 className={style["brand-name"]}>
@@ -28,7 +30,7 @@ export default function Header() {
         <span className={style["bar"]}></span>
       </div>
       <nav className={`${style["main-nav"]} ${isOpen ? style["active"] : ""}`}>
-        {!loggedIn && (
+        {!authCtx.isLoggedIn && (
           <ul className={style["main-nav-list"]}>
             <li className={style["main-nav-list-item"]}>
               <Link to="/login">Login</Link>
@@ -38,13 +40,20 @@ export default function Header() {
             </li>
           </ul>
         )}
-        {loggedIn && (
+        {authCtx.isLoggedIn && (
           <ul className={style["main-nav-list"]}>
             <li className={style["main-nav-list-item"]}>
-              <Link to="/">Logout</Link>
+              <button onClick={()=>authCtx.logout()}>Logout</button>
             </li>
             <li className={style["main-nav-list-item"]}>
-              <Link to="/">Profile</Link>
+              <Link to="/my-profile" className={style['user-profile']}>
+                <img
+                  className={style.userPhoto}
+                  src={`http://localhost:8080/img/users/${authCtx.user.photo}`}
+                  alt={authCtx.user.name}
+                />
+                <span className={style.userName}>{authCtx.user.name}</span>
+              </Link>
             </li>
           </ul>
         )}

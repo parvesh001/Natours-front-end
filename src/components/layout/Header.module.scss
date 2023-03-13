@@ -79,10 +79,29 @@
         margin-bottom: 1rem;
         margin-right: 0;
       }
-      a {
-        text-decoration: none;
-        color: #fff;
-        font-size: 1.2rem;
+      .main-nav-list-item{
+        button{
+          background: none;
+          color:#fff;
+          border: none;
+          font-size: 1.2rem;
+          cursor: pointer;
+        }
+        .user-profile{
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          .userPhoto{
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 50%;
+          }
+        }
+        a, .userName {
+          text-decoration: none;
+          color: #fff;
+          font-size: 1.2rem;
+        }
       }
     }
   }

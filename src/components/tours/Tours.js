@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from "react";
 import SingleTour from "./SingleTour";
+import Loader from "../../UIs/loader/Loader";
+import Model from "../../UIs/Model/Model";
 import style from "./Tours.module.scss";
 
 export default function Tours() {
   const [tours, setTours] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     async function fetchTours() {
+      setIsLoading(true);
       try {
         const response = await fetch("http://localhost:8080/api/v1/tours");
         if (!response.ok) {
@@ -18,9 +22,17 @@ export default function Tours() {
       } catch (err) {
         console.log(err.message);
       }
+      setIsLoading(false);
     }
     fetchTours();
   }, []);
+
+  if (isLoading)
+    return (
+      <Model>
+        <Loader />
+      </Model>
+    );
 
   return (
     <div className={style["tours-container"]}>
