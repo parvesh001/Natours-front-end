@@ -17,7 +17,7 @@ export default function TourOverviewReview(props) {
     <div className={style["tour-overview-review"]}>
       <div className={style["review-header"]}>
         <img
-          src={`http://localhost:8080/img/users/${props.user.photo}`}
+          src={`${process.env.REACT_APP_DOMAIN_NAME}/img/users/${props.user.photo}`}
           alt={props.user.name}
         />
         <span>{props.user.name}</span>

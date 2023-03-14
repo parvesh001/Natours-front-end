@@ -14,7 +14,7 @@ export default function SingleTour(props) {
         <div className={style["card-picture"]}>
           <div className={style["card-picture-overlay"]} />
           <img
-            src={`http://localhost:8080/img/tours/${props.imageCover}`}
+            src={`${process.env.REACT_APP_DOMAIN_NAME}/img/tours/${props.imageCover}`}
             alt={props.name}
           />
         </div>

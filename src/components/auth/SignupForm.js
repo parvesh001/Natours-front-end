@@ -1,9 +1,20 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import AuthForm from "../../UIs/authForm/AuthForm";
 import useInput from "../../hooks/use-input";
 import Input from "../../UIs/Input/Input";
+import Model from "../../UIs/Model/Model";
+import Loader from "../../UIs/loader/Loader";
+import Notification from "../../UIs/notification/Notification";
+import { AuthContext } from "../../context/auth-ctx";
+import { useNavigate } from "react-router-dom";
 
 export default function SignupForm() {
+  const authCtx = useContext(AuthContext);
+  const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState();
+  const [notification, setNotification] = useState(null);
+
+
   const {
     userInput: nameInput,
     userInputIsValid: nameInputIsValid,
@@ -50,9 +61,10 @@ export default function SignupForm() {
   const formSubmitHandler = async (event) => {
     event.preventDefault();
     if (!formIsValid) return;
+    setIsLoading(true);
     try {
       const response = await fetch(
-        "http://localhost:8080/api/v1/users/signup",
+        `${process.env.REACT_APP_DOMAIN_NAME}/api/v1/users/signup`,
         {
           method: "POST",
           body: JSON.stringify({
@@ -71,10 +83,18 @@ export default function SignupForm() {
         throw new Error(errorData.message);
       }
       const data = await response.json();
-      console.log(data);
+      setNotification({ status: "success", message: "Signedup Successfully!" });
+      setTimeout(() => {
+        setNotification(null);
+        authCtx.setToken(data.token);
+        authCtx.setUser(data.data.user);
+        navigate("/");
+      }, 1000);
     } catch (err) {
-      console.log(err.message);
+      setNotification({ status: "fail", message: err.message });
+      setTimeout(() => setNotification(null), 1000);
     }
+    setIsLoading(false);
   };
 
   const nameInputClasses = nameInputHasError ? "invalid" : "";
@@ -91,6 +111,13 @@ export default function SignupForm() {
     padding: "10rem 3rem",
   };
 
+  if (isLoading)
+    return (
+      <Model>
+        <Loader />
+      </Model>
+    );
+
   return (
     <div style={signupFormStyle}>
       <AuthForm
@@ -98,6 +125,7 @@ export default function SignupForm() {
         authFormTitle="CREATE YOUR ACCOUNT"
         authFormBtn="Signup"
       >
+        {notification && <Notification notification={notification} />}
         <Input
           className={nameInputClasses}
           type="text"

@@ -9,7 +9,7 @@ export default function TourOverviewHero(props) {
       <div className={style["hero-img"]}>
         <div className={style["hero-img-overlay"]} />
         <img
-          src={`http://localhost:8080/img/tours/${props.imageCover}`}
+          src={`${process.env.REACT_APP_DOMAIN_NAME}/img/tours/${props.imageCover}`}
           alt={props.name}
         />
       </div>

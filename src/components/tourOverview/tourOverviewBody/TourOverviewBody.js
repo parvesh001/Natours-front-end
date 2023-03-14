@@ -9,7 +9,7 @@ export default function TourOverviewBody(props) {
     return (
       <div key={guide._id} className={style["data"]}>
         <img
-          src={`http://localhost:8080/img/users/${guide.photo}`}
+          src={`${process.env.REACT_APP_DOMAIN_NAME}/img/users/${guide.photo}`}
           alt={guide.name}
         />
         <span className={style["name"]}>

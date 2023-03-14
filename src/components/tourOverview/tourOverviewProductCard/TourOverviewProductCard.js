@@ -8,17 +8,17 @@ export default function TourOverviewProductCard(props) {
         <div className={style["card-images"]}>
           <img
             className={style['img1']}
-            src={`http://localhost:8080/img/logo-green-round.png`}
+            src={`${process.env.REACT_APP_DOMAIN_NAME}/img/logo-green-round.png`}
             alt="tour"
           />
           <img
           className={style['img2']}
-            src={`http://localhost:8080/img/tours/${props.images[1]}`}
+            src={`${process.env.REACT_APP_DOMAIN_NAME}/img/tours/${props.images[1]}`}
             alt="tour"
           />
           <img
           className={style['img3']}
-            src={`http://localhost:8080/img/tours/${props.images[2]}`}
+            src={`${process.env.REACT_APP_DOMAIN_NAME}/img/tours/${props.images[2]}`}
             alt="tour"
           />
         </div>

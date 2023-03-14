@@ -1,0 +1,21 @@
+.notification{
+    width: 20rem;
+    max-width: 90%;
+    background: linear-gradient(to bottom right, #519946, #27ab81);
+        padding: 1rem 2rem;
+    position: fixed;
+    top:5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    margin: auto;
+    z-index: 9999;
+    color: #fff;
+    &.error{
+        background: linear-gradient(to bottom right, #9e1616, #6b1212);
+         color:#d69393;
+    }
+    p{
+        font-weight: 600;
+    }
+}

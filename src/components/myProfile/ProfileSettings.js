@@ -1,13 +1,16 @@
-import React, { useContext, useRef } from "react";
+import React, { useContext, useRef, useState } from "react";
 import AuthForm from "../../UIs/authForm/AuthForm";
 import Input from "../../UIs/Input/Input";
 import useInput from "../../hooks/use-input";
+import Notification from "../../UIs/notification/Notification";
 import { AuthContext } from "../../context/auth-ctx";
 import style from "./ProfileSettings.module.scss";
 
 export default function ProfileSettings() {
   const authCtx = useContext(AuthContext);
+  const [notification,setNotification] = useState(null)
   const profilePhotoRef = useRef();
+
   const {
     userInput: nameInput,
     userInputIsValid: nameInputIsValid,
@@ -33,21 +36,54 @@ export default function ProfileSettings() {
     formIsValid = true;
   }
 
-  const formSubmitHandler = (event) => {
+  const formSubmitHandler = async (event) => {
     event.preventDefault();
     if (!formIsValid) return;
-    console.log("form submitted!");
+    const photo = profilePhotoRef.current.files[0]
+    const formData = new FormData()
+    formData.append('name', nameInput)
+    formData.append('email', emailInput)
+    formData.append('photo', photo)
+    try {
+      const response = await fetch(
+        `${process.env.REACT_APP_DOMAIN_NAME}/api/v1/users/updateMe`,
+        {
+          method: "PATCH",
+          body: formData,
+          headers: {
+            "Authorization": "Bearer " + authCtx.token
+          },
+        }
+      );
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message);
+      }
+      const data = await response.json();
+      setNotification({ status: "success", message: "User Updated!" });
+      setTimeout(() => {
+        setNotification(null);
+        authCtx.setUser({...data.data.user})
+      }, 1000);
+    } catch (err) {
+      console.log(err)
+      setNotification({ status: "fail", message: err.message});
+      setTimeout(() => setNotification(null), 1000);
+    }
   };
 
   const nameInputClass = nameInputHasError ? "invalid" : "";
   const emailInputClass = emailInputHasError ? "invalid" : "";
 
+  const profilePhotoURL = `${process.env.REACT_APP_DOMAIN_NAME}/img/users/${authCtx.user.photo}`
+  
   return (
     <AuthForm
       onSubmit={formSubmitHandler}
       authFormTitle="YOUR ACCOUNT SETTINGS"
       authFormBtn="SAVE SETTINGS"
     >
+       {notification && <Notification notification={notification} />}
       <Input
         id="name"
         className={nameInputClass}
@@ -70,7 +106,7 @@ export default function ProfileSettings() {
       />
       <div className={style["change-profile"]}>
         <img
-          src={`http://localhost:8080/img/users/${authCtx.user.photo}`}
+          src={profilePhotoURL}
           alt={authCtx.user.name}
         />
         <div className={style["form-control"]}>

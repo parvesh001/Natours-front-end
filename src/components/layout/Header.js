@@ -10,13 +10,20 @@ export default function Header() {
     setIsOpen(!isOpen);
   };
 
+  const profilePhotoURL = `${process.env.REACT_APP_DOMAIN_NAME}/img/users/${
+    authCtx.user.photo ? authCtx.user.photo : "default.jpg"
+  }`;
+
   return (
     <header className={style["main-header"]}>
       <h4 className={style["brand-name"]}>
         <Link to="/">NATOURS</Link>
       </h4>
       <div className={style["brand-logo"]}>
-        <img src="http://localhost:8080/img/logo-white.png" alt="logo" />
+        <img
+          src={`${process.env.REACT_APP_DOMAIN_NAME}/img/logo-white.png`}
+          alt="logo"
+        />
         <h4>
           <Link to="/">NATOURS</Link>
         </h4>
@@ -43,13 +50,13 @@ export default function Header() {
         {authCtx.isLoggedIn && (
           <ul className={style["main-nav-list"]}>
             <li className={style["main-nav-list-item"]}>
-              <button onClick={()=>authCtx.logout()}>Logout</button>
+              <button onClick={() => authCtx.logout()}>Logout</button>
             </li>
             <li className={style["main-nav-list-item"]}>
-              <Link to="/my-profile" className={style['user-profile']}>
+              <Link to="/my-profile" className={style["user-profile"]}>
                 <img
                   className={style.userPhoto}
-                  src={`http://localhost:8080/img/users/${authCtx.user.photo}`}
+                  src={profilePhotoURL}
                   alt={authCtx.user.name}
                 />
                 <span className={style.userName}>{authCtx.user.name}</span>

@@ -5,25 +5,25 @@ export default function Footer() {
   return (
     <footer className={style['footer']}>
       <div className={style["brand-logo"]}>
-        <img src="http://localhost:8080/img/logo-green.png" alt="logo" />
+        <img src={`${process.env.REACT_APP_DOMAIN_NAME}/img/logo-green.png`} alt="logo" />
       </div>
       <div>
         <nav className={style['footer-nav']}>
           <ul className={style['footer-navlist']}>
             <li className={style['footer-navlist-item']}>
-              <a href="#">About Us</a>
+              <a href="/">About Us</a>
             </li>
             <li className={style['footer-navlist-item']}>
-              <a href="#">Download App</a>
+              <a href="/">Download App</a>
             </li>
             <li className={style['footer-navlist-item']}>
-              <a href="#">Become Guide</a>
+              <a href="/">Become Guide</a>
             </li>
             <li className={style['footer-navlist-item']}>
-              <a href="#">Careers</a>
+              <a href="/">Careers</a>
             </li>
             <li className={style['footer-navlist-item']}>
-              <a href="#">Contact</a>
+              <a href="/">Contact</a>
             </li>
           </ul>
         </nav>

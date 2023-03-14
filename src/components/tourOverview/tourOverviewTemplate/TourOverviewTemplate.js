@@ -8,7 +8,7 @@ export default function TourOverviewTemplate(props) {
         return (
           <div key={image} className={style['template-image']}>
             <img
-              src={`http://localhost:8080/img/tours/${image}`}
+              src={`${process.env.REACT_APP_DOMAIN_NAME}/img/tours/${image}`}
               alt={props.name}
             />
           </div>

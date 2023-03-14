@@ -12,6 +12,7 @@ export default function Input(props) {
         onBlur={props.onBlur}
         value={props.value}
         placeholder={props.placeholder}
+        autoComplete="off"
       />
     </div>
   );

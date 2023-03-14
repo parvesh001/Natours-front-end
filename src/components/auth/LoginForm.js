@@ -6,10 +6,12 @@ import AuthForm from "../../UIs/authForm/AuthForm";
 import Input from "../../UIs/Input/Input";
 import Loader from "../../UIs/loader/Loader";
 import Model from "../../UIs/Model/Model";
+import Notification from "../../UIs/notification/Notification";
 
 export default function LoginForm() {
   const authCtx = useContext(AuthContext);
   const [isLoading, setIsLoading] = useState(false);
+  const [notification, setNotification] = useState(null);
   const navigate = useNavigate();
 
   const {
@@ -39,26 +41,34 @@ export default function LoginForm() {
     if (!formIsValid) return;
     setIsLoading(true);
     try {
-      const response = await fetch("http://localhost:8080/api/v1/users/login", {
-        method: "POST",
-        body: JSON.stringify({
-          email: emailInput,
-          password: passwordInput,
-        }),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      const response = await fetch(
+        `${process.env.REACT_APP_DOMAIN_NAME}/api/v1/users/login`,
+        {
+          method: "POST",
+          body: JSON.stringify({
+            email: emailInput,
+            password: passwordInput,
+          }),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
       if (!response.ok) {
         const errorData = await response.json();
         throw new Error(errorData.message);
       }
       const { token, data } = await response.json();
-      authCtx.setToken(token);
-      authCtx.setUser(data.user);
-      navigate("/");
+      setNotification({ status: "success", message: "Loggedin Successfully!" });
+      setTimeout(() => {
+        setNotification(null);
+        authCtx.setToken(token);
+        authCtx.setUser(data.user);
+        navigate("/");
+      }, 1000);
     } catch (err) {
-      console.log(err.message);
+      setNotification({ status: "fail", message: err.message});
+      setTimeout(() => setNotification(null), 1000);
     }
     setIsLoading(false);
   };
@@ -83,6 +93,7 @@ export default function LoginForm() {
 
   return (
     <div style={loginFormStyle}>
+      {notification && <Notification notification={notification} />}
       <AuthForm
         onSubmit={formSubmitHandler}
         authFormTitle="PLEASE LOGIN"
