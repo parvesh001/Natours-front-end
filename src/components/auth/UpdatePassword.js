@@ -7,7 +7,7 @@ import Notification from "../../UIs/notification/Notification";
 
 
 
-export default function PasswordRest() {
+export default function UpdatePassword() {
   const authCtx = useContext(AuthContext)
   const [notification, setNotification]=useState(null)
   const {

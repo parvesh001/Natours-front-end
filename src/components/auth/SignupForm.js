@@ -107,8 +107,7 @@ export default function SignupForm() {
   const signupFormStyle = {
     backgroundColor: " #f2f2f2",
     width: " 100vw",
-    height: "100vh",
-    padding: "10rem 3rem",
+    padding: "7rem 3rem 3rem 3rem",
   };
 
   if (isLoading)

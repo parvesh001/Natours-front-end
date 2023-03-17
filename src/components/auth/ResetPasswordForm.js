@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate} from "react-router-dom";
 import { AuthContext } from "../../context/auth-ctx";
 import useInput from "../../hooks/use-input";
 import AuthForm from "../../UIs/authForm/AuthForm";
@@ -7,33 +7,31 @@ import Input from "../../UIs/Input/Input";
 import Loader from "../../UIs/loader/Loader";
 import Model from "../../UIs/Model/Model";
 import Notification from "../../UIs/notification/Notification";
-import style from "./LoginForm.module.scss";
+import style from "./ResetPasswordForm.module.scss";
 
-export default function LoginForm() {
+export default function ResetPasswordForm(props) {
   const authCtx = useContext(AuthContext);
   const [isLoading, setIsLoading] = useState(false);
   const [notification, setNotification] = useState(null);
   const navigate = useNavigate();
 
   const {
-    userInput: emailInput,
-    userInputIsValid: emailInputIsValid,
-    hasError: emailInputHasError,
-    userInputChangeHandler: emailChangeHandler,
-    userInputBlurHandler: emailBlurHandler,
-  } = useInput((value) =>
-    /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(value)
-  );
-  const {
     userInput: passwordInput,
     userInputIsValid: passwordInputIsValid,
     hasError: passwordInputHasError,
     userInputChangeHandler: passwordChangeHandler,
     userInputBlurHandler: passwordBlurHandler,
-  } = useInput((value) => value.trim().length > 6);
+  } = useInput((value) => value.trim().length > 6 );
+  const {
+    userInput: confirmPasswordInput,
+    userInputIsValid: confirmPasswordInputIsValid,
+    hasError: confirmPasswordInputHasError,
+    userInputChangeHandler: confirmPasswordChangeHandler,
+    userInputBlurHandler: confirmPasswordBlurHandler,
+  } = useInput((value) => value.trim() === passwordInput);
 
   let formIsValid = false;
-  if (emailInputIsValid && passwordInputIsValid) {
+  if (confirmPasswordInputIsValid && passwordInputIsValid) {
     formIsValid = true;
   }
 
@@ -43,12 +41,12 @@ export default function LoginForm() {
     setIsLoading(true);
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_DOMAIN_NAME}/api/v1/users/login`,
+        `${process.env.REACT_APP_DOMAIN_NAME}/api/v1/users/resetPassword/${props.resetToken}`,
         {
-          method: "POST",
+          method: "PATCH",
           body: JSON.stringify({
-            email: emailInput,
             password: passwordInput,
+            passwordConfirm: confirmPasswordInput,
           }),
           headers: {
             "Content-Type": "application/json",
@@ -60,11 +58,11 @@ export default function LoginForm() {
         throw new Error(errorData.message);
       }
       const { token, data } = await response.json();
-      setNotification({ status: "success", message: "Loggedin Successfully!" });
+      setNotification({ status: "success", message: "Password Resetted Successfully!" });
       setTimeout(() => {
         setNotification(null);
         authCtx.setToken(token);
-        authCtx.setUser(data.user);
+        authCtx.setUser(data.user)
         navigate("/");
       }, 1000);
     } catch (err) {
@@ -74,8 +72,7 @@ export default function LoginForm() {
     setIsLoading(false);
   };
 
-  const emailInputClasses = emailInputHasError ? "invalid" : "";
-
+  const confirmPasswordInputClasses = confirmPasswordInputHasError ? "invalid" : "";
   const passwordInputClasses = passwordInputHasError ? "invalid" : "";
 
   if (isLoading)
@@ -85,41 +82,35 @@ export default function LoginForm() {
       </Model>
     );
 
-
-
   return (
-    <div className={style['login-form']}>
+    <div className={style['reset-password-form']}>
       {notification && <Notification notification={notification} />}
       <AuthForm
         onSubmit={formSubmitHandler}
-        authFormTitle="PLEASE LOGIN"
-        authFormBtn="Login"
+        authFormTitle="RESET YOUR PASSWORD"
+        authFormBtn="Reset"
       >
-        <Input
-          className={emailInputClasses}
-          type="email"
-          id="user-email"
-          name="user-email"
-          onChange={emailChangeHandler}
-          onBlur={emailBlurHandler}
-          value={emailInput}
-          label="Email"
-        />
-
         <Input
           className={passwordInputClasses}
           type="password"
           id="user-password"
-          name="user-password"
           onChange={passwordChangeHandler}
           onBlur={passwordBlurHandler}
           value={passwordInput}
           label="Password"
         />
+
+        <Input
+          className={confirmPasswordInputClasses}
+          type="password"
+          id="user-confirmPassword"
+          name="user-confirmPassword"
+          onChange={confirmPasswordChangeHandler}
+          onBlur={confirmPasswordBlurHandler}
+          value={confirmPasswordInput}
+          label="Confirm Password"
+        />
       </AuthForm>
-      <div className={style["reset-password-link"]}>
-        <Link to="/forget-password">Forget Your Password</Link>
-      </div>
     </div>
   );
 }

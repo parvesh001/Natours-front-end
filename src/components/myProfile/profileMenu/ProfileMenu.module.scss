@@ -3,12 +3,15 @@
   height: 100%;
   padding: 2rem 0;
   background: linear-gradient(to right bottom, #519946, #27ab81);
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
   .profile-menu-items-list {
     list-style: none;
     .profile-menu-item {
         border-left: 0 solid #fff;
-        padding: 1rem 2rem;
-        margin-bottom: 2rem;
+        padding: .5rem 2rem;
+        margin-bottom: 1.5rem;
         display: flex;
         align-items: center;
         gap:1.5rem;
@@ -29,6 +32,16 @@
       }
     }
   
+  }
+  .admin-block{
+    .admin-block-title{
+      padding:.5rem 2rem;
+      h4{
+        color:#fff;
+        border-bottom: 2px solid #fff;
+        padding-bottom: 10px;
+      }
+    }
   }
 }
 

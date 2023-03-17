@@ -1,13 +1,22 @@
-import React from "react";
-import style from "./SingleTour.module.scss";
+import React, { useContext } from "react";
+import { AuthContext } from "../../context/auth-ctx";
 import { useNavigate } from "react-router-dom";
 import { BiCurrentLocation } from "react-icons/bi";
-import { AiOutlineCalendar, AiOutlineFlag } from "react-icons/ai";
 import { BsFillPeopleFill } from "react-icons/bs";
-
+import { CgMenuRound } from "react-icons/cg";
+import {
+  AiOutlineCalendar,
+  AiOutlineFlag,
+  AiOutlineEdit,
+  AiOutlineDelete,
+  AiOutlineFolderView,
+} from "react-icons/ai";
+import StandardBtn from "../../UIs/StandardBtn/StandardBtn";
+import style from "./SingleTour.module.scss";
 
 export default function SingleTour(props) {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const authCtx = useContext(AuthContext);
   return (
     <div className={style["card"]}>
       <div className={style["card-header"]}>
@@ -62,9 +71,32 @@ export default function SingleTour(props) {
             <span>rating({props.ratingsQuantity})</span>
           </div>
         </div>
-        <div className={style["controller"]}>
-          <button onClick={()=>navigate(`/tour/${props.slug}`)}>Details</button>
-        </div>
+        {authCtx.user.role === "admin" && (
+          <div className={style["tour-menu"]}>
+            <CgMenuRound className={style["menu-icon"]} />
+            <div className={style["menu-controllers"]}>
+              <div className={style["controller"]}>
+                <AiOutlineFolderView
+                  onClick={() => navigate(`/tour/${props.slug}`)}
+                />
+              </div>
+              <div className={style["controller"]}>
+                <AiOutlineEdit />
+              </div>
+              <div className={style["controller"]}>
+                <AiOutlineDelete />
+              </div>
+            </div>
+          </div>
+        )}
+        {authCtx.user.role !== "admin" && (
+          <StandardBtn
+            type="button"
+            onClick={() => navigate(`/tour/${props.slug}`)}
+          >
+            Details
+          </StandardBtn>
+        )}
       </div>
     </div>
   );

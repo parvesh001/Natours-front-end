@@ -1,6 +1,7 @@
 .card {
   border-radius: 5px;
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.598);
+  overflow: hidden;
   .card-header {
     position: relative;
     .card-picture {
@@ -35,64 +36,84 @@
       }
     }
   }
-  .card-details{
+  .card-details {
     padding: 1.2rem 1rem;
-    .sub-heading{
-        color:#666;
-        text-transform: capitalize;
+    .sub-heading {
+      color: #666;
+      text-transform: capitalize;
     }
-    .card-text{
-        color:#888;
-        margin-top: 10px;
+    .card-text {
+      color: #888;
+      margin-top: 10px;
     }
-    .card-data{
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        margin-top: 1rem;
-        grid-gap: 1rem;
-        .card-data-item{
-            color:#55c57a;
-            span{
-                margin-left: 10px;
-                color:#888
-            }
+    .card-data {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      margin-top: 1rem;
+      grid-gap: 1rem;
+      .card-data-item {
+        color: #55c57a;
+        span {
+          margin-left: 10px;
+          color: #888;
         }
+      }
     }
   }
-  .card-footer{
+  .card-footer {
     display: flex;
     justify-content: space-between;
     padding: 1.2rem 1rem;
-    .price-rating-container{
-      .card-price{
+    .price-rating-container {
+      .card-price {
         margin-bottom: 1rem;
       }
-      .card-price, .card-rating{
+      .card-price,
+      .card-rating {
         display: flex;
-        gap:10px
+        gap: 10px;
       }
-      h4{
-        color:#666
+      h4 {
+        color: #666;
       }
-      span{
-        color:#888
+      span {
+        color: #888;
       }
     }
-    .controller{
-      align-self: flex-end;
-      button{
-        padding:10px 20px;
-        background-color: #55c57a;
-        color:#ffff;
-        border: none;
-        border-radius: 10px;
-        transition: all .2s ease-in-out;
-        cursor: pointer;
-        &:hover{
-          box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.598);
-          transform: translateY(-5px);
+    .tour-menu{
+      position: relative;
+      cursor: pointer;
+      &:hover .menu-controllers{
+        right: -20px;
+      }
+      .menu-icon {
+        align-self: flex-end;
+        color: #55c57a;
+        font-size: 2rem;
+      
+      }
+      .menu-controllers{
+        background: linear-gradient(to bottom right, #7dd56fd9, #28b487d9);
+        position: absolute;
+        padding: 2rem;
+        display: flex;
+        flex-direction: column;
+        gap:.5rem;
+        bottom: -20px;
+        border-radius: 50% 0 0 50%;
+        right: -132px;
+        transition: all .4s ease-in-out;
+        .controller{
+          color: #fff;
+          font-size: 1.5rem;
+          padding: .5rem;
+          transition: all .2s ease-in-out;
+          &:hover{
+            transform: scale(1.2);
+          }
         }
       }
     }
+    
   }
 }

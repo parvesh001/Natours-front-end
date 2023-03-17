@@ -80,7 +80,7 @@ export default function TourOverview() {
       <TourOverviewTemplate images={tour.images} name={tour.name} />
       <TourOverviewMap/>
       <section className={style["reviews"]}>{tourOverviewReviews}</section>
-      <TourOverviewProductCard images={tour.images} duration={tour.duration} />
+      <TourOverviewProductCard images={tour.images} duration={tour.duration} tourId={tour._id}/>
     </>
   );
 }

@@ -10,9 +10,7 @@ export default function Header() {
     setIsOpen(!isOpen);
   };
 
-  const profilePhotoURL = `${process.env.REACT_APP_DOMAIN_NAME}/img/users/${
-    authCtx.user.photo ? authCtx.user.photo : "default.jpg"
-  }`;
+  const profilePhotoURL = `${process.env.REACT_APP_DOMAIN_NAME}/img/users/${authCtx.user.photo}`;
 
   return (
     <header className={style["main-header"]}>

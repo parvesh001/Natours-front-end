@@ -3,8 +3,8 @@ import AuthForm from "../../UIs/authForm/AuthForm";
 import Input from "../../UIs/Input/Input";
 import useInput from "../../hooks/use-input";
 import Notification from "../../UIs/notification/Notification";
-import { AuthContext } from "../../context/auth-ctx";
-import style from "./ProfileSettings.module.scss";
+import { AuthContext } from "../../context/auth-ctx"
+import style from "./UpdateMe.module.scss";
 
 export default function ProfileSettings() {
   const authCtx = useContext(AuthContext);

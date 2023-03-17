@@ -1,0 +1,31 @@
+.login-form{
+    background-color: #f2f2f2;
+    width: 100vw;
+    height: 90vh;
+    padding: 8rem 1rem 1rem 1rem;
+    position: relative;
+    .reset-password-link{
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        top:60%;
+        a{
+          color:#999;
+          text-decoration: none;
+          &:hover{
+            color:#444
+          }
+        }
+      }
+}
+
+@media screen and(min-width:768px) {
+  .login-form{
+    height: 77vh;
+  }
+}
+@media screen and(min-width:920px) {
+  .login-form{
+    height: 100vh;
+  }
+}

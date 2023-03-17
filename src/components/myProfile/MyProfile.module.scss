@@ -1,9 +1,0 @@
-.my-profile{
-    margin-top: 4rem;
-    @media screen and(min-width:768px) {
-        &{
-            display: grid;
-            grid-template-columns: 30vw 70vw;
-        }
-    }
-}
