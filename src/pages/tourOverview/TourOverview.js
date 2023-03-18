@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import TourOverviewBody from "../../components/tourOverview/tourOverviewBody/TourOverviewBody";
-import TourOverviewHero from "../../components/tourOverview/tourOverviewHero/TourOverviewHero";
-import TourOverviewMap from "../../components/tourOverview/tourOverviewMap/TourOverviewMap";
-import TourOverviewProductCard from "../../components/tourOverview/tourOverviewProductCard/TourOverviewProductCard";
-import TourOverviewReview from "../../components/tourOverview/tourOverviewReview/TourOverviewReview";
-import TourOverviewTemplate from "../../components/tourOverview/tourOverviewTemplate/TourOverviewTemplate";
+import TourOverviewBody from "../../components/tour/tourOverview/tourOverviewBody/TourOverviewBody";
+import TourOverviewHero from "../../components/tour/tourOverview/tourOverviewHero/TourOverviewHero";
+import TourOverviewMap from "../../components/tour/tourOverview/tourOverviewMap/TourOverviewMap";
+import TourOverviewProductCard from "../../components/tour/tourOverview/tourOverviewProductCard/TourOverviewProductCard";
+import TourOverviewReview from "../../components/tour/tourOverview/tourOverviewReview/TourOverviewReview";
+import TourOverviewTemplate from "../../components/tour/tourOverview/tourOverviewTemplate/TourOverviewTemplate";
 import Model from '../../UIs/Model/Model'
 import Loader from '../../UIs/loader/Loader'
 import HasError from "../../components/error/HasError";

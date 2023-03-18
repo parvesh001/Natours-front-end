@@ -2,8 +2,8 @@ import React from "react";
 import ReactDOM from "react-dom";
 import style from "./Model.module.scss";
 
-const BackdropShadow = () => {
-  return <div className={style["backdrop"]}></div>;
+const BackdropShadow = (props) => {
+  return <div className={style["backdrop"]} onClick={props.onClose}></div>;
 };
 
 const ModelContent = (props) => {
@@ -14,7 +14,7 @@ const Model = (props) => {
   return (
     <React.Fragment>
       {ReactDOM.createPortal(
-        <BackdropShadow />,
+        <BackdropShadow onClose={props.onClose}/>,
         document.getElementById("model-root")
       )}
       {ReactDOM.createPortal(

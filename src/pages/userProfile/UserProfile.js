@@ -1,6 +1,6 @@
 import React from "react";
 import { Outlet} from "react-router-dom";
-import ProfileLayout from "../../components/myProfile/profileLayout/ProfileLayout";
+import ProfileLayout from "../../components/user/myProfile/profileLayout/ProfileLayout";
 
 export default function UserProfile() {
 

@@ -1,0 +1,55 @@
+.tour-form {
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 5px;
+  width: 90vw;
+  .title {
+    font-size: 1.5rem;
+    font-weight: 900;
+    margin-bottom: 1rem;
+  }
+  .sub-title {
+    font-size: 1rem;
+    font-weight: 900;
+  }
+  .sub-title-2 {
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+  .title,
+  .sub-title-2 {
+    background: linear-gradient(to right bottom, #519946, #27ab81);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 1.5rem;
+  }
+
+  .geo-information {
+    width: 100%;
+    .geo-info-inputs-container {
+      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-gap: 1rem;
+    }
+  }
+  .controllers {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .icon {
+      font-size: 1.8rem;
+      font-weight: 900;
+      color: #27ab81;
+      margin-top: 1rem;
+      transition: all 0.2s ease;
+      cursor: pointer;
+      margin-left: auto;
+      &:hover {
+        transform: scale(1.2);
+      }
+    }
+  }
+ 
+}

@@ -1,14 +1,16 @@
-.backdrop{
-    background-color: rgba(0, 0, 0, 0.598);
-    position:fixed;
-    inset: 0 0 0 0;
-    z-index: 999;
+.backdrop {
+  background-color: #072d0062;
+  position: fixed;
+  inset: 0 0 0 0;
+  z-index: 999999;
+  transition: all 0.4s ease;
 }
 
-.model-content{
-    position: fixed;
-    top:50%;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 9999;
+.model-content {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  z-index: 9999999;
+  transition: all 0.4s ease;
 }

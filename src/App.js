@@ -12,7 +12,7 @@ import UserProfile from "./pages/userProfile/UserProfile";
 import NotFound from "./pages/notFound/NotFound";
 import ForgetPassword from "./pages/authentication/ForgetPassword";
 import ResetPassword from "./pages/authentication/ResetPassword";
-import ManageTours from "./pages/userProfile/managment/ManageTours";
+import ManageToursPage from "./pages/userProfile/managment/ManageToursPage";
 import ProfileSettingsPage from "./pages/userProfile/selfManagment/ProfileSettingsPage";
 
 function App() {
@@ -35,8 +35,8 @@ function App() {
         <Route path="/password-reset/:resetToken" element={<ResetPassword />} />
         {authCtx.isLoggedIn && (
           <Route path="/my-profile" element={<UserProfile />}>
-            <Route path="" element={<ProfileSettingsPage/>}/>
-            <Route path="manage-tours" element={<ManageTours/>}/>
+            <Route path="settings" element={<ProfileSettingsPage/>}/>
+            <Route path="manage-tours" element={<ManageToursPage/>}/>
           </Route>
         )}
         <Route path="/" element={<Navigate replace to="/home" />} />

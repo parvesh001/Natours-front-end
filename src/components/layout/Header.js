@@ -51,7 +51,7 @@ export default function Header() {
               <button onClick={() => authCtx.logout()}>Logout</button>
             </li>
             <li className={style["main-nav-list-item"]}>
-              <Link to="/my-profile" className={style["user-profile"]}>
+              <Link to="/my-profile/settings" className={style["user-profile"]}>
                 <img
                   className={style.userPhoto}
                   src={profilePhotoURL}

@@ -1,0 +1,48 @@
+.inputs-container {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 1rem;
+}
+.sub-title {
+  background: linear-gradient(to right bottom, #519946, #27ab81);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 1.5rem;
+}
+.form-control {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 1rem;
+    &.invalid {
+      label {
+        color: red;
+      }
+      select {
+        border-color: red;
+        background-color: rgb(255, 168, 168);
+      }
+    }
+    label {
+      font-weight: 800;
+      font-size: 1rem;
+      color: #444;
+    }
+    select {
+      padding: 10px 5px;
+      background-color: #f2f2f2;
+      border: 1px solid #ababab;
+      border-radius: 5px;
+      height: 55px;
+      &:focus {
+        border: 1px solid #ababab;
+        outline: none;
+      }
+      option:hover {
+        background-color: #777;
+        color: #fff;
+      }
+    }
+  }

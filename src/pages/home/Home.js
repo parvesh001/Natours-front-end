@@ -1,5 +1,5 @@
 import React from "react";
-import Tours from "../../components/tours/Tours";
+import Tours from "../../components/tour/tours/Tours";
 
 export default function Home() {
 
