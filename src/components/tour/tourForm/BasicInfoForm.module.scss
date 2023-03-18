@@ -1,8 +1,8 @@
 .inputs-container {
   width: 100%;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-gap: 1rem;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: .6rem;
 }
 .sub-title {
   background: linear-gradient(to right bottom, #519946, #27ab81);

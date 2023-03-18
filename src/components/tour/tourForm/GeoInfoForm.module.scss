@@ -1,0 +1,111 @@
+.geo-info-form{
+    .title {
+        background: linear-gradient(to right bottom, #519946, #27ab81);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin-bottom: 1.5rem;
+      }
+      .sub-title{
+        color: #519946;
+        margin-bottom: 1.5rem;
+      }
+      .add-location-btn{
+        font-size: .7rem;
+      }
+      .inputs-container, .location-inputs-container{
+        width: 100%;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-gap: 1rem;
+      }
+     .locations-container{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: relative;
+        .location{
+            .sub-title{
+                padding: 5px 10px;
+                border: 1px solid #519946;
+                display: inline-block;
+                margin-top: 1rem;
+                position: relative;
+                .icon{
+                    position: absolute;
+                    right: -10px;
+                    top:-10px;
+                    color:rgb(196, 0, 0);
+                }
+              }
+            
+            .location-inputs-container {
+                transform: translateX(-200%);
+                visibility: hidden;
+                transition: all .4s ease-in-out;
+                position: absolute;
+                animation: disappear .4s ease;
+                @keyframes disappear {
+                    0%{
+                        opacity: 100%;
+                    }
+                    50%{
+                        opacity: 50%;
+                    }
+                    100%{
+                        opacity: 0%;
+                    }
+                }
+              }
+              &.active{
+                .sub-title{
+                    background: linear-gradient(to right bottom, #519946, #27ab81);
+                    color:#fff;
+                    .icon{
+                       display: none;
+                    }
+                  }
+                .location-inputs-container{
+                    transform: translateX(0%) scale(1);
+                    visibility: visible;
+                    position: absolute;
+                    left: 0;
+                }
+              }
+          }
+     }
+      .form-control {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-bottom: 1rem;
+        &.invalid {
+          label {
+            color: red;
+          }
+          select {
+            border-color: red;
+            background-color: rgb(255, 168, 168);
+          }
+        }
+        label {
+          font-weight: 800;
+          font-size: 1rem;
+          color: #444;
+        }
+        select {
+          padding: 10px 5px;
+          background-color: #f2f2f2;
+          border: 1px solid #ababab;
+          border-radius: 5px;
+          &:focus {
+            border: 1px solid #ababab;
+            outline: none;
+          }
+          option:hover {
+            background-color: #777;
+            color: #fff;
+          }
+        }
+      }
+}
