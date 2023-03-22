@@ -1,6 +1,4 @@
 import React, { useContext, useEffect, useState } from "react";
-import StandardBtn from "../../../UIs/StandardBtn/StandardBtn";
-import { AiOutlineArrowRight, AiOutlineArrowLeft } from "react-icons/ai";
 import BasicInfoForm from "./BasicInfoForm";
 import GeoInfoForm from "./GeoInfoForm";
 import VisualInfoForm from "./VisualInfoForm";
@@ -11,11 +9,10 @@ import style from "./TourForm.module.scss";
 export default function TourForm() {
   const { token } = useContext(AuthContext);
   const [guides, setGuides] = useState([]);
-  const [error, setError] = useState(null)
-  const [infoPage, setInfoPage] = useState(1);
-  const [v, setv] = useState(null)
-  console.log(v)
-  const lastSection = 3;
+  const [basicFormInputs, setBasicFormInputs] = useState(null);
+  const [geoFormInputs, setGeoFormInputs] = useState(null);
+  const [visualFormInputs, setVisualFormInputs] = useState(null);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     async function fetchGuides() {
@@ -35,42 +32,25 @@ export default function TourForm() {
         const data = await response.json();
         setGuides(data.data.data);
       } catch (err) {
-        setError(err.message)
+        setError(err.message);
       }
     }
     fetchGuides();
   }, [token]);
 
-  if(error)return <HasError message={error}/>
+  if (error) return <HasError message={error} />;
 
   return (
-    <form className={style["tour-form"]} onClick={()=>setv('hii')}>
-      {infoPage === 1 && <BasicInfoForm tourGuides={guides}/>}
-      {infoPage === 2 && <GeoInfoForm />}
-      {infoPage === 3 && <VisualInfoForm />}
-      <div className={style["controllers"]}>
-        {infoPage === lastSection && <StandardBtn>Submit</StandardBtn>}
-        <div className={style["direction-controllers"]}>
-          {infoPage > 1 && (
-            <AiOutlineArrowLeft
-              className={style["icon"]}
-              onClick={() => setInfoPage((prevN) => prevN - 1)}
-            />
-          )}
-          {infoPage < lastSection && (
-            <AiOutlineArrowRight
-              className={style["icon"]}
-              onClick={() => setInfoPage((prevNum) => prevNum + 1)}
-            />
-          )}
-        </div>
-      </div>
-    </form>
+    <div className={style["tour-form"]}>
+      {!basicFormInputs && (
+        <BasicInfoForm
+          tourGuides={guides}
+          onCompletingBasicForm={(inputs) => setBasicFormInputs({ ...inputs })}
+        />
+      )}
+      {basicFormInputs && !geoFormInputs && <GeoInfoForm onCompletingGeoForm={(inputs) => setGeoFormInputs({ ...inputs })} />}
+
+      {basicFormInputs && geoFormInputs && <VisualInfoForm />}
+    </div>
   );
 }
-
-//things to add in input
-// className={emailInputClasses}
-// onChange={emailChangeHandler}
-// onBlur={emailBlurHandler}
-// value={emailInput}

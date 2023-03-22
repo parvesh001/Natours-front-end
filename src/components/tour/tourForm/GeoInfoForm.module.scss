@@ -1,117 +1,125 @@
-.geo-info-form{
-    .title {
-        background: linear-gradient(to right bottom, #519946, #27ab81);
-        -webkit-background-clip: text;
-        background-clip: text;
-        -webkit-text-fill-color: transparent;
-        margin-bottom: 1.5rem;
+.geo-info-form {
+  .form-control {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 1rem;
+    &.invalid {
+      label {
+        color: red;
       }
-      .sub-title-1{
-        color: #519946;
-        margin-bottom: 1.5rem;
+      select {
+        border-color: red;
+        background-color: rgb(255, 168, 168);
       }
-      .add-location-btn{
-        font-size: .7rem;
+    }
+    label {
+      font-weight: 800;
+      font-size: 1rem;
+      color: #444;
+    }
+    select {
+      padding: 10px 5px;
+      background-color: #f2f2f2;
+      border: 1px solid #ababab;
+      border-radius: 5px;
+      &:focus {
+        border: 1px solid #ababab;
+        outline: none;
       }
-      .inputs-container, .location-inputs-container{
+      option:hover {
+        background-color: #777;
+        color: #fff;
+      }
+    }
+  }
+  .title {
+    background: linear-gradient(to right bottom, #519946, #27ab81);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 1.5rem;
+  }
+  .sub-title {
+    color: #519946;
+    margin-bottom: 1.5rem;
+  }
+  .inputs-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 1rem;
+  }
+  .submit-btn{
+      display: block;
+      margin-left: auto;
+      transform: translateY(13.5rem);
+  }
+
+  .locations-section {
+    margin-top: 1rem;
+    .location-controller {
+      display: block;
+      margin-left: auto;
+      font-size: 0.8rem;
+    }
+    .locations-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+      .location {
         width: 100%;
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            grid-gap: 1rem;
-      }
-     .locations-container{
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        position: relative;
-        .location{
-            .sub-title-2{
-                padding: 5px 10px;
-                border: 1px solid #519946;
-                color:#519946;
-                // margin-bottom: 1rem;
-                display: inline-block;
-                position: relative;
-                h3{
-                  cursor: pointer;
-                }
-                .icon{
-                    position: absolute;
-                    right: -10px;
-                    top:-10px;
-                    color:rgb(196, 0, 0);
-                    cursor: pointer;
-                }
-              }
-            
-            .location-inputs-container {
-                transform: translateX(-200%);
-                visibility: hidden;
-                transition: all .4s ease-in-out;
-                position: absolute;
-                animation: disappear .4s ease;
-                @keyframes disappear {
-                    0%{
-                        opacity: 100%;
-                    }
-                    50%{
-                        opacity: 50%;
-                    }
-                    100%{
-                        opacity: 0%;
-                    }
-                }
-              }
-              &.active{
-                .sub-title-2{
-                    background: linear-gradient(to right bottom, #519946, #27ab81);
-                    color:#fff;
-                    .icon{
-                       display: none;
-                    }
-                  }
-                .location-inputs-container{
-                    transform: translateX(0%) scale(1);
-                    visibility: visible;
-                    position: absolute;
-                    left: 0;
-                    top:4rem;
-                }
-              }
+        .sub-title {
+          padding: 5px 10px;
+          border: 1px solid #519946;
+          display: inline-block;
+          position: relative;
+          h3{
+            cursor: pointer;
           }
-     }
-      .form-control {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        margin-bottom: 1rem;
-        &.invalid {
-          label {
-            color: red;
-          }
-          select {
-            border-color: red;
-            background-color: rgb(255, 168, 168);
+          .delete-location-icon {
+            position: absolute;
+            cursor: pointer;
+            right: -10px;
+            top: -10px;
+            color: rgb(196, 0, 0);
           }
         }
-        label {
-          font-weight: 800;
-          font-size: 1rem;
-          color: #444;
-        }
-        select {
-          padding: 10px 5px;
-          background-color: #f2f2f2;
-          border: 1px solid #ababab;
-          border-radius: 5px;
-          &:focus {
-            border: 1px solid #ababab;
-            outline: none;
+
+        .location-inputs-container {
+          transform: translateX(-200%);
+          visibility: hidden;
+          position: absolute;
+          width: 100%;
+          transition: all 0.4s ease-in-out;
+          animation: disappear 0.4s ease;
+          @keyframes disappear {
+            0% {
+              opacity: 100%;
+            }
+            50% {
+              opacity: 50%;
+            }
+            100% {
+              opacity: 0%;
+            }
           }
-          option:hover {
-            background-color: #777;
+        }
+        &.active {
+          .sub-title {
+            background: linear-gradient(to right bottom, #519946, #27ab81);
             color: #fff;
+            .delete-location-icon {
+              display: none;
+            }
+          }
+          .location-inputs-container {
+            transform: translateX(0%) scale(1);
+            visibility: visible;
+            left: 0;
           }
         }
       }
+    }
+  }
 }

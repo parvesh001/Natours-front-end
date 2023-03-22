@@ -13,10 +13,10 @@
         box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.603);
     }
     &:disabled{
-        background: #aadaa3;
-        cursor:not-allowed;
-        transform: none; /* Remove hover effect */
-        box-shadow: none; /* Remove hover effect */
+        background: gray;
+        transform: none;
+        box-shadow: none;
+        cursor: not-allowed;
     }
 }
 

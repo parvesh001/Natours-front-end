@@ -3,8 +3,8 @@ import style from './StandardBtn.module.scss'
 
 export default function StandardBtn(props) {
   return (
-    <button type={props.type} onClick={props.onClick} className={`${style['standard-btn']} ${props.className}`} disabled={props.disabled}>
-     {props.children}
+    <button type={props.type} disabled={props.disabled} onClick={props.onClick} className={`${style['standard-btn']} ${props.className}`}>
+      {props.children}
     </button>
   );
 }

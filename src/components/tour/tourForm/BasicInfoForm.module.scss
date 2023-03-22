@@ -16,15 +16,6 @@
     flex-direction: column;
     gap: 10px;
     margin-bottom: 1rem;
-    &.invalid {
-      label {
-        color: red;
-      }
-      select {
-        border-color: red;
-        background-color: rgb(255, 168, 168);
-      }
-    }
     label {
       font-weight: 800;
       font-size: 1rem;
@@ -40,9 +31,16 @@
         border: 1px solid #ababab;
         outline: none;
       }
-      option:hover {
-        background-color: #777;
-        color: #fff;
+      option{
+        font-size: 1rem;
+        &:hover {
+          background-color: #777;
+          color: #fff;
+        }
       }
     }
+  }
+  .submit-btn{
+    display: block;
+    margin-left: auto;
   }

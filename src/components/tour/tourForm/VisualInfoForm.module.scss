@@ -1,10 +1,15 @@
 
-.visual-info-form{
+  .visual-info-form{
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    height: 90%;
-}
+    height: 100%;
+  }
+  .submit-btn{
+    display: block;
+    margin-left: auto;
+  }
+
   .title {
     background: linear-gradient(to right bottom, #519946, #27ab81);
     -webkit-background-clip: text;

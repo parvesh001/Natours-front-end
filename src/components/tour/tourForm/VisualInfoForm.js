@@ -1,10 +1,11 @@
 import React from "react";
 import Input from "../../../UIs/Input/Input";
+import StandardBtn from "../../../UIs/StandardBtn/StandardBtn";
 import style from "./VisualInfoForm.module.scss";
 
 export default function VisualInfoForm() {
   return (
-    <div className={style['visual-info-form']}>
+    <form className={style['visual-info-form']}>
       <div>
         <h2 className={style["title"]}>VISUAL INFORMATION</h2>
         <div className={style["inputs-container"]}>
@@ -24,6 +25,7 @@ export default function VisualInfoForm() {
           <Input type="date" id="date-2" label="Date 4" />
         </div>
       </div>
-    </div>
+      <StandardBtn className={style['submit-btn']}>Submit</StandardBtn>
+    </form>
   );
 }

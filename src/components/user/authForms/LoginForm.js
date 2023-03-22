@@ -23,7 +23,7 @@ export default function LoginForm() {
     userInputBlurHandler: emailBlurHandler,
   } = useInput((value) =>
     /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(value)
-  );
+  ); 
   const {
     userInput: passwordInput,
     userInputIsValid: passwordInputIsValid,
