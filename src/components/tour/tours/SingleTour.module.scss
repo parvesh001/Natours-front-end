@@ -63,7 +63,11 @@
   .card-footer {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     padding: 1.2rem 1rem;
+    .controller{
+      font-size: 16px;
+    }
     .price-rating-container {
       .card-price {
         margin-bottom: 1rem;

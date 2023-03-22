@@ -6,7 +6,7 @@
         -webkit-text-fill-color: transparent;
         margin-bottom: 1.5rem;
       }
-      .sub-title{
+      .sub-title-1{
         color: #519946;
         margin-bottom: 1.5rem;
       }
@@ -25,17 +25,22 @@
         align-items: center;
         position: relative;
         .location{
-            .sub-title{
+            .sub-title-2{
                 padding: 5px 10px;
                 border: 1px solid #519946;
+                color:#519946;
+                // margin-bottom: 1rem;
                 display: inline-block;
-                margin-top: 1rem;
                 position: relative;
+                h3{
+                  cursor: pointer;
+                }
                 .icon{
                     position: absolute;
                     right: -10px;
                     top:-10px;
                     color:rgb(196, 0, 0);
+                    cursor: pointer;
                 }
               }
             
@@ -58,7 +63,7 @@
                 }
               }
               &.active{
-                .sub-title{
+                .sub-title-2{
                     background: linear-gradient(to right bottom, #519946, #27ab81);
                     color:#fff;
                     .icon{
@@ -70,6 +75,7 @@
                     visibility: visible;
                     position: absolute;
                     left: 0;
+                    top:4rem;
                 }
               }
           }

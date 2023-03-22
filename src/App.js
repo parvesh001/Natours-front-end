@@ -18,7 +18,7 @@ import ProfileSettingsPage from "./pages/userProfile/selfManagment/ProfileSettin
 function App() {
   const authCtx = useContext(AuthContext);
   const dispatch = useDispatch()
-  console.log(authCtx)
+  // console.log(authCtx)
 
   useEffect(()=>{
     dispatch(fetchAllTours())

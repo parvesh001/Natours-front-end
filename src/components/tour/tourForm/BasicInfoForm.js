@@ -3,7 +3,8 @@ import Input from "../../../UIs/Input/Input";
 import Textarea from "../../../UIs/textArea/Textarea";
 import style from "./BasicInfoForm.module.scss";
 
-export default function BasicInfoForm() {
+export default function BasicInfoForm(props) {
+
   const [selectedValues, setSelectedValues] = useState([]);
   const handleSelectChange = (event) => {
     const selectedOptions = Array.from(event.target.selectedOptions);
@@ -14,7 +15,7 @@ export default function BasicInfoForm() {
     <>
       <h2 className={style["sub-title"]}>BASIC INFORMATION</h2>
       <div className={style["inputs-container"]}>
-        <Input type="text" id="tour-name" name="tour-name" label="Name" />
+        <Input type="text" id="tour-name" name="tour-name" label="Name"/>
         <Input
           type="number"
           id="tour-duration"

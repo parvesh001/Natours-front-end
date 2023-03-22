@@ -94,8 +94,9 @@ export default function SingleTour(props) {
           <StandardBtn
             type="button"
             onClick={() => navigate(`/tour/${props.slug}`)}
+            className={style['controller']}
           >
-            Details
+           Details
           </StandardBtn>
         )}
       </div>

@@ -92,6 +92,7 @@ export default function SignupForm() {
         navigate("/");
       }, 1000);
     } catch (err) {
+      console.log(err)
       setNotification({ status: "fail", message: err.message });
       setTimeout(() => setNotification(null), 1000);
     }
