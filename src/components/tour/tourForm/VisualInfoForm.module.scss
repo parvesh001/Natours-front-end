@@ -1,0 +1,25 @@
+.sub-title {
+    background: linear-gradient(to right bottom, #519946, #27ab81);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 1.5rem;
+  }
+
+  .inputs-container {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 0.6rem;
+  }
+
+  .visual-info-form{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 100%;
+  }
+  .submit-btn{
+    display: block;
+    margin-left: auto;
+  }
