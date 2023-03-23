@@ -11,7 +11,7 @@ const uid = function () {
 
 export default function GeoInfoForm(props) {
   const [startLocation, setStartLocation] = useState({
-    type: "point",
+    type: "Point",
     latitude: "",
     longitude: "",
     description: "",
@@ -22,7 +22,7 @@ export default function GeoInfoForm(props) {
   const [locationInputs, setLocationInputs] = useState([
     {
       id: locations[0].id,
-      type: "point",
+      type: "Point",
       latitude: "",
       longitude: "",
       description: "",
@@ -52,7 +52,7 @@ export default function GeoInfoForm(props) {
         ...locationInputs,
         {
           id,
-          type: "point",
+          type: "Point",
           latitude: "",
           longitude: "",
           description: "",
@@ -79,7 +79,6 @@ export default function GeoInfoForm(props) {
     });
   };
 
-
   const locationClickHandler = (id) => {
     setLocations((prevLoctions) => {
       const updatedLocations = prevLoctions.map((location) => {
@@ -103,11 +102,29 @@ export default function GeoInfoForm(props) {
 
   const formSubmitHandler = (event) => {
     event.preventDefault();
-    props.onCompletingGeoForm({startLocation, locationInputs})
+    const transformedStartLocation = {
+      type: startLocation.type,
+      coordinates: [startLocation.latitude, startLocation.longitude],
+      address: startLocation.address,
+      description: startLocation.description,
+    }
+    const transformedLocations = locationInputs.map(location => {
+      return {
+        type:location.type,
+        coordinates:[location.latitude, location.longitude],
+        address:location.address,
+        day:location.day,
+        description:location.description
+      }
+    })
+    props.onCompletingGeoForm({
+      startLocation: transformedStartLocation,
+      locations:transformedLocations,
+    });
   };
 
   return (
-    <form className={style["geo-info-form"]} onSubmit={formSubmitHandler}>
+    <form className={style["geo-info-form"]} onSubmit={formSubmitHandler} noValidate>
       <h2 className={style["title"]}>GEO INFORMATION</h2>
       <div>
         <h3 className={style["sub-title"]}>Start Location</h3>
@@ -115,7 +132,7 @@ export default function GeoInfoForm(props) {
           <div className={style["form-control"]}>
             <label htmlFor="select-guide">Select Type</label>
             <select>
-              <option value="point" selected>
+              <option value="Point" selected>
                 Point
               </option>
             </select>
@@ -185,7 +202,7 @@ export default function GeoInfoForm(props) {
                   <div className={style["form-control"]}>
                     <label htmlFor="select-guide">Select Type</label>
                     <select id="select-guide">
-                      <option value="point" selected>
+                      <option value="Point" defaultValue='point'>
                         Point
                       </option>
                     </select>

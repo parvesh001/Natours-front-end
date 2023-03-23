@@ -9,9 +9,39 @@ import style from "./TourForm.module.scss";
 export default function TourForm() {
   const { token } = useContext(AuthContext);
   const [guides, setGuides] = useState([]);
-  const [basicFormInputs, setBasicFormInputs] = useState(null);
-  const [geoFormInputs, setGeoFormInputs] = useState(null);
-  const [visualFormInputs, setVisualFormInputs] = useState(null);
+  const [basicFormInputs, setBasicFormInputs] = useState({
+    name: null,
+    duration: null,
+    maxGroupSize: null,
+    ratingsAverage: null,
+    ratingsQuantity: null,
+    price: null,
+    discount: null,
+    difficulty: null,
+    secret: null,
+    description: null,
+    summary: null,
+    guides: [],
+  });
+  const [geoFormInputs, setGeoFormInputs] = useState({
+    startLocation: {
+      type: null,
+      coordinates: [],
+      address: null,
+      description: null,
+    },
+    locations: [
+      {
+        type: null,
+        coordinates: [],
+        address: null,
+        description: null,
+        day: null,
+      },
+    ],
+  });
+  const [basicFormIsCompleted, setBasicFormIsCompleted] = useState(false);
+  const [geoFormIsCompleted, setGeoFormIsCompleted] = useState(false);
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -40,17 +70,93 @@ export default function TourForm() {
 
   if (error) return <HasError message={error} />;
 
+  const tourFormSubmitHandler = async (visualInfo) => {
+    const tourData = {
+      name:basicFormInputs.name,
+      duration:basicFormInputs.duration,
+      maxGroupSize:basicFormInputs.maxGroupSize,
+      ratingsAverage:basicFormInputs.ratingsAverage,
+      ratingsQuantity:basicFormInputs.ratingsQuantity,
+      price:basicFormInputs.price,
+      priceDiscount:basicFormInputs.discount,
+      description:basicFormInputs.description,
+      summary:basicFormInputs.summary,
+      secret:basicFormInputs.secret,
+      guides:[...basicFormInputs.guides],
+      difficulty:basicFormInputs.difficulty,
+      startLocation:geoFormInputs.startLocation,
+      locations:geoFormInputs.locations,
+      startDates:visualInfo.startDates
+    }
+    try {
+      const response = await fetch(
+        `${process.env.REACT_APP_DOMAIN_NAME}/api/v1/tours`,
+        {
+          method: "POST",
+          body: JSON.stringify(tourData),
+          headers: {
+            Authorization: "Bearer " + token,
+            'Content-Type':'application/json'
+          },
+        }
+      );
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message);
+      }
+      const {data} = await response.json();
+     
+      const formData = new FormData();
+      formData.append("imageCover", visualInfo.imageCover);
+      formData.append("images", visualInfo.images[0]);
+      formData.append("images", visualInfo.images[1]);
+      formData.append("images", visualInfo.images[2]);
+
+      const results = await fetch(`${process.env.REACT_APP_DOMAIN_NAME}/api/v1/tours/${data.data._id}`, {
+          method:"PATCH",
+          body:formData,
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+      })
+      if(!results.ok){
+        const errorData = await results.json()
+        throw new Error(errorData.message)
+      }
+      const finalData = await results.json();
+      console.log(finalData)
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <div className={style["tour-form"]}>
-      {!basicFormInputs && (
+      {!basicFormIsCompleted && (
         <BasicInfoForm
           tourGuides={guides}
-          onCompletingBasicForm={(inputs) => setBasicFormInputs({ ...inputs })}
+          onCompletingBasicForm={(inputs) => {
+            setBasicFormInputs({ ...inputs });
+            setBasicFormIsCompleted(true);
+          }}
         />
       )}
-      {basicFormInputs && !geoFormInputs && <GeoInfoForm onCompletingGeoForm={(inputs) => setGeoFormInputs({ ...inputs })} />}
+      {basicFormIsCompleted && !geoFormIsCompleted && (
+        <GeoInfoForm
+          onCompletingGeoForm={(inputs) => {
+            setGeoFormInputs({ ...inputs });
+            setGeoFormIsCompleted(true);
+          }}
+        />
+      )}
 
-      {basicFormInputs && geoFormInputs && <VisualInfoForm />}
+      {basicFormIsCompleted && geoFormIsCompleted && (
+        <VisualInfoForm
+          onSubmittingTourForm={(visualInfo) =>
+            tourFormSubmitHandler(visualInfo)
+          }
+        />
+      )}
     </div>
   );
 }

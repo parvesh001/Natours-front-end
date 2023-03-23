@@ -44,6 +44,7 @@ export default function ProfileSettings() {
     formData.append('name', nameInput)
     formData.append('email', emailInput)
     formData.append('photo', photo)
+    
     try {
       const response = await fetch(
         `${process.env.REACT_APP_DOMAIN_NAME}/api/v1/users/updateMe`,

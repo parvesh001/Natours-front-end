@@ -142,9 +142,8 @@ export default function BasicInfoForm(props) {
       secret:secretInput.trim() === '' ? false: secretInput,
       description:descriptionInput,
       summary:summaryInput,
-      guides:selectedGuides
+      guides:[...selectedGuides]
     };
-    // console.log(basicFormInputs)
     props.onCompletingBasicForm(basicFormInputs);
   };
 
