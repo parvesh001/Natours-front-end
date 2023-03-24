@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import BasicInfoForm from "./BasicInfoForm";
 import GeoInfoForm from "./GeoInfoForm";
 import VisualInfoForm from "./VisualInfoForm";
@@ -6,9 +7,11 @@ import HasError from "../../error/HasError";
 import Model from "../../../UIs/Model/Model";
 import Loader from "../../../UIs/loader/Loader";
 import { AuthContext } from "../../../context/auth-ctx";
+import { tourSliceActions } from "../../../store/tour-slice";
 import style from "./TourForm.module.scss";
 
 export default function TourForm(props) {
+  const dispatch = useDispatch()
   const { token } = useContext(AuthContext);
   const [guides, setGuides] = useState([]);
   const [basicFormInputs, setBasicFormInputs] = useState({});
@@ -100,12 +103,12 @@ export default function TourForm(props) {
         throw new Error(errorData.message);
       }
       const finalData = await results.json();
-      console.log(finalData);
+      dispatch(tourSliceActions.createTour(finalData.data.data))
+      props.onClose()
     } catch (err) {
       setError(err.message);
     }
     setIsLoading(false);
-    props.onClose()
   };
 
   if (error) return <HasError message={error} />;
