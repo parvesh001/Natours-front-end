@@ -4,19 +4,45 @@ import Textarea from "../../../UIs/textArea/Textarea";
 import StandardBtn from "../../../UIs/StandardBtn/StandardBtn";
 import { GiCancel } from "react-icons/gi";
 import style from "./GeoInfoForm.module.scss";
+import useInput from "../../../hooks/use-input";
 
 const uid = function () {
   return Date.now().toString(36) + Math.random().toString(36).substring(2);
 };
 
 export default function GeoInfoForm(props) {
-  const [startLocation, setStartLocation] = useState({
-    type: "Point",
-    latitude: "",
-    longitude: "",
-    description: "",
-    address: "",
-  });
+  const {
+    userInput: startLocationLatitudeInput,
+    userInputIsValid: startLocationLatitudeInputIsValid,
+    hasError: startLocationLatitudeInputHasError,
+    userInputChangeHandler: startLocationLatitudeChangeHandler,
+    userInputBlurHandler: startLocationLatitudeBlurHandler,
+  } = useInput((value) =>
+    /^(-?[1-8]?\d(?:\.\d{1,18})?|90(?:\.0{1,18})?)$/.test(value)
+  );
+  const {
+    userInput: startLocationLongitudeInput,
+    userInputIsValid: startLocationLongitudeInputIsValid,
+    hasError: startLocationLongitudeInputHasError,
+    userInputChangeHandler: startLocationLongitudeChangeHandler,
+    userInputBlurHandler: startLocationLongitudeBlurHandler,
+  } = useInput((value) =>
+    /^(?:-?(?:1[0-7]|[1-9])?\d(?:\.\d{1,18})?|180(?:\.0{1,18})?)$/.test(value)
+  );
+  const {
+    userInput: startLocationAddressInput,
+    userInputIsValid: startLocationAddressInputIsValid,
+    hasError: startLocationAddressInputHasError,
+    userInputChangeHandler: startLocationAddressChangeHandler,
+    userInputBlurHandler: startLocationAddressBlurHandler,
+  } = useInput((value) => value.trim().length > 3);
+  const {
+    userInput: startLocationDescriptionInput,
+    userInputIsValid: startLocationDescriptionInputIsValid,
+    hasError: startLocationDescriptionInputHasError,
+    userInputChangeHandler: startLocationDescriptionChangeHandler,
+    userInputBlurHandler: startLocationDescriptionBlurHandler,
+  } = useInput((value) => value.trim().length > 3);
 
   const [locations, setLocations] = useState([{ id: uid(), isActive: true }]);
   const [locationInputs, setLocationInputs] = useState([
@@ -27,10 +53,11 @@ export default function GeoInfoForm(props) {
       longitude: "",
       description: "",
       day: "",
-      address: "",
+      address: ""
     },
   ]);
-  const [errorInputs, setErrorInputs] = useState([{ id: "", field: "" }]);
+  
+  const [errorInputs, setErrorInputs] = useState([]);
 
   const validateInputs = (value, id, field) => {
     let valueIsValid;
@@ -73,14 +100,6 @@ export default function GeoInfoForm(props) {
     }
   };
 
-  const startLocationChangeHandler = (event, field) => {
-    setStartLocation((startLocation) => {
-      let newStartLocation = { ...startLocation };
-      newStartLocation[field] = event.target.value;
-      return newStartLocation;
-    });
-  };
-
   const locationInputChangeHandler = (index, field, event, id) => {
     let value = event.target.value;
     setLocationInputs((locationInputs) => {
@@ -119,7 +138,7 @@ export default function GeoInfoForm(props) {
           longitude: "",
           description: "",
           day: "",
-          address: "",
+          address: ""
         },
       ];
       return newLocationInputs;
@@ -160,13 +179,23 @@ export default function GeoInfoForm(props) {
     return isInValid;
   };
 
+  let formIsValid = false;
+  if (
+    startLocationLatitudeInputIsValid &&
+    startLocationLongitudeInputIsValid &&
+    startLocationAddressInputIsValid &&
+    startLocationDescriptionInputIsValid
+  ) {
+    formIsValid = true
+  }
+
   const formSubmitHandler = (event) => {
     event.preventDefault();
     const transformedStartLocation = {
-      type: startLocation.type,
-      coordinates: [startLocation.latitude, startLocation.longitude],
-      address: startLocation.address,
-      description: startLocation.description,
+      type: 'Point',
+      coordinates: [startLocationLatitudeInput, startLocationLongitudeInput],
+      address: startLocationAddressInput,
+      description: startLocationDescriptionInput,
     };
     const transformedLocations = locationInputs.map((location) => {
       return {
@@ -182,6 +211,19 @@ export default function GeoInfoForm(props) {
       locations: transformedLocations,
     });
   };
+
+  const startLocationLatitudeClass = startLocationLatitudeInputHasError
+    ? "invalid"
+    : "";
+  const startLocationLongitudeClass = startLocationLongitudeInputHasError
+    ? "invalid"
+    : "";
+  const startLocationAddressClass = startLocationAddressInputHasError
+    ? "invalid"
+    : "";
+  const startLocationDescriptionClass = startLocationDescriptionInputHasError
+    ? "invalid"
+    : "";
 
   return (
     <form
@@ -202,33 +244,43 @@ export default function GeoInfoForm(props) {
             </select>
           </div>
           <Input
+            className={startLocationLatitudeClass}
             type="number"
             id="latitude"
             name="latitude"
             label="Latitude"
-            onChange={(event) => startLocationChangeHandler(event, "latitude")}
+            onChange={startLocationLatitudeChangeHandler}
+            onBlur={startLocationLatitudeBlurHandler}
+            value={startLocationLatitudeInput}
           />
           <Input
+            className={startLocationLongitudeClass}
             type="number"
             id="longitude"
             name="longitude"
             label="Longitude"
-            onChange={(event) => startLocationChangeHandler(event, "longitude")}
+            onChange={startLocationLongitudeChangeHandler}
+            onBlur={startLocationLongitudeBlurHandler}
+            value={startLocationLongitudeInput}
           />
           <Input
+            className={startLocationAddressClass}
             type="text"
             id="address"
             name="address"
             label="Address"
-            onChange={(event) => startLocationChangeHandler(event, "address")}
+            onChange={startLocationAddressChangeHandler}
+            onBlur={startLocationAddressBlurHandler}
+            value={startLocationAddressInput}
           />
           <Textarea
+            className={startLocationDescriptionClass}
             id="description"
             name="description"
             label="Description"
-            onChange={(event) =>
-              startLocationChangeHandler(event, "description")
-            }
+            onChange={startLocationDescriptionChangeHandler}
+            onBlur={startLocationDescriptionBlurHandler}
+            value={startLocationDescriptionInput}
           />
         </div>
       </div>
@@ -405,7 +457,11 @@ export default function GeoInfoForm(props) {
           })}
         </div>
       </section>
-      <StandardBtn className={style["submit-btn"]} type="submit">
+      <StandardBtn
+        disabled={!formIsValid}
+        className={style["submit-btn"]}
+        type="submit"
+      >
         Next
       </StandardBtn>
     </form>

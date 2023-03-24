@@ -3,10 +3,12 @@ import BasicInfoForm from "./BasicInfoForm";
 import GeoInfoForm from "./GeoInfoForm";
 import VisualInfoForm from "./VisualInfoForm";
 import HasError from "../../error/HasError";
+import Model from "../../../UIs/Model/Model";
+import Loader from "../../../UIs/loader/Loader";
 import { AuthContext } from "../../../context/auth-ctx";
 import style from "./TourForm.module.scss";
 
-export default function TourForm() {
+export default function TourForm(props) {
   const { token } = useContext(AuthContext);
   const [guides, setGuides] = useState([]);
   const [basicFormInputs, setBasicFormInputs] = useState({});
@@ -14,6 +16,7 @@ export default function TourForm() {
   const [basicFormIsCompleted, setBasicFormIsCompleted] = useState(false);
   const [geoFormIsCompleted, setGeoFormIsCompleted] = useState(false);
   const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     async function fetchGuides() {
@@ -39,26 +42,25 @@ export default function TourForm() {
     fetchGuides();
   }, [token]);
 
-  if (error) return <HasError message={error} />;
-
   const tourFormSubmitHandler = async (visualInfo) => {
+    setIsLoading(true);
     const tourData = {
-      name:basicFormInputs.name,
-      duration:basicFormInputs.duration,
-      maxGroupSize:basicFormInputs.maxGroupSize,
-      ratingsAverage:basicFormInputs.ratingsAverage,
-      ratingsQuantity:basicFormInputs.ratingsQuantity,
-      price:basicFormInputs.price,
-      priceDiscount:basicFormInputs.discount,
-      description:basicFormInputs.description,
-      summary:basicFormInputs.summary,
-      secret:basicFormInputs.secret,
-      guides:[...basicFormInputs.guides],
-      difficulty:basicFormInputs.difficulty,
-      startLocation:geoFormInputs.startLocation,
-      locations:geoFormInputs.locations,
-      startDates:visualInfo.startDates
-    }
+      name: basicFormInputs.name,
+      duration: basicFormInputs.duration,
+      maxGroupSize: basicFormInputs.maxGroupSize,
+      ratingsAverage: basicFormInputs.ratingsAverage,
+      ratingsQuantity: basicFormInputs.ratingsQuantity,
+      price: basicFormInputs.price,
+      priceDiscount: basicFormInputs.discount,
+      description: basicFormInputs.description,
+      summary: basicFormInputs.summary,
+      secret: basicFormInputs.secret,
+      guides: [...basicFormInputs.guides],
+      difficulty: basicFormInputs.difficulty,
+      startLocation: geoFormInputs.startLocation,
+      locations: geoFormInputs.locations,
+      startDates: visualInfo.startDates,
+    };
     try {
       const response = await fetch(
         `${process.env.REACT_APP_DOMAIN_NAME}/api/v1/tours`,
@@ -67,7 +69,7 @@ export default function TourForm() {
           body: JSON.stringify(tourData),
           headers: {
             Authorization: "Bearer " + token,
-            'Content-Type':'application/json'
+            "Content-Type": "application/json",
           },
         }
       );
@@ -75,35 +77,47 @@ export default function TourForm() {
         const errorData = await response.json();
         throw new Error(errorData.message);
       }
-      const {data} = await response.json();
-     
+      const { data } = await response.json();
+
       const formData = new FormData();
       formData.append("imageCover", visualInfo.imageCover);
       formData.append("images", visualInfo.images[0]);
       formData.append("images", visualInfo.images[1]);
       formData.append("images", visualInfo.images[2]);
 
-      const results = await fetch(`${process.env.REACT_APP_DOMAIN_NAME}/api/v1/tours/${data.data._id}`, {
-          method:"PATCH",
-          body:formData,
+      const results = await fetch(
+        `${process.env.REACT_APP_DOMAIN_NAME}/api/v1/tours/${data.data._id}`,
+        {
+          method: "PATCH",
+          body: formData,
           headers: {
             Authorization: "Bearer " + token,
           },
-      })
-      if(!results.ok){
-        const errorData = await results.json()
-        throw new Error(errorData.message)
+        }
+      );
+      if (!results.ok) {
+        const errorData = await results.json();
+        throw new Error(errorData.message);
       }
       const finalData = await results.json();
-      console.log(finalData)
+      console.log(finalData);
     } catch (err) {
-      console.log(err);
+      setError(err.message);
     }
+    setIsLoading(false);
+    props.onClose()
   };
+
+  if (error) return <HasError message={error} />;
 
   return (
     <div className={style["tour-form"]}>
-      {/* {!basicFormIsCompleted && (
+      {isLoading && (
+        <Model>
+          <Loader />
+        </Model>
+      )}
+      {!basicFormIsCompleted && (
         <BasicInfoForm
           tourGuides={guides}
           onCompletingBasicForm={(inputs) => {
@@ -127,13 +141,7 @@ export default function TourForm() {
             tourFormSubmitHandler(visualInfo)
           }
         />
-      )} */}
-      <GeoInfoForm
-          onCompletingGeoForm={(inputs) => {
-            setGeoFormInputs({ ...inputs });
-            setGeoFormIsCompleted(true);
-          }}
-        />
+      )}
     </div>
   );
 }

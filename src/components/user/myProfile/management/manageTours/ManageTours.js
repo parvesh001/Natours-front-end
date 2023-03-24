@@ -10,7 +10,7 @@ export default function ManageTours() {
   return (
     <>
       <StandardBtn className={style['add-tour-controller']} onClick={()=>setIsAdding(true)}>Add New Tour</StandardBtn>
-      {isAdding && <Model onClose={()=>setIsAdding(false)}><TourForm/></Model>}
+      {isAdding && <Model onClose={()=>setIsAdding(false)}><TourForm onClose={()=>setIsAdding(false)}/></Model>}
       <Tours className="management" />
     </>
   );
