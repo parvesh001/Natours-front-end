@@ -30,6 +30,48 @@ export default function GeoInfoForm(props) {
       address: "",
     },
   ]);
+  const [errorInputs, setErrorInputs] = useState([{ id: "", field: "" }]);
+
+  const validateInputs = (value, id, field) => {
+    let valueIsValid;
+    if (field === "latitude") {
+      valueIsValid = /^(-?[1-8]?\d(?:\.\d{1,18})?|90(?:\.0{1,18})?)$/.test(
+        value
+      );
+    } else if (field === "longitude") {
+      valueIsValid =
+        /^(?:-?(?:1[0-7]|[1-9])?\d(?:\.\d{1,18})?|180(?:\.0{1,18})?)$/.test(
+          value
+        );
+    } else if (field === "address") {
+      valueIsValid = value.trim().length > 3;
+    } else if (field === "day") {
+      valueIsValid = value > 0;
+    } else if (field === "description") {
+      valueIsValid = value.trim().length > 3;
+    }
+    if (!valueIsValid) {
+      const inputIndex = errorInputs.findIndex(
+        (errIn) => errIn.id === id && errIn.field === field
+      );
+      if (inputIndex !== -1) return;
+      setErrorInputs((prevErrInputs) => {
+        const newErrInputs = [...prevErrInputs, { id, field }];
+        return newErrInputs;
+      });
+    } else if (valueIsValid === true) {
+      const inputIndex = errorInputs.findIndex(
+        (errIn) => errIn.id === id && errIn.field === field
+      );
+      if (inputIndex === -1) return;
+      setErrorInputs((prevErrInputs) => {
+        const newErrInputs = prevErrInputs.filter((prevInput) => {
+          return prevInput.field !== field || prevInput.id !== id;
+        });
+        return newErrInputs;
+      });
+    }
+  };
 
   const startLocationChangeHandler = (event, field) => {
     setStartLocation((startLocation) => {
@@ -37,6 +79,26 @@ export default function GeoInfoForm(props) {
       newStartLocation[field] = event.target.value;
       return newStartLocation;
     });
+  };
+
+  const locationInputChangeHandler = (index, field, event, id) => {
+    let value = event.target.value;
+    setLocationInputs((locationInputs) => {
+      const newLocationInputs = [...locationInputs];
+      newLocationInputs[index][field] = value;
+      return newLocationInputs;
+    });
+    if (
+      errorInputs.some(
+        (errInput) => errInput.id === id && errInput.field === field
+      )
+    ) {
+      validateInputs(value, id, field);
+    }
+  };
+
+  const locationInputBlurHandler = (value, id, field) => {
+    validateInputs(value, id, field);
   };
 
   const addLocationHandler = () => {
@@ -91,13 +153,11 @@ export default function GeoInfoForm(props) {
     });
   };
 
-  const locationInputChangeHandler = (index, field, event) => {
-    let value = event.target.value;
-    setLocationInputs((locationInputs) => {
-      const newLocationInputs = [...locationInputs];
-      newLocationInputs[index][field] = value;
-      return newLocationInputs;
-    });
+  const classNameHandler = (id, field) => {
+    const isInValid = errorInputs.some(
+      (errIn) => errIn.id === id && errIn.field === field
+    );
+    return isInValid;
   };
 
   const formSubmitHandler = (event) => {
@@ -107,31 +167,35 @@ export default function GeoInfoForm(props) {
       coordinates: [startLocation.latitude, startLocation.longitude],
       address: startLocation.address,
       description: startLocation.description,
-    }
-    const transformedLocations = locationInputs.map(location => {
+    };
+    const transformedLocations = locationInputs.map((location) => {
       return {
-        type:location.type,
-        coordinates:[location.latitude, location.longitude],
-        address:location.address,
-        day:location.day,
-        description:location.description
-      }
-    })
+        type: location.type,
+        coordinates: [location.latitude, location.longitude],
+        address: location.address,
+        day: location.day,
+        description: location.description,
+      };
+    });
     props.onCompletingGeoForm({
       startLocation: transformedStartLocation,
-      locations:transformedLocations,
+      locations: transformedLocations,
     });
   };
 
   return (
-    <form className={style["geo-info-form"]} onSubmit={formSubmitHandler} noValidate>
+    <form
+      className={style["geo-info-form"]}
+      onSubmit={formSubmitHandler}
+      noValidate
+    >
       <h2 className={style["title"]}>GEO INFORMATION</h2>
       <div>
         <h3 className={style["sub-title"]}>Start Location</h3>
         <div className={style["inputs-container"]}>
           <div className={style["form-control"]}>
-            <label htmlFor="select-guide">Select Type</label>
-            <select>
+            <label htmlFor="select-type">Select Type</label>
+            <select id="select-type">
               <option value="Point" selected>
                 Point
               </option>
@@ -202,57 +266,136 @@ export default function GeoInfoForm(props) {
                   <div className={style["form-control"]}>
                     <label htmlFor="select-guide">Select Type</label>
                     <select id="select-guide">
-                      <option value="Point" defaultValue='point'>
+                      <option value="Point" defaultValue="point">
                         Point
                       </option>
                     </select>
                   </div>
                   <Input
+                    className={
+                      classNameHandler(location.id, "latitude") ? "invalid" : ""
+                    }
                     type="number"
                     id="latitude"
                     name="latitude"
                     label="Latitude"
                     onChange={(event) =>
-                      locationInputChangeHandler(index, "latitude", event)
+                      locationInputChangeHandler(
+                        index,
+                        "latitude",
+                        event,
+                        location.id
+                      )
+                    }
+                    onBlur={() =>
+                      locationInputBlurHandler(
+                        locationInputs[index].latitude,
+                        location.id,
+                        "latitude"
+                      )
                     }
                     value={locationInputs[index].latitude}
                   />
                   <Input
+                    className={
+                      classNameHandler(location.id, "longitude")
+                        ? "invalid"
+                        : ""
+                    }
                     type="number"
                     id="longitude"
                     name="longitude"
                     label="Longitude"
                     onChange={(event) =>
-                      locationInputChangeHandler(index, "longitude", event)
+                      locationInputChangeHandler(
+                        index,
+                        "longitude",
+                        event,
+                        location.id
+                      )
+                    }
+                    onBlur={() =>
+                      locationInputBlurHandler(
+                        locationInputs[index].longitude,
+                        location.id,
+                        "longitude"
+                      )
                     }
                     value={locationInputs[index].longitude}
                   />
                   <Input
+                    className={
+                      classNameHandler(location.id, "address") ? "invalid" : ""
+                    }
                     type="text"
                     id="address"
                     name="address"
                     label="Address"
                     onChange={(event) =>
-                      locationInputChangeHandler(index, "address", event)
+                      locationInputChangeHandler(
+                        index,
+                        "address",
+                        event,
+                        location.id
+                      )
+                    }
+                    onBlur={() =>
+                      locationInputBlurHandler(
+                        locationInputs[index].address,
+                        location.id,
+                        "address"
+                      )
                     }
                     value={locationInputs[index].address}
                   />
                   <Input
+                    className={
+                      classNameHandler(location.id, "day") ? "invalid" : ""
+                    }
                     type="number"
                     id="day"
                     name="day"
                     label="Day"
                     onChange={(event) =>
-                      locationInputChangeHandler(index, "day", event)
+                      locationInputChangeHandler(
+                        index,
+                        "day",
+                        event,
+                        location.id
+                      )
+                    }
+                    onBlur={() =>
+                      locationInputBlurHandler(
+                        locationInputs[index].day,
+                        location.id,
+                        "day"
+                      )
                     }
                     value={locationInputs[index].day}
                   />
                   <Textarea
+                    className={
+                      classNameHandler(location.id, "description")
+                        ? "invalid"
+                        : ""
+                    }
                     id="description"
                     name="description"
                     label="Description"
                     onChange={(event) =>
-                      locationInputChangeHandler(index, "description", event)
+                      locationInputChangeHandler(
+                        index,
+                        "description",
+                        event,
+                        location.id
+                      )
+                    }
+                    onBlur={() =>
+                      locationInputBlurHandler(
+                        locationInputs[index].description,
+                        location.id,
+                        "description"
+                      )
                     }
                     value={locationInputs[index].description}
                   />

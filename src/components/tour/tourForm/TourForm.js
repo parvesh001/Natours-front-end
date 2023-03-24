@@ -9,37 +9,8 @@ import style from "./TourForm.module.scss";
 export default function TourForm() {
   const { token } = useContext(AuthContext);
   const [guides, setGuides] = useState([]);
-  const [basicFormInputs, setBasicFormInputs] = useState({
-    name: null,
-    duration: null,
-    maxGroupSize: null,
-    ratingsAverage: null,
-    ratingsQuantity: null,
-    price: null,
-    discount: null,
-    difficulty: null,
-    secret: null,
-    description: null,
-    summary: null,
-    guides: [],
-  });
-  const [geoFormInputs, setGeoFormInputs] = useState({
-    startLocation: {
-      type: null,
-      coordinates: [],
-      address: null,
-      description: null,
-    },
-    locations: [
-      {
-        type: null,
-        coordinates: [],
-        address: null,
-        description: null,
-        day: null,
-      },
-    ],
-  });
+  const [basicFormInputs, setBasicFormInputs] = useState({});
+  const [geoFormInputs, setGeoFormInputs] = useState({});
   const [basicFormIsCompleted, setBasicFormIsCompleted] = useState(false);
   const [geoFormIsCompleted, setGeoFormIsCompleted] = useState(false);
   const [error, setError] = useState(null);
@@ -132,7 +103,7 @@ export default function TourForm() {
 
   return (
     <div className={style["tour-form"]}>
-      {!basicFormIsCompleted && (
+      {/* {!basicFormIsCompleted && (
         <BasicInfoForm
           tourGuides={guides}
           onCompletingBasicForm={(inputs) => {
@@ -156,7 +127,13 @@ export default function TourForm() {
             tourFormSubmitHandler(visualInfo)
           }
         />
-      )}
+      )} */}
+      <GeoInfoForm
+          onCompletingGeoForm={(inputs) => {
+            setGeoFormInputs({ ...inputs });
+            setGeoFormIsCompleted(true);
+          }}
+        />
     </div>
   );
 }
