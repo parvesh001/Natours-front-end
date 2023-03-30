@@ -1,8 +1,8 @@
 .inputs-container {
   width: 100%;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-gap: .6rem;
+  grid-template-columns: repeat(1, 1fr);
+  grid-gap: .5rem;
 }
 .sub-title {
   background: linear-gradient(to right bottom, #519946, #27ab81);
@@ -43,4 +43,11 @@
   .submit-btn{
     display: block;
     margin-left: auto;
+  }
+
+  @media screen and(min-width:760px) {
+    .inputs-container {
+      grid-template-columns: repeat(2, 1fr);
+      grid-gap: .6rem;
+    }
   }

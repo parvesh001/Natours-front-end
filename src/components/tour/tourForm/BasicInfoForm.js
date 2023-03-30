@@ -6,6 +6,7 @@ import useInput from "../../../hooks/use-input";
 import style from "./BasicInfoForm.module.scss";
 
 export default function BasicInfoForm(props) {
+  console.log(props.tourSlug)
   const [selectedGuides, setSelectedGuides] = useState([]);
   const handleSelectChange = (event) => {
     const selectedOptions = Array.from(event.target.selectedOptions);

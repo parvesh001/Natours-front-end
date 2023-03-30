@@ -46,13 +46,20 @@
   }
   .inputs-container {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-gap: 1rem;
+    grid-template-columns: repeat(1, 1fr);
+    grid-gap: .5rem;
+    @media screen and(min-width:760px) {
+      grid-template-columns: repeat(4, 1fr);
+      grid-gap: 1rem;
+    }
   }
   .submit-btn{
       display: block;
       margin-left: auto;
-      transform: translateY(13.5rem);
+      transform: translateY(35.5rem);
+      @media screen and(min-width:760px) {
+        transform: translateY(13.5rem);
+      }
   }
 
   .locations-section {
@@ -74,6 +81,10 @@
           border: 1px solid #519946;
           display: inline-block;
           position: relative;
+          font-size: .4rem;
+          @media screen and(min-width:760px) {
+            font-size: 1rem;
+          }
           h3{
             cursor: pointer;
           }

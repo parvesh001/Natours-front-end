@@ -127,6 +127,7 @@ export default function TourForm(props) {
             setBasicFormInputs({ ...inputs });
             setBasicFormIsCompleted(true);
           }}
+          tourSlug={props.tourSlug}
         />
       )}
       {basicFormIsCompleted && !geoFormIsCompleted && (

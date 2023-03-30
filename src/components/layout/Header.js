@@ -37,20 +37,20 @@ export default function Header() {
       <nav className={`${style["main-nav"]} ${isOpen ? style["active"] : ""}`}>
         {!authCtx.isLoggedIn && (
           <ul className={style["main-nav-list"]}>
-            <li className={style["main-nav-list-item"]}>
+            <li className={style["main-nav-list-item"]} onClick={navbarToggleHandler}>
               <Link to="/login">Login</Link>
             </li>
-            <li className={style["main-nav-list-item"]}>
+            <li className={style["main-nav-list-item"]} onClick={navbarToggleHandler}>
               <Link to="/signup">Sign Up</Link>
             </li>
           </ul>
         )}
         {authCtx.isLoggedIn && (
           <ul className={style["main-nav-list"]}>
-            <li className={style["main-nav-list-item"]}>
+            <li className={style["main-nav-list-item"]} onClick={navbarToggleHandler}>
               <button onClick={() => authCtx.logout()}>Logout</button>
             </li>
-            <li className={style["main-nav-list-item"]}>
+            <li className={style["main-nav-list-item"]} onClick={navbarToggleHandler}>
               <Link to="/my-profile/settings" className={style["user-profile"]}>
                 <img
                   className={style.userPhoto}
