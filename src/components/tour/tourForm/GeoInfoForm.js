@@ -17,8 +17,9 @@ export default function GeoInfoForm(props) {
     hasError: startLocationLatitudeInputHasError,
     userInputChangeHandler: startLocationLatitudeChangeHandler,
     userInputBlurHandler: startLocationLatitudeBlurHandler,
-  } = useInput((value) =>
-    /^(-?[1-8]?\d(?:\.\d{1,18})?|90(?:\.0{1,18})?)$/.test(value)
+  } = useInput(
+    (value) => /^(-?[1-8]?\d(?:\.\d{1,18})?|90(?:\.0{1,18})?)$/.test(value),
+    props.tour.startLocation ? props.tour.startLocation.coordinates[0] : ""
   );
   const {
     userInput: startLocationLongitudeInput,
@@ -26,8 +27,12 @@ export default function GeoInfoForm(props) {
     hasError: startLocationLongitudeInputHasError,
     userInputChangeHandler: startLocationLongitudeChangeHandler,
     userInputBlurHandler: startLocationLongitudeBlurHandler,
-  } = useInput((value) =>
-    /^(?:-?(?:1[0-7]|[1-9])?\d(?:\.\d{1,18})?|180(?:\.0{1,18})?)$/.test(value)
+  } = useInput(
+    (value) =>
+      /^(?:-?(?:1[0-7]|[1-9])?\d(?:\.\d{1,18})?|180(?:\.0{1,18})?)$/.test(
+        value
+      ),
+    props.tour.startLocation ? props.tour.startLocation.coordinates[1] : ""
   );
   const {
     userInput: startLocationAddressInput,
@@ -35,28 +40,56 @@ export default function GeoInfoForm(props) {
     hasError: startLocationAddressInputHasError,
     userInputChangeHandler: startLocationAddressChangeHandler,
     userInputBlurHandler: startLocationAddressBlurHandler,
-  } = useInput((value) => value.trim().length > 3);
+  } = useInput(
+    (value) => value.trim().length > 3,
+    props.tour.startLocation ? props.tour.startLocation.address : ""
+  );
   const {
     userInput: startLocationDescriptionInput,
     userInputIsValid: startLocationDescriptionInputIsValid,
     hasError: startLocationDescriptionInputHasError,
     userInputChangeHandler: startLocationDescriptionChangeHandler,
     userInputBlurHandler: startLocationDescriptionBlurHandler,
-  } = useInput((value) => value.trim().length > 3);
+  } = useInput(
+    (value) => value.trim().length > 3,
+    props.tour.startLocation ? props.tour.startLocation.description : ""
+  );
 
-  const [locations, setLocations] = useState([{ id: uid(), isActive: true }]);
-  const [locationInputs, setLocationInputs] = useState([
-    {
-      id: locations[0].id,
-      type: "Point",
-      latitude: "",
-      longitude: "",
-      description: "",
-      day: "",
-      address: ""
-    },
-  ]);
-  
+  const initialLocationsState = props.tour.locations
+    ? props.tour.locations.map((location, index) => {
+        if (index === 0) return { id: uid(), isActive: true };
+        return { id: uid(), isActive: false };
+      })
+    : [{ id: uid(), isActive: true }];
+
+  const initialLocationsInputs = initialLocationsState.map(
+    (location, index) => {
+      if (props.tour.locations) {
+        return {
+          id: location.id,
+          type: "Point",
+          latitude: props.tour.locations[index].coordinates[0],
+          longitude: props.tour.locations[index].coordinates[1],
+          description: props.tour.locations[index].description,
+          day: props.tour.locations[index].day,
+        };
+      } else {
+        return {
+          id: location.id,
+          type: "Point",
+          latitude: "",
+          longitude: "",
+          description: "",
+          day: "",
+        };
+      }
+    }
+  );
+
+  const [locations, setLocations] = useState(initialLocationsState);
+
+  const [locationInputs, setLocationInputs] = useState(initialLocationsInputs);
+
   const [errorInputs, setErrorInputs] = useState([]);
 
   const validateInputs = (value, id, field) => {
@@ -70,8 +103,6 @@ export default function GeoInfoForm(props) {
         /^(?:-?(?:1[0-7]|[1-9])?\d(?:\.\d{1,18})?|180(?:\.0{1,18})?)$/.test(
           value
         );
-    } else if (field === "address") {
-      valueIsValid = value.trim().length > 3;
     } else if (field === "day") {
       valueIsValid = value > 0;
     } else if (field === "description") {
@@ -138,7 +169,6 @@ export default function GeoInfoForm(props) {
           longitude: "",
           description: "",
           day: "",
-          address: ""
         },
       ];
       return newLocationInputs;
@@ -186,13 +216,13 @@ export default function GeoInfoForm(props) {
     startLocationAddressInputIsValid &&
     startLocationDescriptionInputIsValid
   ) {
-    formIsValid = true
+    formIsValid = true;
   }
 
   const formSubmitHandler = (event) => {
     event.preventDefault();
     const transformedStartLocation = {
-      type: 'Point',
+      type: "Point",
       coordinates: [startLocationLatitudeInput, startLocationLongitudeInput],
       address: startLocationAddressInput,
       description: startLocationDescriptionInput,
@@ -374,31 +404,6 @@ export default function GeoInfoForm(props) {
                       )
                     }
                     value={locationInputs[index].longitude}
-                  />
-                  <Input
-                    className={
-                      classNameHandler(location.id, "address") ? "invalid" : ""
-                    }
-                    type="text"
-                    id="address"
-                    name="address"
-                    label="Address"
-                    onChange={(event) =>
-                      locationInputChangeHandler(
-                        index,
-                        "address",
-                        event,
-                        location.id
-                      )
-                    }
-                    onBlur={() =>
-                      locationInputBlurHandler(
-                        locationInputs[index].address,
-                        location.id,
-                        "address"
-                      )
-                    }
-                    value={locationInputs[index].address}
                   />
                   <Input
                     className={

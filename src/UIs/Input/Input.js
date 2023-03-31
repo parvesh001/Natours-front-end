@@ -11,7 +11,7 @@ export default function Input(props) {
         onChange={props.onChange}
         onBlur={props.onBlur}
         value={props.value}
-        placeholder={props.placeholder}
+        placeholder={props.placeholder || ''}
         autoComplete="off"
       />
     </div>

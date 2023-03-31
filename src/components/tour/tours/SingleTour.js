@@ -82,7 +82,7 @@ export default function SingleTour(props) {
                 />
               </div>
               <div className={style["controller"]}>
-                <AiOutlineEdit onClick={()=>props.onEdit(props.slug)}/>
+                <AiOutlineEdit onClick={()=>props.onEdit({slug:props.slug, id:props.id})}/>
               </div>
               <div className={style["controller"]}>
                 <AiOutlineDelete />

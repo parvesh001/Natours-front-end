@@ -1,7 +1,7 @@
 import { useState } from "react";
 
-export default function useInput(checkValidation) {
-  const [userInput, setUserInput] = useState("");
+export default function useInput(checkValidation, initialValue) {
+  const [userInput, setUserInput] = useState(initialValue || "");
   const [inputIsTouched, setInputIsTouched] = useState(false);
 
   const userInputIsValid = checkValidation(userInput);

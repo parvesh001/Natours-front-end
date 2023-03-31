@@ -24,6 +24,7 @@ export default function Tours(props) {
       {tourData.tours.map((tour) => {
         return (
           <SingleTour
+            key={tour._id}
             id={tour._id}
             name={tour.name}
             imageCover={tour.imageCover}

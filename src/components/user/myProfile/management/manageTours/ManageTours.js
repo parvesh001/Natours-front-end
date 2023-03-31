@@ -7,19 +7,19 @@ import style from "./ManageTours.module.scss";
 
 export default function ManageTours() {
   const [showForm, setShowForm] = useState(false);
-  const [tourSlug, setTourSlug] = useState(null);
+  const [tourData, setTourData] = useState(null);
 
   const addTourHandler = ()=>{
     setShowForm(true)
-    setTourSlug(null)
+    setTourData(null)
   }
-  const editTourHandler = (tourSlug) => {
+  const editTourHandler = (tourData) => {
     setShowForm(true);
-    setTourSlug(tourSlug);
+    setTourData(tourData);
   };
   const closeFormHandler = ()=>{
     setShowForm(false);
-    setTourSlug(null);
+    setTourData(null);
   }
 
   return (
@@ -32,10 +32,10 @@ export default function ManageTours() {
       </StandardBtn>
       {showForm && (
         <FormModel onClose={()=>closeFormHandler()}>
-          <TourForm onClose={()=>closeFormHandler()}  tourSlug={tourSlug} />
+          <TourForm onClose={()=>closeFormHandler()}  tourData={tourData} />
         </FormModel>
       )}
-      <Tours className="management" onEdit={(tourSlug) => editTourHandler(tourSlug)} />
+      <Tours className="management" onEdit={(tourData) => editTourHandler(tourData)} />
     </>
   );
 }

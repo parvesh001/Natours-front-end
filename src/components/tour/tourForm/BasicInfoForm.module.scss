@@ -33,10 +33,11 @@
       }
       option{
         font-size: 1rem;
-        &:hover {
+        &:hover, &:checked {
           background-color: #777;
           color: #fff;
         }
+        
       }
     }
   }

@@ -11,19 +11,40 @@ import { tourSliceActions } from "../../../store/tour-slice";
 import style from "./TourForm.module.scss";
 
 export default function TourForm(props) {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const { token } = useContext(AuthContext);
+  const [tour, setTour] = useState({});
   const [guides, setGuides] = useState([]);
   const [basicFormInputs, setBasicFormInputs] = useState({});
   const [geoFormInputs, setGeoFormInputs] = useState({});
   const [basicFormIsCompleted, setBasicFormIsCompleted] = useState(false);
   const [geoFormIsCompleted, setGeoFormIsCompleted] = useState(false);
   const [error, setError] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
+
+  let slug;
+  let id;
+  if(props.tourData){
+    slug = props.tourData.slug
+    id = props.tourData.id
+  }
+  
   useEffect(() => {
-    async function fetchGuides() {
+    async function fetchingRelevantData() {
       try {
+        if (slug) {
+          const response = await fetch(
+            `${process.env.REACT_APP_DOMAIN_NAME}/api/v1/tours/${slug}`
+          );
+          if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.message);
+          }
+          const data = await response.json();
+          setTour(data.data.data);
+        }
+
         const response = await fetch(
           `${process.env.REACT_APP_DOMAIN_NAME}/api/v1/users?role=guide`,
           {
@@ -41,9 +62,11 @@ export default function TourForm(props) {
       } catch (err) {
         setError(err.message);
       }
+      setIsLoading(false);
     }
-    fetchGuides();
-  }, [token]);
+
+    fetchingRelevantData();
+  }, [token, slug]);
 
   const tourFormSubmitHandler = async (visualInfo) => {
     setIsLoading(true);
@@ -64,18 +87,24 @@ export default function TourForm(props) {
       locations: geoFormInputs.locations,
       startDates: visualInfo.startDates,
     };
+    let url;
+    let method;
+    if (slug && id) {
+      url = `${process.env.REACT_APP_DOMAIN_NAME}/api/v1/tours/${id}`;
+      method = "PATCH";
+    } else {
+      url = `${process.env.REACT_APP_DOMAIN_NAME}/api/v1/tours`;
+      method = "POST";
+    }
     try {
-      const response = await fetch(
-        `${process.env.REACT_APP_DOMAIN_NAME}/api/v1/tours`,
-        {
-          method: "POST",
-          body: JSON.stringify(tourData),
-          headers: {
-            Authorization: "Bearer " + token,
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const response = await fetch(url, {
+        method: method,
+        body: JSON.stringify(tourData),
+        headers: {
+          Authorization: "Bearer " + token,
+          "Content-Type": "application/json",
+        },
+      });
       if (!response.ok) {
         const errorData = await response.json();
         throw new Error(errorData.message);
@@ -87,7 +116,7 @@ export default function TourForm(props) {
       formData.append("images", visualInfo.images[0]);
       formData.append("images", visualInfo.images[1]);
       formData.append("images", visualInfo.images[2]);
-
+    
       const results = await fetch(
         `${process.env.REACT_APP_DOMAIN_NAME}/api/v1/tours/${data.data._id}`,
         {
@@ -103,8 +132,8 @@ export default function TourForm(props) {
         throw new Error(errorData.message);
       }
       const finalData = await results.json();
-      dispatch(tourSliceActions.createTour(finalData.data.data))
-      props.onClose()
+      dispatch(tourSliceActions.createTour(finalData.data.data));
+      props.onClose();
     } catch (err) {
       setError(err.message);
     }
@@ -112,14 +141,16 @@ export default function TourForm(props) {
   };
 
   if (error) return <HasError message={error} />;
+  if (isLoading) {
+    return (
+      <Model>
+        <Loader />
+      </Model>
+    );
+  }
 
   return (
     <div className={style["tour-form"]}>
-      {isLoading && (
-        <Model>
-          <Loader />
-        </Model>
-      )}
       {!basicFormIsCompleted && (
         <BasicInfoForm
           tourGuides={guides}
@@ -127,7 +158,7 @@ export default function TourForm(props) {
             setBasicFormInputs({ ...inputs });
             setBasicFormIsCompleted(true);
           }}
-          tourSlug={props.tourSlug}
+          tour={tour}
         />
       )}
       {basicFormIsCompleted && !geoFormIsCompleted && (
@@ -136,6 +167,7 @@ export default function TourForm(props) {
             setGeoFormInputs({ ...inputs });
             setGeoFormIsCompleted(true);
           }}
+          tour={tour}
         />
       )}
 
@@ -144,6 +176,7 @@ export default function TourForm(props) {
           onSubmittingTourForm={(visualInfo) =>
             tourFormSubmitHandler(visualInfo)
           }
+          tour={tour}
         />
       )}
     </div>

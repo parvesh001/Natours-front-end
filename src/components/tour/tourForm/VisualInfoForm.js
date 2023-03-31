@@ -5,6 +5,17 @@ import Input from "../../../UIs/Input/Input";
 import StandardBtn from "../../../UIs/StandardBtn/StandardBtn";
 import style from "./VisualInfoForm.module.scss";
 
+function convertformat(inputDate) {
+  let curr_dt = new Date(inputDate);
+  let form_dt =
+    curr_dt.getFullYear() +
+    "-" +
+    (curr_dt.getMonth() + 1) +
+    "-" +
+    curr_dt.getDate();
+  return form_dt.replace(/\b\d\b/g, "0$&");
+}
+
 export default function VisualInfoForm(props) {
   const {
     fileInput: coverImageInput,
@@ -31,22 +42,34 @@ export default function VisualInfoForm(props) {
     userInput: date1Input,
     userInputIsValid: date1IsValid,
     userInputChangeHandler: date1ChangeHandler,
-  } = useInput((value) => value.trim() !== "");
+  } = useInput(
+    (value) => value !== "",
+    props.tour.startDates ? convertformat(props.tour.startDates[0]) : ""
+  );
   const {
     userInput: date2Input,
     userInputIsValid: date2IsValid,
     userInputChangeHandler: date2ChangeHandler,
-  } = useInput((value) => value.trim() !== "");
+  } = useInput(
+    (value) => value !== "",
+    props.tour.startDates ? convertformat(props.tour.startDates[1]) : ""
+  );
   const {
     userInput: date3Input,
     userInputIsValid: date3IsValid,
     userInputChangeHandler: date3ChangeHandler,
-  } = useInput((value) => value.trim() !== "");
+  } = useInput(
+    (value) => value !== "",
+    props.tour.startDates ? convertformat(props.tour.startDates[2]) : ""
+  );
   const {
     userInput: date4Input,
     userInputIsValid: date4IsValid,
     userInputChangeHandler: date4ChangeHandler,
-  } = useInput((value) => value.trim() !== "");
+  } = useInput(
+    (value) => value !== "",
+    props.tour.startDates ? convertformat(props.tour.startDates[3]) : ""
+  );
 
   let formIsValid = false;
   if (
@@ -67,10 +90,11 @@ export default function VisualInfoForm(props) {
     if (!formIsValid) {
       return;
     }
+    
     props.onSubmittingTourForm({
       imageCover: coverImageInput,
       images: [imageAInput, imageBInput, imageCInput],
-      startDates:[date1Input, date2Input, date3Input, date4Input]
+      startDates: [date1Input, date2Input, date3Input, date4Input],
     });
   };
 
@@ -114,24 +138,28 @@ export default function VisualInfoForm(props) {
             id="date-1"
             label="Date 1"
             onChange={date1ChangeHandler}
+            value={date1Input}
           />
           <Input
             type="date"
             id="date-2"
             label="Date 2"
             onChange={date2ChangeHandler}
+            value={date2Input}
           />
           <Input
             type="date"
             id="date-3"
             label="Date 3"
             onChange={date3ChangeHandler}
+            value={date3Input}
           />
           <Input
             type="date"
             id="date-4"
             label="Date 4"
             onChange={date4ChangeHandler}
+            value={date3Input}
           />
         </div>
       </div>
