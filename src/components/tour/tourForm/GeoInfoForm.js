@@ -65,7 +65,7 @@ export default function GeoInfoForm(props) {
   const initialLocationsInputs = initialLocationsState.map(
     (location, index) => {
       if (props.tour.locations) {
-        return {
+        return { 
           id: location.id,
           type: "Point",
           latitude: props.tour.locations[index].coordinates[0],
@@ -268,7 +268,7 @@ export default function GeoInfoForm(props) {
           <div className={style["form-control"]}>
             <label htmlFor="select-type">Select Type</label>
             <select id="select-type">
-              <option value="Point" selected>
+              <option value="Point">
                 Point
               </option>
             </select>

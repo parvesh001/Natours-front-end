@@ -159,7 +159,7 @@ export default function VisualInfoForm(props) {
             id="date-4"
             label="Date 4"
             onChange={date4ChangeHandler}
-            value={date3Input}
+            value={date4Input}
           />
         </div>
       </div>

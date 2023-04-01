@@ -6,8 +6,12 @@ import useInput from "../../../hooks/use-input";
 import style from "./BasicInfoForm.module.scss";
 
 export default function BasicInfoForm(props) {
+  const initialSelectedGuidesState = props.tour.guides
+    ? props.tour.guides.map((guide) => guide._id)
+    : [];
+
   const [selectedGuides, setSelectedGuides] = useState(
-    props.tour.guides ? props.tour.guides.map((guide) => guide._id) : []
+    initialSelectedGuidesState
   );
 
   const handleSelectChange = (event) => {
@@ -58,7 +62,10 @@ export default function BasicInfoForm(props) {
     hasError: ratingsQuantityInputHasError,
     userInputChangeHandler: ratingsQuantityChangeHandler,
     userInputBlurHandler: ratingsQuantityBlurHandler,
-  } = useInput((value) => +value >= 0, JSON.stringify(props.tour.ratingsQuantity));
+  } = useInput(
+    (value) => +value >= 0,
+    JSON.stringify(props.tour.ratingsQuantity)
+  );
 
   const {
     userInput: priceInput,
@@ -75,7 +82,8 @@ export default function BasicInfoForm(props) {
     userInputChangeHandler: discountChangeHandler,
     userInputBlurHandler: discountBlurHandler,
   } = useInput(
-    (value) => (+priceInput > 0 ? +value < +priceInput : +value === +priceInput),
+    (value) =>
+      +priceInput > 0 ? +value < +priceInput : +value === +priceInput,
     JSON.stringify(props.tour.priceDiscount)
   );
 
@@ -143,11 +151,11 @@ export default function BasicInfoForm(props) {
       duration: durationInput,
       maxGroupSize: groupSizeInput,
       ratingsAverage:
-        ratingsAverageInput.trim() === "" ? 4.5 : JSON.parse(ratingsAverageInput),
+        ratingsAverageInput.trim() === "" ? 4.5 : ratingsAverageInput,
       ratingsQuantity:
-        ratingsQuantityInput.trim() === "" ? 0 : JSON.parse(ratingsQuantityInput),
-      price: priceInput.trim() === "" ? 0 : JSON.parse(priceInput),
-      discount: discountInput.trim() === "" ? 0 : JSON.parse(discountInput),
+        ratingsQuantityInput.trim() === "" ? 0 : ratingsQuantityInput,
+      price: priceInput.trim() === "" ? 0 : priceInput,
+      discount: discountInput.trim() === "" ? 0 : discountInput,
       difficulty: difficultyInput,
       secret: secretInput.trim() === "" ? false : secretInput,
       description: descriptionInput,

@@ -25,27 +25,27 @@ export default function TourForm(props) {
 
   let slug;
   let id;
-  if(props.tourData){
-    slug = props.tourData.slug
-    id = props.tourData.id
+  if(props.tourEditData){
+    slug = props.tourEditData.slug
+    id = props.tourEditData.id
   }
   
   useEffect(() => {
     async function fetchingRelevantData() {
       try {
-        if (slug) {
-          const response = await fetch(
+        if (slug && id) {
+          const response1 = await fetch(
             `${process.env.REACT_APP_DOMAIN_NAME}/api/v1/tours/${slug}`
           );
-          if (!response.ok) {
-            const errorData = await response.json();
+          if (!response1.ok) {
+            const errorData = await response1.json();
             throw new Error(errorData.message);
           }
-          const data = await response.json();
+          const data = await response1.json();
           setTour(data.data.data);
         }
 
-        const response = await fetch(
+        const response2 = await fetch(
           `${process.env.REACT_APP_DOMAIN_NAME}/api/v1/users?role=guide`,
           {
             headers: {
@@ -53,11 +53,11 @@ export default function TourForm(props) {
             },
           }
         );
-        if (!response.ok) {
-          const errorData = await response.json();
+        if (!response2.ok) {
+          const errorData = await response2.json();
           throw new Error(errorData.message);
         }
-        const data = await response.json();
+        const data = await response2.json();
         setGuides(data.data.data);
       } catch (err) {
         setError(err.message);
@@ -66,7 +66,7 @@ export default function TourForm(props) {
     }
 
     fetchingRelevantData();
-  }, [token, slug]);
+  }, [token, slug, id]);
 
   const tourFormSubmitHandler = async (visualInfo) => {
     setIsLoading(true);
@@ -132,10 +132,15 @@ export default function TourForm(props) {
         throw new Error(errorData.message);
       }
       const finalData = await results.json();
-      dispatch(tourSliceActions.createTour(finalData.data.data));
+      if(!slug && !id){
+        dispatch(tourSliceActions.createTour(finalData.data.data));
+      }else{
+        dispatch(tourSliceActions.updateTour(finalData.data.data))
+      }
       props.onClose();
     } catch (err) {
       setError(err.message);
+      console.log(err)
     }
     setIsLoading(false);
   };
