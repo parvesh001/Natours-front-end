@@ -40,6 +40,7 @@ export default function Tours(props) {
             ratingsQuantity={tour.ratingsQuantity}
             slug={tour.slug}
             onEdit={props.onEdit}
+            onTourDelete={props.onTourDelete}
           />
         );
       })}

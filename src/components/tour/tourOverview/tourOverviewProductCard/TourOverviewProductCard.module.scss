@@ -1,3 +1,50 @@
+.book-your-tour{
+  background-color: #fff;
+  border-radius: 5px;
+  padding: .8rem 1rem;
+  @media screen and (min-width:780px) {
+    padding: 1rem 3rem;
+  } 
+  h3{
+    background: linear-gradient(to right bottom, #519946, #27ab81);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 1.5rem;
+  }
+  .form-control {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 1.5rem;
+    &.invalid {
+      label {
+        color: red;
+      }
+      select {
+        border-color: red;
+        background-color: rgb(255, 168, 168);
+      }
+    }
+    label {
+      font-weight: 800;
+      font-size: 1rem;
+      color: #444;
+    }
+    select {
+      padding: 10px 5px;
+      background-color: #f2f2f2;
+      border: 1px solid #ababab;
+      border-radius: 5px;
+      height: 55px;
+    }
+  }
+  .form-controllers{
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
 .tour-overview-product-card {
   padding: 2rem 1rem;
   background-color: #ebebeb;

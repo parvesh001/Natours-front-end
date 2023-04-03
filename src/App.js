@@ -14,6 +14,7 @@ import ForgetPassword from "./pages/authentication/ForgetPassword";
 import ResetPassword from "./pages/authentication/ResetPassword";
 import ManageToursPage from "./pages/userProfile/managment/ManageToursPage";
 import ProfileSettingsPage from "./pages/userProfile/selfManagment/ProfileSettingsPage";
+import BookingSuccess from "./pages/booking/BookingSuccess";
 
 function App() {
   const authCtx = useContext(AuthContext);
@@ -25,6 +26,7 @@ function App() {
 
   return (
     <Layout>
+      
       <Routes>
         <Route path="/home" element={<Home />} />
         <Route path="/tour/:slug" element={<TourOverview />} />
@@ -38,6 +40,7 @@ function App() {
             <Route path="manage-tours" element={<ManageToursPage/>}/>
           </Route>
         )}
+        <Route path="/bookings/success" element={<BookingSuccess/>}/>
         <Route path="/" element={<Navigate replace to="/home" />} />
         <Route path="*" element={<NotFound />} />
       </Routes>

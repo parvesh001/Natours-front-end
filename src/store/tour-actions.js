@@ -11,7 +11,7 @@ export const fetchAllTours = () => {
       }
       const data = await response.json();
       dispatch(tourSliceActions.setHasError(null))
-      dispatch(tourSliceActions.populateTours(data.data.data));
+      dispatch(tourSliceActions.populateTours(data.data.tours));
     } catch (err) {
       dispatch(tourSliceActions.setHasError(err.message))
     }

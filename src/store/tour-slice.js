@@ -15,6 +15,10 @@ const tourSlice = createSlice({
            const updatedTourIndex = state.tours.findIndex(tour => tour._id === action.payload._id)
            state.tours[updatedTourIndex] = action.payload
         },
+        deleteTour(state, action){
+            const filteredTours = state.tours.filter(tour => tour._id !== action.payload)
+            state.tours = filteredTours
+        },
         populateTours(state, action){
             state.tours = [...action.payload]
         },

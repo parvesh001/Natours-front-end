@@ -3,20 +3,51 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../../context/auth-ctx";
 import StandardBtn from "../../../../UIs/StandardBtn/StandardBtn";
 import Notification from "../../../../UIs/notification/Notification";
+import Model from "../../../../UIs/Model/Model";
 import style from "./TourOverviewProductCard.module.scss";
 
 export default function TourOverviewProductCard(props) {
   const authCtx = useContext(AuthContext);
   const navigate = useNavigate();
+  const [startDate, setStartDate] = useState();
+  const [startDateInputIsValid, setStartDateInputIsValid] = useState(false);
+  const [startDateInputHasTouched, setStartDateInputHasTouched] =
+    useState(false);
+  const [bookingTour, setBookingTour] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [notification, setNotification] = useState(null);
   
+
+  const startDateInputHasError =
+    !startDateInputIsValid && startDateInputHasTouched;
+
   const cardControllerHandler = async () => {
     if (!authCtx.isLoggedIn) return navigate("/login");
+    setBookingTour(true);
+  };
+
+  const startDateInputChangeHandler = (event)=>{
+    setStartDate(event.target.value)
+    if(event.target.value !== ''){
+      setStartDateInputIsValid(true)
+    }else{
+      setStartDateInputIsValid(false)
+    }
+  }
+  
+
+  const bookMyTourFormSubmitHandler = async(event) => {
+    event.preventDefault();
+    if(startDate === '' || !startDate){
+       setStartDateInputIsValid(false)
+       setStartDateInputHasTouched(true)
+       return
+    }
+
     setIsLoading(true);
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_DOMAIN_NAME}/api/v1/bookings/checkout-session/${props.tourId}`,
+        `${process.env.REACT_APP_DOMAIN_NAME}/api/v1/bookings/checkout-session/tour/${props.tourId}/startDate/${new Date(startDate).toISOString()}`,
         {
           headers: {
             Authorization: "Bearer " + authCtx.token,
@@ -42,6 +73,41 @@ export default function TourOverviewProductCard(props) {
   return (
     <>
       {notification && <Notification notification={notification} />}
+      {bookingTour && (
+        <Model>
+          <div className={style["book-your-tour"]}>
+            <h3>
+              We are pleased to see you with us, Please select a tour date
+            </h3>
+            <form onSubmit={bookMyTourFormSubmitHandler}>
+              <div
+                className={`${style["form-control"]} ${
+                  startDateInputHasError ? style["invalid"] : ""
+                }`}
+              >
+                <label htmlFor="select-guide">Select Start Date</label>
+                <select onChange={startDateInputChangeHandler}>
+                  <option value={""}>Select Preferred Date</option>
+                  {props.startDates.map((startDate) => {
+                    const SD = new Date(startDate).toISOString().slice(0, 10)
+                    return <option key={SD} value={SD}>{SD}</option>;
+                  })}
+                </select>
+              </div>
+              <div className={style["form-controllers"]}>
+                <StandardBtn type="submit">{isLoading?'processing':'Book your tour'}</StandardBtn>
+                <StandardBtn
+                  type="button"
+                  danger={true}
+                  onClick={() => setBookingTour(false)}
+                >
+                  Close
+                </StandardBtn>
+              </div>
+            </form>
+          </div>
+        </Model>
+      )}
       <div className={style["tour-overview-product-card"]}>
         <div className={style["product-card"]}>
           <div className={style["card-images"]}>
@@ -74,11 +140,7 @@ export default function TourOverviewProductCard(props) {
               className={style["card-btn"]}
               onClick={cardControllerHandler}
             >
-              {authCtx.isLoggedIn
-                ? isLoading
-                  ? "processing..."
-                  : "Book Tour"
-                : "Login To Book Tour"}
+              {authCtx.isLoggedIn ? "Book Tour" : "Login To Book Tour"}
             </StandardBtn>
           </div>
         </div>
