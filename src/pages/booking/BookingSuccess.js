@@ -1,3 +1,7 @@
+
+//=>>>TEMPORARY SOLUTION NOT SECURE AND RECOMMENDABLE NEED TO FIX<<===
+//========================================================
+
 import React, { useContext} from "react";
 import { useLocation } from "react-router-dom";
 import queryString from "query-string";
@@ -5,8 +9,6 @@ import { AuthContext } from "../../context/auth-ctx";
 import style from "./BookingSuccess.module.scss";
 import StandardBtn from "../../UIs/StandardBtn/StandardBtn";
 
-//=>>>TEMPORARY SOLUTION NOT SECURE AND RECOMMENDABLE<<===
-//========================================================
 export default function BookingSuccess() {
   const { token } = useContext(AuthContext);
   const location = useLocation();

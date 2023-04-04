@@ -7,6 +7,7 @@ import HasError from "../../error/HasError";
 
 export default function Tours(props) {
   const tourData = useSelector(state => state.tour)
+  console.log(tourData.tours)
 
   if (tourData.isLoading)
     return (
@@ -39,6 +40,8 @@ export default function Tours(props) {
             ratingsAverage={tour.ratingsAverage}
             ratingsQuantity={tour.ratingsQuantity}
             slug={tour.slug}
+            participants = {tour.tourBookingsDetails.participants}
+            totalAvailableCapacity={tour.tourBookingsDetails.availableCapacity}
             onEdit={props.onEdit}
             onTourDelete={props.onTourDelete}
           />

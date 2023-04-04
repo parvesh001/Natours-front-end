@@ -1,4 +1,4 @@
-import React, { useContext} from "react";
+import React, { useContext } from "react";
 import { AuthContext } from "../../../context/auth-ctx";
 import StandardBtn from "../../../UIs/StandardBtn/StandardBtn";
 import { useNavigate } from "react-router-dom";
@@ -18,8 +18,18 @@ export default function SingleTour(props) {
   const navigate = useNavigate();
   const authCtx = useContext(AuthContext);
 
+  const bookedByCurrentUser = props.participants.includes(authCtx.user._id)
+  const fullyBookedTour = props.totalAvailableCapacity <= 0
+ 
   return (
-      <div className={style["card"]}>
+    <div className={style["card"]}>
+      {fullyBookedTour && !bookedByCurrentUser && (
+        <div className={`${style["tour-label"]} ${style['tour-label__fully-booked']}`}>Fully Booked</div>
+      )}
+      {bookedByCurrentUser && (
+        <div className={`${style["tour-label"]} ${style['tour-label__you-booked']}`}>You Booked</div>
+      )}
+      <div className={style['card-container']}>
         <div className={style["card-header"]}>
           <div className={style["card-picture"]}>
             <div className={style["card-picture-overlay"]} />
@@ -107,5 +117,6 @@ export default function SingleTour(props) {
           )}
         </div>
       </div>
+    </div>
   );
 }

@@ -16,7 +16,6 @@ export default function TourOverviewProductCard(props) {
   const [bookingTour, setBookingTour] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [notification, setNotification] = useState(null);
-  
 
   const startDateInputHasError =
     !startDateInputIsValid && startDateInputHasTouched;
@@ -26,28 +25,31 @@ export default function TourOverviewProductCard(props) {
     setBookingTour(true);
   };
 
-  const startDateInputChangeHandler = (event)=>{
-    setStartDate(event.target.value)
-    if(event.target.value !== ''){
-      setStartDateInputIsValid(true)
-    }else{
-      setStartDateInputIsValid(false)
+  const startDateInputChangeHandler = (event) => {
+    setStartDate(event.target.value);
+    if (event.target.value !== "") {
+      setStartDateInputIsValid(true);
+    } else {
+      setStartDateInputIsValid(false);
     }
-  }
-  
+  };
 
-  const bookMyTourFormSubmitHandler = async(event) => {
+  const bookMyTourFormSubmitHandler = async (event) => {
     event.preventDefault();
-    if(startDate === '' || !startDate){
-       setStartDateInputIsValid(false)
-       setStartDateInputHasTouched(true)
-       return
+    if (startDate === "" || !startDate) {
+      setStartDateInputIsValid(false);
+      setStartDateInputHasTouched(true);
+      return;
     }
 
     setIsLoading(true);
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_DOMAIN_NAME}/api/v1/bookings/checkout-session/tour/${props.tourId}/startDate/${new Date(startDate).toISOString()}`,
+        `${
+          process.env.REACT_APP_DOMAIN_NAME
+        }/api/v1/bookings/checkout-session/tour/${
+          props.tourId
+        }/startDate/${new Date(startDate).toISOString()}`,
         {
           headers: {
             Authorization: "Bearer " + authCtx.token,
@@ -65,7 +67,7 @@ export default function TourOverviewProductCard(props) {
       });
     } catch (err) {
       setNotification({ status: "fail", message: err.message });
-      setTimeout(() => setNotification(null), 1000);
+      setTimeout(() => setNotification(null), 2000);
     }
     setIsLoading(false);
   };
@@ -88,14 +90,23 @@ export default function TourOverviewProductCard(props) {
                 <label htmlFor="select-guide">Select Start Date</label>
                 <select onChange={startDateInputChangeHandler}>
                   <option value={""}>Select Preferred Date</option>
-                  {props.startDates.map((startDate) => {
-                    const SD = new Date(startDate).toISOString().slice(0, 10)
-                    return <option key={SD} value={SD}>{SD}</option>;
+                  {props.bookingsPerStartDate.map((BPSD) => {
+                    return (
+                      <option
+                        key={BPSD.startDate}
+                        value={BPSD.startDate}
+                        disabled={BPSD.availableCapacity <= 0}
+                      >
+                        {BPSD.startDate}
+                      </option>
+                    );
                   })}
                 </select>
               </div>
               <div className={style["form-controllers"]}>
-                <StandardBtn type="submit">{isLoading?'processing':'Book your tour'}</StandardBtn>
+                <StandardBtn type="submit">
+                  {isLoading ? "processing" : "Book your tour"}
+                </StandardBtn>
                 <StandardBtn
                   type="button"
                   danger={true}
