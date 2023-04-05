@@ -7,7 +7,6 @@ import HasError from "../../error/HasError";
 
 export default function Tours(props) {
   const tourData = useSelector(state => state.tour)
-  console.log(tourData.tours)
 
   if (tourData.isLoading)
     return (

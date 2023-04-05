@@ -19,7 +19,7 @@ export default function TourOverviewMap() {
       mapboxAccessToken={process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}
       mapStyle="mapbox://styles/vparv/clf3k1oxn000101ntjbuoi21d"
       style={{
-        height: "40vh",
+        height: "60vh",
         width: "100%",
         transform: "skewY(-6deg)",
         transformOrigin: "bottom left",
