@@ -1,12 +1,16 @@
 import { useSelector } from "react-redux";
+import { useContext } from "react";
+import { AuthContext } from "../../../context/auth-ctx";
 import SingleTour from "./SingleTour";
 import Loader from "../../../UIs/loader/Loader";
 import Model from "../../../UIs/Model/Model";
 import style from "./Tours.module.scss";
 import HasError from "../../error/HasError";
 
+
 export default function Tours(props) {
   const tourData = useSelector(state => state.tour)
+  const authCtx = useContext(AuthContext)
 
   if (tourData.isLoading)
     return (
@@ -40,7 +44,8 @@ export default function Tours(props) {
             ratingsQuantity={tour.ratingsQuantity}
             slug={tour.slug}
             participants = {tour.tourBookingsDetails.participants}
-            totalAvailableCapacity={tour.tourBookingsDetails.availableCapacity}
+            bookedByCurrentUser = {tour.tourBookingsDetails.participants.includes(authCtx.user._id)}
+            fullyBookedTour = {tour.tourBookingsDetails.availableCapacity <= 0}
             onEdit={props.onEdit}
             onTourDelete={props.onTourDelete}
           />

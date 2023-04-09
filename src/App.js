@@ -15,18 +15,18 @@ import ResetPassword from "./pages/authentication/ResetPassword";
 import ManageToursPage from "./pages/userProfile/managment/ManageToursPage";
 import ProfileSettingsPage from "./pages/userProfile/selfManagment/ProfileSettingsPage";
 import BookingSuccess from "./pages/booking/BookingSuccess";
+import MyBookings from "./pages/userProfile/selfManagment/MyBookings";
 
 function App() {
   const authCtx = useContext(AuthContext);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  useEffect(()=>{
-    dispatch(fetchAllTours())
-  },[dispatch])
+  useEffect(() => {
+    dispatch(fetchAllTours());
+  }, [dispatch]);
 
   return (
     <Layout>
-      
       <Routes>
         <Route path="/home" element={<Home />} />
         <Route path="/tour/:slug" element={<TourOverview />} />
@@ -36,11 +36,14 @@ function App() {
         <Route path="/password-reset/:resetToken" element={<ResetPassword />} />
         {authCtx.isLoggedIn && (
           <Route path="/my-profile" element={<UserProfile />}>
-            <Route path="settings" element={<ProfileSettingsPage/>}/>
-            <Route path="manage-tours" element={<ManageToursPage/>}/>
+            <Route path="settings" element={<ProfileSettingsPage />} />
+            <Route path="my-bookings" element={<MyBookings />} />
+            {authCtx.user.role === "admin" && (
+              <Route path="manage-tours" element={<ManageToursPage />} />
+            )}
           </Route>
         )}
-        <Route path="/bookings/success" element={<BookingSuccess/>}/>
+        <Route path="/bookings/success" element={<BookingSuccess />} />
         <Route path="/" element={<Navigate replace to="/home" />} />
         <Route path="*" element={<NotFound />} />
       </Routes>

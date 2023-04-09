@@ -68,7 +68,7 @@ export default function TourOverview() {
 
   const reviewFormSubmitHandler = async (event) => {
     event.preventDefault();
-    setIsLoading(true)
+    setIsLoading(true);
     try {
       const response = await fetch(
         `${process.env.REACT_APP_DOMAIN_NAME}/api/v1/reviews`,
@@ -86,20 +86,39 @@ export default function TourOverview() {
           },
         }
       );
-      if(!response.ok){
-        const errorData = await response.json()
-        throw new Error(errorData.message)
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message);
       }
       const data = await response.json();
-      console.log(data)
-      setReviewState(false)
-      setNotification({status:'success', message:'Thank You For Kind Review'})
-      setTimeout(()=>setNotification(null),2000)
+      //formula to caluculate average rating
+      //(currentAverage * n + newRating) / (n + 1)
+      setTour((prevTour) => {
+        const newRatingsAverage =
+          (prevTour.ratingsAverage * prevTour.ratingsQuantity +
+            data.data.data.rating) /
+          (prevTour.ratingsQuantity + 1);
+        const newRatingsQuantity = prevTour.ratingsQuantity + 1
+        const newReviews = [...prevTour.reviews, data.data.data]
+        const updatedTour = {
+          ...prevTour,
+          ratingsAverage:Math.round(newRatingsAverage * 10) / 10,
+          ratingsQuantity:newRatingsQuantity,
+          reviews: newReviews,
+        };
+        return updatedTour;
+      });
+      setReviewState(false);
+      setNotification({
+        status: "success",
+        message: "Thank You For Kind Review",
+      });
+      setTimeout(() => setNotification(null), 2000);
     } catch (err) {
-      setNotification({status:'fail', message:err.message})
-      setTimeout(()=>setNotification(null),2000)
+      setNotification({ status: "fail", message: err.message });
+      setTimeout(() => setNotification(null), 2000);
     }
-    setIsLoading(false)
+    setIsLoading(false);
   };
 
   if (isLoading)

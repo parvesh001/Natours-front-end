@@ -14,12 +14,13 @@ import {
 } from "react-icons/ai";
 import style from "./SingleTour.module.scss";
 
+
 export default function SingleTour(props) {
   const navigate = useNavigate();
   const authCtx = useContext(AuthContext);
 
-  const bookedByCurrentUser = props.participants.includes(authCtx.user._id)
-  const fullyBookedTour = props.totalAvailableCapacity <= 0
+  const bookedByCurrentUser = props.bookedByCurrentUser
+  const fullyBookedTour = props.fullyBookedTour
  
   return (
     <div className={style["card"]}>
