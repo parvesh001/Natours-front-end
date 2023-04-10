@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
-import { AuthContext } from "../../../context/auth-ctx";
-import Model from "../../../UIs/Model/Model";
-import StandardBtn from "../../../UIs/StandardBtn/StandardBtn";
-import useInput from "../../../hooks/use-input";
-import Input from "../../../UIs/Input/Input";
+import { AuthContext } from "../../context/auth-ctx";
+import Model from "../../UIs/Model/Model";
+import StandardBtn from "../../UIs/StandardBtn/StandardBtn";
+import useInput from "../../hooks/use-input";
+import Input from "../../UIs/Input/Input";
 import style from "./AddReview.module.scss";
 
 export default function AddReview(props) {

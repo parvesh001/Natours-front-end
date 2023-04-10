@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import SingleReview from "./SingleReview";
-import AddReview from "../../../addReviewForm/AddReview";
+import AddReview from "../../../../addReviewForm/AddReview";
 import { AuthContext } from "../../../../../context/auth-ctx";
 import Model from "../../../../../UIs/Model/Model";
 import Loader from "../../../../../UIs/loader/Loader";

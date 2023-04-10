@@ -1,0 +1,26 @@
+.add-user-controller{
+    display: block;
+    margin-inline: auto;
+    margin-bottom: 2rem;
+}
+.users-container{
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: repeat(1, 1fr);
+    justify-items: center;
+    @media screen and(min-width:'768px') {
+        grid-template-columns: repeat(2,1fr);
+    }
+    @media screen and (min-width:'1150px') {
+        grid-template-columns: repeat(3,1fr);
+    }
+}
+.not-found-message{
+    font-size: large;
+    font-weight: 600;
+    text-align: center;
+    height: 70vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

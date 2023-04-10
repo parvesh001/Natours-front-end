@@ -13,6 +13,7 @@ import NotFound from "./pages/notFound/NotFound";
 import ForgetPassword from "./pages/authentication/ForgetPassword";
 import ResetPassword from "./pages/authentication/ResetPassword";
 import ManageToursPage from "./pages/userProfile/managment/ManageToursPage";
+import ManageUsersPage from "./pages/userProfile/managment/ManageUsersPage";
 import ProfileSettingsPage from "./pages/userProfile/selfManagment/ProfileSettingsPage";
 import BookingSuccess from "./pages/booking/BookingSuccess";
 import MyBookings from "./pages/userProfile/selfManagment/MyBookings";
@@ -42,6 +43,9 @@ function App() {
             <Route path="my-reviews" element={<MyReviews />} />
             {authCtx.user.role === "admin" && (
               <Route path="manage-tours" element={<ManageToursPage />} />
+            )}
+            {authCtx.user.role === "admin" && (
+              <Route path="manage-users" element={<ManageUsersPage />} />
             )}
           </Route>
         )}

@@ -7,12 +7,13 @@ import TourOverviewMap from "../../components/tour/tourOverview/tourOverviewMap/
 import TourOverviewProductCard from "../../components/tour/tourOverview/tourOverviewProductCard/TourOverviewProductCard";
 import TourOverviewReview from "../../components/tour/tourOverview/tourOverviewReview/TourOverviewReview";
 import TourOverviewTemplate from "../../components/tour/tourOverview/tourOverviewTemplate/TourOverviewTemplate";
+import AddReview from "../../components/addReviewForm/AddReview";
 import Model from "../../UIs/Model/Model";
 import Loader from "../../UIs/loader/Loader";
 import HasError from "../../components/error/HasError";
 import Notification from "../../UIs/notification/Notification";
 import style from "./TourOverview.module.scss";
-import AddReview from "../../components/user/addReviewForm/AddReview";
+
 
 export default function TourOverview() {
   const authCtx = useContext(AuthContext);

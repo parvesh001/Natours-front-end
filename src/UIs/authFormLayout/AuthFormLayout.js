@@ -7,7 +7,12 @@ export default function AuthFormLayout(props) {
     <form className={style["auth-form"]} onSubmit={props.onSubmit}>
       <h2 className={style["title"]}>{props.authFormTitle}</h2>
       {props.children}
-      <StandardBtn type="submit">{props.authFormBtn}</StandardBtn>
+      <div className={style["auth-form-controllers"]}>
+        <StandardBtn type="submit">{props.authFormBtn}</StandardBtn>
+        {props.forManagement && <StandardBtn type="button" danger={true} onClick={props.onCancel}>
+          Cancel
+        </StandardBtn>}
+      </div>
     </form>
   );
 }

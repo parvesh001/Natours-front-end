@@ -1,6 +1,6 @@
 .auth-form {
-  max-width: 90%;
-  width: 45rem;
+  max-width: 90vw;
+  width: 60rem;
   background-color: #fff;
   padding:2rem .5rem;
   border-radius: 15px;
@@ -11,6 +11,10 @@
     -webkit-text-fill-color: transparent;
     margin-bottom: 1.5rem;
     font-size: 1rem;
+  }
+  .auth-form-controllers{
+    display: flex;
+    justify-content: space-between;
   }
 }
   
