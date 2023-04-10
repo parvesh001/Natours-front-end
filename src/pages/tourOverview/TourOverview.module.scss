@@ -1,29 +1,4 @@
-.review-box {
-  padding: 1rem;
-  border: 2px solid #00000028;
-  border-radius: 5px;
-  background: #00000034;
-  backdrop-filter: blur(2px);
-  h2 {
-    margin-bottom: 1rem;
-    background: linear-gradient(to right bottom, #519946, #27ab81);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    margin-bottom: 1.5rem;
-  }
-  .review-form {
-    width: 30rem;
-    max-width: 90vw;
-    padding: 1rem;
-    background: linear-gradient(to right bottom, #519946, #27ab81);
-    border-radius: 5px;
-    .review-form-controllers{
-        display: flex;
-        justify-content: space-between;
-    }
-  }
-}
+
 .reviews {
   display: flex;
   align-items: center;
