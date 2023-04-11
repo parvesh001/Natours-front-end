@@ -1,8 +1,8 @@
 import React from 'react'
-import Users from '../../../components/user/myProfile/management/manageUsers/Users'
+import ManageUsers from '../../../components/user/myProfile/management/manageUsers/ManageUsers'
 
 export default function ManageUsersPage() {
   return (
-    <Users/>
+    <ManageUsers/>
   )
 }

@@ -6,9 +6,9 @@ import User from "./User";
 import Notification from "../../../../../UIs/notification/Notification";
 import StandardBtn from "../../../../../UIs/StandardBtn/StandardBtn";
 import UserForm from "../../../userForm/UserForm";
-import style from "./Users.module.scss";
+import style from "./ManageUsers.module.scss";
 
-export default function Users() {
+export default function ManageUsers() {
   const { token } = useContext(AuthContext);
   const [users, setUsers] = useState([]);
   const [userForm, setUserForm] = useState(false);

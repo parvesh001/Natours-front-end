@@ -7,7 +7,7 @@ import TourOverviewMap from "../../components/tour/tourOverview/tourOverviewMap/
 import TourOverviewProductCard from "../../components/tour/tourOverview/tourOverviewProductCard/TourOverviewProductCard";
 import TourOverviewReview from "../../components/tour/tourOverview/tourOverviewReview/TourOverviewReview";
 import TourOverviewTemplate from "../../components/tour/tourOverview/tourOverviewTemplate/TourOverviewTemplate";
-import AddReview from "../../components/addReviewForm/AddReview";
+import AddReviewForm from "../../components/user/addReviewForm/AddReviewForm";
 import Model from "../../UIs/Model/Model";
 import Loader from "../../UIs/loader/Loader";
 import HasError from "../../components/error/HasError";
@@ -119,7 +119,7 @@ export default function TourOverview() {
     <>
       {notification && <Notification notification={notification} />}
       {userCanAddReview && !currentUserAlreadyAddedReview && reviewState && (
-        <AddReview
+        <AddReviewForm
           tourId={tour._id}
           onReviewFormSubmit={reviewFormSubmitHandler}
           setIsLoading={(value) => setIsLoading(value)}

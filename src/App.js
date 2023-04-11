@@ -14,6 +14,8 @@ import ForgetPassword from "./pages/authentication/ForgetPassword";
 import ResetPassword from "./pages/authentication/ResetPassword";
 import ManageToursPage from "./pages/userProfile/managment/ManageToursPage";
 import ManageUsersPage from "./pages/userProfile/managment/ManageUsersPage";
+import ManageReviewsPage from "./pages/userProfile/managment/ManageReviewsPage";
+import ManageBookingsPage from "./pages/userProfile/managment/ManageBookingsPage";
 import ProfileSettingsPage from "./pages/userProfile/selfManagment/ProfileSettingsPage";
 import BookingSuccess from "./pages/booking/BookingSuccess";
 import MyBookings from "./pages/userProfile/selfManagment/MyBookings";
@@ -46,6 +48,12 @@ function App() {
             )}
             {authCtx.user.role === "admin" && (
               <Route path="manage-users" element={<ManageUsersPage />} />
+            )}
+            {authCtx.user.role === "admin" && (
+              <Route path="manage-reviews" element={<ManageReviewsPage />} />
+            )}
+            {authCtx.user.role === "admin" && (
+              <Route path="manage-bookings" element={<ManageBookingsPage />} />
             )}
           </Route>
         )}

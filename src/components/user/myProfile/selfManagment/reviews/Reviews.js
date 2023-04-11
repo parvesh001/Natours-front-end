@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import SingleReview from "./SingleReview";
-import AddReview from "../../../../addReviewForm/AddReview";
+import AddReviewForm from '../../../addReviewForm/AddReviewForm'
 import { AuthContext } from "../../../../../context/auth-ctx";
 import Model from "../../../../../UIs/Model/Model";
 import Loader from "../../../../../UIs/loader/Loader";
@@ -114,7 +114,7 @@ export default function Reviews() {
     <>
       {notification && <Notification notification={notification} />}
       {reviewState && (
-        <AddReview
+        <AddReviewForm
           review={reviewState}
           onReviewFormSubmit={reviewFormSubmitHandler}
           setIsLoading={(value) => setIsLoading(value)}
