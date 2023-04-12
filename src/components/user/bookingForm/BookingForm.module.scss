@@ -5,13 +5,20 @@
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.4);
     padding: 1rem;
+    max-width: 90vw;
+    min-width: 20rem;
   }
 
 
   .filterForm__fields{
     display: flex;
     margin-block: 2rem;
-    align-items: center;
+    flex-direction: column;
+    
+    @media  screen and(min-width:780px) {
+      align-items: center;
+      flex-direction: row;
+    }
     .filterForm__input {
         margin-right: 0.5rem;
         padding: 0.5rem;

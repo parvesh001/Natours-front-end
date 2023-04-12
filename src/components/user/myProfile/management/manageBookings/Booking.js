@@ -1,4 +1,6 @@
 import React from "react";
+import { AiOutlineEdit, AiOutlineDelete } from "react-icons/ai";
+
 import style from "./Booking.module.scss";
 
 export default function Booking(props) {
@@ -23,6 +25,16 @@ export default function Booking(props) {
         <p className={style["booking-card__customer-email"]}>
           Customer Email: {props.customerEmail}
         </p>
+      </div>
+      <div className={style["booking-controllers"]}>
+        <AiOutlineEdit
+          className={style["controller"]}
+          onClick={props.onUpdateBooking}
+        />
+        <AiOutlineDelete
+          className={style["controller"]}
+          onClick={props.onDeleteBooking}
+        />
       </div>
     </div>
   );

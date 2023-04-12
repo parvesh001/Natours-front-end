@@ -25,7 +25,7 @@ export default function BookingSuccess() {
   const bookingSuccessHandler = async () => {
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_DOMAIN_NAME}/api/v1/bookings/create-booking`,
+        `${process.env.REACT_APP_DOMAIN_NAME}/api/v1/bookings/book-tour`,
         {
           method: "POST",
           body: JSON.stringify({ tourId, price, startDate, userId }),

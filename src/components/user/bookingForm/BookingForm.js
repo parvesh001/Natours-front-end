@@ -1,20 +1,27 @@
-
 // FilterBookingsForm.js
 
-import React, { useState } from 'react';
-import styles from './FilterBookingsForm.module.scss'; // Import the CSS module for styles
-import StandardBtn from '../../../UIs/StandardBtn/StandardBtn';
+import React, { useState } from "react";
+import StandardBtn from "../../../UIs/StandardBtn/StandardBtn";
+import convertDateFormat from "../../../utils/convertDateFormat";
+import styles from "./BookingForm.module.scss"; // Import the CSS module for styles
 
-const FilterBookingsForm = (props) => {
-  const [tourId, setTourId] = useState('');
-  const [userId, setUserId] = useState('');
-  const [price, setPrice] = useState('');
-  const [startDate, setStartDate] = useState('');
+const BookingForm = (props) => {
+  const convertedDate = props.updatingBookingValues
+    ? convertDateFormat(props.updatingBookingValues.startDate)
+    : "";
+  const [tourId, setTourId] = useState(props.updatingBookingValues?.tour ?? "");
+  const [userId, setUserId] = useState(props.updatingBookingValues?.user ?? "");
+  const [price, setPrice] = useState(props.updatingBookingValues?.price ?? "");
+  const [startDate, setStartDate] = useState(convertedDate);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     // Pass the form data to the onSubmit callback function
-    props.onSubmit({ tourId, userId, price, startDate });
+    if (props.filtering && !props.updating) {
+      props.onFiltering({ tourId, userId, price, startDate });
+    } else if (props.updating && !props.filtering) {
+      props.onUpdating({ tourId, userId, price, startDate });
+    }
   };
 
   return (
@@ -51,11 +58,13 @@ const FilterBookingsForm = (props) => {
         />
       </div>
       <div className={styles.filterForm__controllers}>
-      <StandardBtn type="submit">Filter</StandardBtn>
-      <StandardBtn danger={true} onClick={props.onCancel}>Cancel</StandardBtn>
+        <StandardBtn type="submit">{props.filtering?'Filter':'Update'}</StandardBtn>
+        <StandardBtn danger={true} onClick={props.onCancel}>
+          Cancel
+        </StandardBtn>
       </div>
     </form>
   );
 };
 
-export default FilterBookingsForm;
+export default BookingForm;
