@@ -1,3 +1,5 @@
+@import '../../../assets/sass/variables';
+
 .card {
   position: relative;
   margin-top: 1rem;
@@ -22,7 +24,7 @@
       background: linear-gradient(to right bottom, #d56f6f, #b42828);
     }
     &.tour-label__you-booked{
-      background-image: linear-gradient(to right bottom, #7dd56f, #28b487);
+      background-image: $gradient-ocean
     }
   }
   .card-container {
@@ -41,7 +43,7 @@
           object-fit: cover;
         }
         .card-picture-overlay {
-          background-image: linear-gradient(to right bottom, #7dd56f, #28b487);
+          background-image:$gradient-ocean;
           height: 100%;
           width: 100%;
           position: absolute;
@@ -57,11 +59,7 @@
         right: 17px;
         color: #fff;
         z-index: 99;
-        background-image: linear-gradient(
-          to bottom right,
-          #7dd56fd9,
-          #28b487d9
-        );
+        background-image: $gradient-ocean;
         h2 {
           font-weight: 500;
           overflow-wrap: break-word;
@@ -84,7 +82,7 @@
         margin-top: 1rem;
         grid-gap: 1rem;
         .card-data-item {
-          color: #55c57a;
+          color: $color-ocean-2;
           span {
             margin-left: 10px;
             color: #888;
@@ -124,11 +122,11 @@
         }
         .menu-icon {
           align-self: flex-end;
-          color: #55c57a;
+          color: $color-ocean-2;
           font-size: 2rem;
         }
         .menu-controllers {
-          background: linear-gradient(to bottom right, #7dd56fd9, #28b487d9);
+          background: $gradient-ocean;
           position: absolute;
           padding: 2rem;
           display: flex;

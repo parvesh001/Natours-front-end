@@ -1,3 +1,6 @@
+@import '../../assets/sass/variables';
+
+
 .form-control {
     display: flex;
     flex-direction: column;
@@ -15,13 +18,13 @@
     label {
       font-weight: 800;
       font-size: 1rem;
-      color: #444;
+      color: $color-text-dark-1;
     }
     textarea {
       padding: 10px 5px;
-      background-color: #f2f2f2;
+      background-color: $color-text-dark-4;
       outline: none;
-      border: 1px solid #ababab;
+      border: 1px solid $color-text-dark-4;
       border-radius: 5px;
     }
   }

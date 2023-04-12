@@ -1,5 +1,8 @@
+@import '../../../../assets/sass/variables';
+@import '../../../../assets/sass/mixins';
+
 .book-your-tour{
-  background-color: #fff;
+  background-color: $color-text-white;
   border-radius: 5px;
   padding: .8rem 1rem;
   width: 40rem;
@@ -8,7 +11,7 @@
     padding: 1rem 3rem;
   } 
   h3{
-    background: linear-gradient(to right bottom, #519946, #27ab81);
+    background: $gradient-ocean;
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -31,12 +34,12 @@
     label {
       font-weight: 800;
       font-size: 1rem;
-      color: #444;
+      color: $color-text-dark-1;
     }
     select {
       padding: 10px 5px;
-      background-color: #f2f2f2;
-      border: 1px solid #ababab;
+      background-color: $color-text-dark-3;
+      border: 1px solid $color-text-dark-2;
       border-radius: 5px;
       height: 55px;
       font-size: 1rem;
@@ -53,7 +56,7 @@
 }
 
 .tour-overview-product-card {
-  background-color: #ebebeb;
+  background-color: $color-text-dark-4;
   transform: skewY(-6deg);
   transform-origin: bottom left;
   display: flex;
@@ -66,7 +69,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #fff;
+    background-color: $color-text-white;
     border-radius: 15px;
     height: 15rem;
     flex-direction: column;
@@ -100,22 +103,19 @@
       h4 {
         font-weight: 800;
         font-size: 1.2rem;
-        background: linear-gradient(to right bottom, #519946, #27ab81);
-        -webkit-background-clip: text;
-        background-clip: text;
-        -webkit-text-fill-color: transparent;
+      @include ocean-gradient-text
       }
       p {
-        color: #666;
+        color: $color-text-dark-3;
         margin-top: 0.5rem;
       }
     }
     .card-controller {
       .card-btn {
         padding: 10px 15px;
-        color: #fff;
+        color: $color-text-white;
         border: none;
-        background: linear-gradient(to right bottom, #83f472, #3cdfac);
+        background: $gradient-ocean;
         border-radius: 15px;
         font-weight: 700;
         cursor: pointer;

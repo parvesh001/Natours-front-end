@@ -1,3 +1,5 @@
+@import '../../assets/sass/mixins';
+
 .auth-form {
   max-width: 90vw;
   width: 60rem;
@@ -5,10 +7,7 @@
   padding:2rem .5rem;
   border-radius: 15px;
   .title {
-    background: linear-gradient(to right bottom, #519946, #27ab81);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
+    @include ocean-gradient-text;
     margin-bottom: 1.5rem;
     font-size: 1rem;
   }

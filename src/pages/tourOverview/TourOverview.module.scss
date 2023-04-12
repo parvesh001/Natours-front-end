@@ -1,10 +1,11 @@
+@import '../../assets/sass/variables';
 
 .reviews {
   display: flex;
   align-items: center;
   overflow-x: scroll;
   gap: 5rem;
-  background: linear-gradient(to right bottom, #519946, #27ab81);
+  background: $gradient-ocean;
   transform: skewY(-6deg);
   transform-origin: bottom left;
   height: 40vh;

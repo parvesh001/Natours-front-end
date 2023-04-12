@@ -1,3 +1,5 @@
+@import '../../../../assets/sass/variables';
+
 .tour-overview-hero {
     position: relative;
     height: 44vh;
@@ -11,7 +13,7 @@
         position: absolute;
         height: 100%;
         width: 100%;
-        background-image: linear-gradient(to bottom right, #7dd56fd9, #28b487d9);
+        background-image: $gradient-ocean-light;
       }
       img {
         -o-object-fit: cover;
@@ -31,7 +33,7 @@
         transform:skewY(6deg);
         color: #fff;
         padding: 5px 10px;
-        background-image: linear-gradient(to bottom right, #7dd56fd9, #28b487d9);
+        background-image: $gradient-ocean;
       }
       .hero-content-body{
         display: flex;

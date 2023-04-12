@@ -1,8 +1,8 @@
 import React from 'react'
 import NoDataFound from '../../../UIs/noDataFound/NoDataFound'
 
-export default function ManageReviewsPage() {
+export default function MyBilling() {
   return (
-    <div><NoDataFound/></div>
+    <div style={{width:'100%'}}><NoDataFound/></div>
   )
 }

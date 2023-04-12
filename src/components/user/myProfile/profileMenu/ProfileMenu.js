@@ -45,7 +45,7 @@ export default function ProfileMenu(props) {
           <CiMoneyBill className={style["icon"]} />
           <NavLink
             className={(navData) => (navData.isActive ? style["active"] : "")}
-            to="/my-profile/billing"
+            to="/my-profile/my-billing"
           >
             BILLING
           </NavLink>

@@ -15,7 +15,7 @@ export default function Header() {
   return (
     <header className={style["main-header"]}>
       <h4 className={style["brand-name"]}>
-        <Link to="/">NATOURS</Link>
+        <Link to="/">Tourista</Link>
       </h4>
       <div className={style["brand-logo"]}>
         <img
@@ -23,7 +23,7 @@ export default function Header() {
           alt="logo"
         />
         <h4>
-          <Link to="/">NATOURS</Link>
+          <Link to="/">Tourista</Link>
         </h4>
       </div>
       <div

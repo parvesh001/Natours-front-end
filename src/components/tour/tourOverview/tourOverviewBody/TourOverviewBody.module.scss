@@ -1,3 +1,6 @@
+@import '../../../../assets/sass/variables';
+@import '../../../../assets/sass/mixins';
+
 .tour-overview-body {
   display: flex;
   flex-direction: column;
@@ -5,7 +8,7 @@
   transform-origin: bottom left;
   .body-section-b1 {
     width: 100%;
-    background-color: #f1f1f1;
+    background-color: $color-text-white;
     padding: 5rem;
     display: flex;
     flex-direction: column;
@@ -15,11 +18,7 @@
       .heading {
         font-weight: 800;
         font-size: 1.2rem;
-        background: linear-gradient(to right bottom, #519946, #27ab81);
-        -webkit-background-clip: text;
-        background-clip: text;
-        -webkit-text-fill-color: transparent;
-        margin-bottom: 1.5rem;
+        @include ocean-gradient-text;
       }
       .data {
         margin-top: 1rem;
@@ -28,16 +27,16 @@
         gap: 10px;
         .icon {
           font-size: 1.2rem;
-          color: rgb(9, 121, 54);
+          color: $color-ocean-2;
         }
         .name {
-          color: #444;
+          color: $color-text-dark-1;
           font-weight: 800;
           font-size: 0.8rem;
         }
         .text {
           font-size: 0.8rem;
-          color: #444;
+          color: $color-text-dark-1;
           font-weight: 500;
           text-transform: capitalize;
         }
@@ -53,7 +52,7 @@
   }
   .body-section-b2 {
     width: 100%;
-    background-color: #fff;
+    background-color: $color-text-dark-4;
     padding: 5rem;
     .sub-box {
       transform:skewY(6deg);
@@ -61,15 +60,10 @@
         text-align: center;
         font-weight: 800;
         font-size: 1.2rem;
-        background: linear-gradient(to right bottom, #519946, #27ab81);
-        -webkit-background-clip: text;
-        background-clip: text;
-        -webkit-text-fill-color: transparent;
-        margin-bottom: 1.5rem;
-        text-transform: uppercase;
+       @include ocean-gradient-text;
       }
       .text {
-        color: #666;
+        color: $color-text-dark-2;
         font-weight: 500;
       }
     }

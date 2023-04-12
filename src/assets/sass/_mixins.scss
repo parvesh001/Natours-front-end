@@ -1,0 +1,12 @@
+// _mixins.scss
+@import './variables';
+
+@mixin ocean-gradient-text {
+    background: $gradient-ocean;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+  }
+  

@@ -4,6 +4,7 @@ import SingleTour from "../../../../tour/tours/SingleTour";
 import Model from "../../../../../UIs/Model/Model";
 import Loader from "../../../../../UIs/loader/Loader";
 import Notification from "../../../../../UIs/notification/Notification";
+import NoDataFound from '../../../../../UIs/noDataFound/NoDataFound'
 import style from "./Bookings.module.scss";
 
 export default function MyBookings() {
@@ -50,8 +51,8 @@ export default function MyBookings() {
   return (
     <>
       {notification && <Notification notification={notification} />}
+      {!bookedTours.length && <NoDataFound/>}
       <div className={style["my-bookings-page"]}>
-        {!bookedTours.length && <p className={style['no-found-message']}>No tour booked by you!</p>}
         {bookedTours.length !== 0 && bookedTours.map((bookedTour) => {
           return (
             <SingleTour

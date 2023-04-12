@@ -1,0 +1,25 @@
+@import '../../assets/sass/mixins';
+
+.no-data-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 70vh;
+  }
+  
+  .no-data {
+    opacity: 0;
+    animation: fade-in 1s ease-in forwards;
+    font-size: 2.5rem;
+    @include ocean-gradient-text;
+  }
+  
+  @keyframes fade-in {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  

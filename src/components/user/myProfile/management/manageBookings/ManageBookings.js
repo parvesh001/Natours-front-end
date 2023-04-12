@@ -4,9 +4,11 @@ import Loader from "../../../../../UIs/loader/Loader";
 import Model from "../../../../../UIs/Model/Model";
 import Notification from "../../../../../UIs/notification/Notification";
 import StandardBtn from "../../../../../UIs/StandardBtn/StandardBtn";
-import style from "./ManageBookings.module.scss";
 import Booking from "./Booking";
 import BookingForm from "../../../bookingForm/BookingForm";
+import NoDataFound from "../../../../../UIs/noDataFound/NoDataFound";
+import style from "./ManageBookings.module.scss";
+
 
 export default function ManageBookings() {
   const { token } = useContext(AuthContext);
@@ -17,10 +19,9 @@ export default function ManageBookings() {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState([]);
   const [queryObj, setQueryObj] = useState({});
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [notification, setNotification] = useState(null);
   const docsPerPage = 3;
-  // console.log(bookings);
 
   useEffect(() => {
     const fetchBookings = async () => {
@@ -150,22 +151,33 @@ export default function ManageBookings() {
     );
   }
 
-  if (!bookings.length && !isLoading) {
-    return <p className={style["not-found-message"]}>No Booking Found</p>;
-  }
-
   const queryObjHasValue = Object.values(queryObj).some(
     (val) => (val?.trim() ?? "") !== ""
   );
 
   return (
     <>
+       {(filtering || updating) && (
+        <Model>
+          <BookingForm
+            onFiltering={(filterData) => filterHandler(filterData)}
+            onUpdating={(updateData) => updateBookingHandler(updateData)}
+            updatingBookingValues={updatingBooking}
+            onCancel={() => {
+              setFiltering(false);
+              setUpdating(false);
+            }}
+            filtering={filtering}
+            updating={updating}
+          />
+        </Model>
+      )}
       {notification && <Notification notification={notification} />}
       <div className={style["controllers"]}>
         <StandardBtn className={style["add-booking-controller"]}>
           New Booking
         </StandardBtn>
-        {!queryObjHasValue && (
+        {!queryObjHasValue && bookings.length > 0 && (
           <StandardBtn
             className={style["filter-booking-controller"]}
             onClick={() => {
@@ -189,21 +201,7 @@ export default function ManageBookings() {
           </StandardBtn>
         )}
       </div>
-      {(filtering || updating) && (
-        <Model>
-          <BookingForm
-            onFiltering={(filterData) => filterHandler(filterData)}
-            onUpdating={(updateData) => updateBookingHandler(updateData)}
-            updatingBookingValues={updatingBooking}
-            onCancel={() => {
-              setFiltering(false);
-              setUpdating(false);
-            }}
-            filtering={filtering}
-            updating={updating}
-          />
-        </Model>
-      )}
+      {bookings.length === 0 && <NoDataFound/>}
       <div className={style["bookings-container"]}>
         {bookings.map((booking) => (
           <Booking

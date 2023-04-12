@@ -1,3 +1,4 @@
+@import '../../assets/sass/variables';
 
 .loader {
     display: flex;
@@ -10,7 +11,7 @@
     width: 10px;
     height: 30px;
     margin: 0 10px;
-    background: linear-gradient(#7dd56f, #28b487);
+    background: $gradient-ocean;
     animation: loading 1s ease-in-out infinite;
   }
 

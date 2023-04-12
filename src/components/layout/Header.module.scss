@@ -1,5 +1,7 @@
+@import '../../assets/sass/variables';
+
 .main-header {
-  background-color: #444;
+  background: $gradient-ocean;
   width: 100vw;
   position: fixed;
   top:0;
@@ -55,7 +57,6 @@
     }
   }
   .main-nav {
-    background-color: #444;
     height: 100vh;
     position: absolute;
     right: -100%;
@@ -80,12 +81,14 @@
         margin-right: 0;
       }
       .main-nav-list-item{
+        
         button{
           background: none;
           color:#fff;
           border: none;
           font-size: 1.2rem;
           cursor: pointer;
+          font-weight: 600;
         }
         .user-profile{
           display: flex;
@@ -101,6 +104,7 @@
           text-decoration: none;
           color: #fff;
           font-size: 1.2rem;
+          font-weight: 600;
         }
       }
     }

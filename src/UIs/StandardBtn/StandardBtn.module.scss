@@ -1,7 +1,9 @@
+@import '../../assets/sass/variables';
+
 .standard-btn{
     padding: .5rem 1rem;
-    background: linear-gradient(to right bottom, #76cd69, #27ab81);
-    color:#fff;
+    background: $gradient-ocean;
+    color:$color-text-white;
     font-weight: 800;
     font-size: 1rem;
     border:none;
@@ -16,7 +18,7 @@
         box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.603);
     }
     &:disabled{
-        background: gray;
+        background: $color-ocean-3;
         transform: none;
         box-shadow: none;
         cursor: not-allowed;

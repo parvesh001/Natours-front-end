@@ -20,6 +20,7 @@ import ProfileSettingsPage from "./pages/userProfile/selfManagment/ProfileSettin
 import BookingSuccess from "./pages/booking/BookingSuccess";
 import MyBookings from "./pages/userProfile/selfManagment/MyBookings";
 import MyReviews from "./pages/userProfile/selfManagment/MyReviews";
+import MyBilling from "./pages/userProfile/selfManagment/MyBilling";
 
 function App() {
   const authCtx = useContext(AuthContext);
@@ -43,6 +44,7 @@ function App() {
             <Route path="settings" element={<ProfileSettingsPage />} />
             <Route path="my-bookings" element={<MyBookings />} />
             <Route path="my-reviews" element={<MyReviews />} />
+            <Route path="my-billing" element={<MyBilling />} />
             {authCtx.user.role === "admin" && (
               <Route path="manage-tours" element={<ManageToursPage />} />
             )}

@@ -1,9 +1,12 @@
+@import '../../../../assets/sass/variables';
+@import '../../../../assets/sass/mixins';
+
 .tour-overview-review{
     width: 18rem;
     min-width: 18rem;
     height: 16rem;
     box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.598);
-    background-color: #fff;
+    background-color: $color-text-white;
     padding: 2rem;
     display: grid;
     grid-template-rows: 20% 60% 20%;
@@ -18,12 +21,12 @@
             border-radius: 50%;
         }
         span{
-            color:#444;
+            color:$color-text-dark-2;
             font-weight: 800;
         }
     }
     .review-body{
-        color:#666;
+        color:$color-text-dark-2;
         margin-top: 1rem;
         overflow: hidden;
     }
@@ -33,10 +36,10 @@
         margin-top: 1rem;
         font-size: 1.5rem;
         .star-active{
-            color:rgb(0, 202, 135);
+            color:$color-ocean-2;
         }
         .star-inactive{
-            color: #999;
+            color: $color-text-dark-3;
         }
     }
 }

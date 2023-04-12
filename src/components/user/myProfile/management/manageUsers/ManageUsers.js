@@ -7,6 +7,7 @@ import Notification from "../../../../../UIs/notification/Notification";
 import StandardBtn from "../../../../../UIs/StandardBtn/StandardBtn";
 import UserForm from "../../../userForm/UserForm";
 import style from "./ManageUsers.module.scss";
+import NoDataFound from "../../../../../UIs/noDataFound/NoDataFound";
 
 export default function ManageUsers() {
   const { token } = useContext(AuthContext);
@@ -125,9 +126,7 @@ export default function ManageUsers() {
         Add New User
       </StandardBtn>
       {users.length === 0 && (
-        <div className={style["not-found-message"]}>
-          <p>There is no user</p>
-        </div>
+        <NoDataFound/>
       )}
       <div className={style["users-container"]}>
         {users.map((user) => {
