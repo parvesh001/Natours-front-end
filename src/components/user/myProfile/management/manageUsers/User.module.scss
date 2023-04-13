@@ -1,3 +1,6 @@
+@import '../../../../../assets/sass/mixins';
+@import '../../../../../assets/sass/variables';
+
 .user-card {
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -20,7 +23,7 @@
       }
     }
     .card-picture-overlay {
-        background-image: linear-gradient(to right bottom, #7dd56f, #28b487);
+        background-image: $gradient-ocean;
         height: 100%;
         width: 100%;
         position: absolute;
@@ -32,11 +35,8 @@
     padding: .2rem;
     text-align: center;
     h1 {
-      font-size: 1.5rem;
-      background: linear-gradient(to right bottom, #7dd56f, #28b487);
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
+      font-size: 1rem;
+     @include ocean-gradient-text;
     }
     span{
         color: #888;
@@ -44,7 +44,7 @@
     }
   }
   .card-footer {
-    background: linear-gradient(to right bottom, #7dd56f, #28b487);
+    background: $gradient-ocean;
     opacity: 0.7;
     position: absolute;
     padding: 2rem 1rem;

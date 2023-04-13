@@ -1,31 +1,29 @@
+@import "../../../assets/sass/mixins";
+@import "../../../assets/sass/variables";
 
-  .visual-info-form{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    height: 100%;
-  }
-  
-  .submit-btn{
-    display: block;
-    margin-left: auto;
-  }
+.visual-info-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 100%;
+}
 
-  .title {
-    background: linear-gradient(to right bottom, #519946, #27ab81);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    margin-bottom: 1.5rem;
-  }
+.submit-btn {
+  display: block;
+  margin-left: auto;
+}
 
-  .inputs-container{
-    display: grid;
-    align-items: center;
-    grid-template-columns: repeat(1, 1fr);
-    gap:.5rem;
-    @media screen and(min-width:760px) {
-      grid-template-columns: repeat(2,1fr);
-      gap: 1rem;
-    }
+.title {
+  @include ocean-gradient-text;
+}
+
+.inputs-container {
+  display: grid;
+  align-items: center;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 0.5rem;
+  @media screen and(min-width:760px) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
   }
+}

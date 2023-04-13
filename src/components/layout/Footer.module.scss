@@ -1,9 +1,12 @@
+@import '../../assets/sass/variables';
+
 .footer{
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 3rem 2rem;
     height: 15rem;
+    background: $gradient-ocean-light;
     .brand-logo{
         width: 120px;
         img{

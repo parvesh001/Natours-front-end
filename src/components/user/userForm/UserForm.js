@@ -140,6 +140,7 @@ export default function UserForm(props) {
         authFormBtn={props.updating ? "Update" : "Add"}
         forManagement={true}
         onCancel={props.onCancel}
+        formIsValid = {formIsValid}
       >
         <Input
           className={nameInputClasses}

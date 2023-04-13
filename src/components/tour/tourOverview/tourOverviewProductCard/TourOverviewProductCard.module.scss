@@ -2,7 +2,7 @@
 @import '../../../../assets/sass/mixins';
 
 .book-your-tour{
-  background-color: $color-text-white;
+  background: $color-text-white;
   border-radius: 5px;
   padding: .8rem 1rem;
   width: 40rem;
@@ -11,11 +11,8 @@
     padding: 1rem 3rem;
   } 
   h3{
-    background: $gradient-ocean;
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    margin-bottom: 1.5rem;
+    @include ocean-gradient-text;
+    margin-bottom: 1rem;
   }
   .form-control {
     display: flex;
@@ -38,7 +35,7 @@
     }
     select {
       padding: 10px 5px;
-      background-color: $color-text-dark-3;
+      background-color: $color-text-dark-4;
       border: 1px solid $color-text-dark-2;
       border-radius: 5px;
       height: 55px;
@@ -56,16 +53,13 @@
 }
 
 .tour-overview-product-card {
-  background-color: $color-text-dark-4;
-  transform: skewY(-6deg);
-  transform-origin: bottom left;
+  background:$gradient-ocean-light;
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 0 1rem;
   height: 40vh;
   .product-card {
-    transform: skewY(6deg);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -93,6 +87,7 @@
       .img1 {
         left: -45%;
         z-index: 99;
+        background: $gradient-ocean;
       }
       .img2 {
         z-index: 9;
@@ -124,9 +119,9 @@
   }
 }
 
-@media screen and(min-width:768px) {
+@media screen and(min-width:920px) {
   .tour-overview-product-card {
-    margin-bottom: 3.5rem;
+    // margin-bottom: 3.5rem;
     height: 70vh;
     .product-card {
       height: 11.5rem;

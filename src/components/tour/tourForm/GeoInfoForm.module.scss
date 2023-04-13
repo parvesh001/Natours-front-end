@@ -1,3 +1,6 @@
+@import '../../../assets/sass/mixins';
+@import '../../../assets/sass/variables';
+
 .geo-info-form {
   .form-control {
     display: flex;
@@ -34,14 +37,10 @@
     }
   }
   .title {
-    background: linear-gradient(to right bottom, #519946, #27ab81);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    margin-bottom: 1.5rem;
+   @include ocean-gradient-text;
   }
   .sub-title {
-    color: #519946;
+    color: $color-ocean-2;
     margin-bottom: 1.5rem;
   }
   .inputs-container {
@@ -78,7 +77,7 @@
         width: 100%;
         .sub-title {
           padding: 5px 10px;
-          border: 1px solid #519946;
+          border: 1px solid $color-ocean-2;
           display: inline-block;
           position: relative;
           font-size: .4rem;
@@ -118,7 +117,7 @@
         }
         &.active {
           .sub-title {
-            background: linear-gradient(to right bottom, #519946, #27ab81);
+            background: $gradient-ocean;
             color: #fff;
             .delete-location-icon {
               display: none;

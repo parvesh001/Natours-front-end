@@ -1,29 +1,36 @@
-.pagination{
-    padding: 1rem;
-    display: flex;
-    gap:1rem;
-    justify-content: center;
-    .page{
-        color:#777;
-        font-weight: 600;
-        padding: .3rem;
-        width: 2rem;
-        height: 2rem;
-        border-radius: 50%;
+@import '../../../../../assets/sass/variables';
+
+.manage-bookings{
+    min-height: 70vh;
+    .pagination{
+        padding: 1rem;
         display: flex;
+        gap:1rem;
         justify-content: center;
-        align-items: center;
-        cursor: pointer;
-        transition: all .4s ease;
-        &.active{
-            border: 4px solid #27ab81;
+        .page{
+            color:#777;
+            font-weight: 600;
+            padding: .3rem;
+            width: 2rem;
+            height: 2rem;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: all .4s ease;
+            &.active{
+                border: 4px solid $color-ocean-2;
+            }
         }
     }
+    .controllers{
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 1rem;
+        padding-inline: 1rem;
+    }
+    @media screen and(min-height:920px) {
+        min-height: 100vh;
+    }
 }
-.controllers{
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 1rem;
-}
-
-

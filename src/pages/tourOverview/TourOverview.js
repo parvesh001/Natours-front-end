@@ -14,7 +14,6 @@ import HasError from "../../components/error/HasError";
 import Notification from "../../UIs/notification/Notification";
 import style from "./TourOverview.module.scss";
 
-
 export default function TourOverview() {
   const authCtx = useContext(AuthContext);
   const { slug } = useParams();
@@ -86,6 +85,7 @@ export default function TourOverview() {
   }
 
   let bookedByCurrentUser = false;
+if(!isLoading && tour !== null){
   for (let i = 0; i < tour.bookingsPerStartDate.length; i++) {
     const BPSD = tour.bookingsPerStartDate[i];
     if (BPSD.participants.includes(authCtx.user._id)) {
@@ -93,27 +93,33 @@ export default function TourOverview() {
       break;
     }
   }
+}
 
   let userCanAddReview = false;
-  for (let i = 0; i < tour.bookingsPerStartDate.length; i++) {
-    const BPSD = tour.bookingsPerStartDate[i];
-    if (
-      BPSD.participants.includes(authCtx.user._id) &&
-      new Date(BPSD.startDate) < new Date()
-    ) {
-      userCanAddReview = true;
-      break;
+  if(!isLoading && tour !== null){
+    for (let i = 0; i < tour.bookingsPerStartDate.length; i++) {
+      const BPSD = tour.bookingsPerStartDate[i];
+      if (
+        BPSD.participants.includes(authCtx.user._id) &&
+        new Date(BPSD.startDate) < new Date()
+      ) {
+        userCanAddReview = true;
+        break;
+      }
     }
   }
 
   let currentUserAlreadyAddedReview = false;
-  for (let i = 0; i < tour.reviews.length; i++) {
-    const review = tour.reviews[i];
-    if (review.user._id === authCtx.user._id) {
-      currentUserAlreadyAddedReview = true;
-      break;
+  if (!isLoading && tour!==null) {
+    for (let i = 0; i < tour.reviews.length; i++) {
+      const review = tour.reviews[i];
+      if (review.user._id === authCtx.user._id) {
+        currentUserAlreadyAddedReview = true;
+        break;
+      }
     }
   }
+
 
   return (
     <>
@@ -127,36 +133,40 @@ export default function TourOverview() {
           setNotification={(value) => setNotification(value)}
         />
       )}
-      <TourOverviewHero
-        imageCover={tour.imageCover}
-        name={tour.name}
-        duration={tour.duration}
-        startLocation={tour.startLocation}
-      />
-      <TourOverviewBody
-        guides={tour.guides}
-        difficulty={tour.difficulty}
-        maxGroupSize={tour.maxGroupSize}
-        ratingsAverage={tour.ratingsAverage}
-        ratingsQuantity={tour.ratingsQuantity}
-        date={new Date(tour.startDates[0]).toLocaleString("ind", {
-          month: "short",
-          year: "numeric",
-        })}
-        name={tour.name}
-        description={tour.description}
-      />
-      <TourOverviewTemplate images={tour.images} name={tour.name} />
-      <TourOverviewMap />
-      <section className={style["reviews"]}>{tourOverviewReviews}</section>
-      {!bookedByCurrentUser && (
-        <TourOverviewProductCard
-          images={tour.images}
+      <div className={style["tour-overview"]}>
+        <TourOverviewHero
+          imageCover={tour.imageCover}
+          name={tour.name}
           duration={tour.duration}
-          tourId={tour._id}
-          bookingsPerStartDate={tour.bookingsPerStartDate}
+          startLocation={tour.startLocation}
         />
-      )}
+        <TourOverviewBody
+          guides={tour.guides}
+          difficulty={tour.difficulty}
+          maxGroupSize={tour.maxGroupSize}
+          ratingsAverage={tour.ratingsAverage}
+          ratingsQuantity={tour.ratingsQuantity}
+          date={new Date(tour.startDates[0]).toLocaleString("ind", {
+            month: "short",
+            year: "numeric",
+          })}
+          name={tour.name}
+          description={tour.description}
+        />
+        <TourOverviewTemplate images={tour.images} name={tour.name} />
+        <TourOverviewMap />
+        {tour.reviews.length !== 0 && (
+          <section className={style["reviews"]}>{tourOverviewReviews}</section>
+        )}
+        {!bookedByCurrentUser && (
+          <TourOverviewProductCard
+            images={tour.images}
+            duration={tour.duration}
+            tourId={tour._id}
+            bookingsPerStartDate={tour.bookingsPerStartDate}
+          />
+        )}
+      </div>
     </>
   );
 }

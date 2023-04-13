@@ -9,7 +9,6 @@ import BookingForm from "../../../bookingForm/BookingForm";
 import NoDataFound from "../../../../../UIs/noDataFound/NoDataFound";
 import style from "./ManageBookings.module.scss";
 
-
 export default function ManageBookings() {
   const { token } = useContext(AuthContext);
   const [bookings, setBookings] = useState([]);
@@ -157,7 +156,7 @@ export default function ManageBookings() {
 
   return (
     <>
-       {(filtering || updating) && (
+      {(filtering || updating) && (
         <Model>
           <BookingForm
             onFiltering={(filterData) => filterHandler(filterData)}
@@ -173,72 +172,74 @@ export default function ManageBookings() {
         </Model>
       )}
       {notification && <Notification notification={notification} />}
-      <div className={style["controllers"]}>
-        <StandardBtn className={style["add-booking-controller"]}>
-          New Booking
-        </StandardBtn>
-        {!queryObjHasValue && bookings.length > 0 && (
-          <StandardBtn
-            className={style["filter-booking-controller"]}
-            onClick={() => {
-              setUpdating(false);
-              setFiltering(true);
-              setUpdatingBooking(null);
-            }}
-          >
-            Filter Bookings
+      <div className={style["manage-bookings"]}>
+        <div className={style["controllers"]}>
+          <StandardBtn className={style["add-booking-controller"]}>
+            New Booking
           </StandardBtn>
-        )}
-        {queryObjHasValue && (
-          <StandardBtn
-            className={style["filter-booking-controller"]}
-            onClick={() => {
-              setQueryObj({});
-              setCurrentPage(1);
-            }}
-          >
-            Reset Filter
-          </StandardBtn>
-        )}
-      </div>
-      {bookings.length === 0 && <NoDataFound/>}
-      <div className={style["bookings-container"]}>
-        {bookings.map((booking) => (
-          <Booking
-            key={booking._id}
-            productPhoto={booking.tour.imageCover}
-            productName={booking.tour.name}
-            startDate={new Date(booking.startDate).toDateString()}
-            customerName={booking.user.name}
-            customerEmail={booking.user.email}
-            productPrice={booking.price}
-            onUpdateBooking={() => {
-              setFiltering(false);
-              setUpdating(true);
-              setUpdatingBooking({
-                id: booking._id,
-                tour: booking.tour._id,
-                user: booking.user._id,
-                price: booking.price,
-                startDate: booking.startDate,
-              });
-            }}
-            onDeleteBooking={() => deleteBookingHandler(booking._id)}
-          />
-        ))}
-      </div>
-      <div className={style["pagination"]}>
-        {totalPages.map((page, ind) => (
-          <div
-            key={ind}
-            className={`${style["page"]} ${
-              currentPage === page + 1 ? style["active"] : ""
-            }`}
-            onClick={() => setCurrentPage(page + 1)}
-          >
-            {page + 1}
-          </div>
-        ))}
+          {!queryObjHasValue && bookings.length > 0 && (
+            <StandardBtn
+              className={style["filter-booking-controller"]}
+              onClick={() => {
+                setUpdating(false);
+                setFiltering(true);
+                setUpdatingBooking(null);
+              }}
+            >
+              Filter Bookings
+            </StandardBtn>
+          )}
+          {queryObjHasValue && (
+            <StandardBtn
+              className={style["filter-booking-controller"]}
+              onClick={() => {
+                setQueryObj({});
+                setCurrentPage(1);
+              }}
+            >
+              Reset Filter
+            </StandardBtn>
+          )}
+        </div>
+        {bookings.length === 0 && <NoDataFound />}
+        <div className={style["bookings-container"]}>
+          {bookings.map((booking) => (
+            <Booking
+              key={booking._id}
+              productPhoto={booking.tour.imageCover}
+              productName={booking.tour.name}
+              startDate={new Date(booking.startDate).toDateString()}
+              customerName={booking.user.name}
+              customerEmail={booking.user.email}
+              productPrice={booking.price}
+              onUpdateBooking={() => {
+                setFiltering(false);
+                setUpdating(true);
+                setUpdatingBooking({
+                  id: booking._id,
+                  tour: booking.tour._id,
+                  user: booking.user._id,
+                  price: booking.price,
+                  startDate: booking.startDate,
+                });
+              }}
+              onDeleteBooking={() => deleteBookingHandler(booking._id)}
+            />
+          ))}
+        </div>
+        <div className={style["pagination"]}>
+          {totalPages.map((page, ind) => (
+            <div
+              key={ind}
+              className={`${style["page"]} ${
+                currentPage === page + 1 ? style["active"] : ""
+              }`}
+              onClick={() => setCurrentPage(page + 1)}
+            >
+              {page + 1}
+            </div>
+          ))}
+        </div>
       </div>
     </>
   );

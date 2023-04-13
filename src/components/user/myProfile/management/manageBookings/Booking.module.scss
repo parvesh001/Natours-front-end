@@ -1,4 +1,6 @@
 /* BookingCard.css */
+@import '../../../../../assets/sass/variables';
+@import '../../../../../assets/sass/mixins';
 
 .booking-card {
   display: flex;
@@ -22,10 +24,7 @@
     .booking-card__product-name {
       font-size: 1.2rem;
       margin-bottom: 0.5rem;
-      background: linear-gradient(to bottom right, #519946, #27ab81);
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
+      @include ocean-gradient-text;
     }
     .booking-card__price {
       font-size: 1rem;
@@ -47,7 +46,7 @@
     }
   }
   .booking-controllers {
-    background: linear-gradient(to right bottom, #7dd56f, #28b487);
+    background: $gradient-ocean;
     height: 100%;
     padding: 1rem;
     opacity: 0.7;

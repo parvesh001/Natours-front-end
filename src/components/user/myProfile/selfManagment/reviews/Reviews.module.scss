@@ -5,6 +5,8 @@
     padding: 0 1rem;
     gap:3rem;
     justify-items: center;
+    min-height: 100vh;
+    margin-top: 1.5rem;
     @media screen and(min-width:1024px) {
         grid-template-columns: repeat(2,1fr);
         

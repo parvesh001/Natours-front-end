@@ -83,6 +83,7 @@ export default function ProfileSettings() {
       onSubmit={formSubmitHandler}
       authFormTitle="YOUR ACCOUNT SETTINGS"
       authFormBtn="SAVE SETTINGS"
+      formIsValid = {formIsValid}
     >
        {notification && <Notification notification={notification} />}
       <Input

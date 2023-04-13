@@ -9,5 +9,10 @@ $color-text-dark-3:#999;
 $color-text-dark-4:#f5f5f5;
 $color-text-white:#fff;
 
+$error-color-1: #FF9494;
+$error-color-2: #FF6666;
+
+$error-background:  linear-gradient(to right, $error-color-1, $error-color-2);
 $gradient-ocean: linear-gradient(135deg, $color-ocean-1, $color-ocean-2, $color-ocean-3, $color-ocean-4);
-$gradient-ocean-light:linear-gradient(to bottom right, #35648d71, #32b7e088);
+$gradient-ocean-light:#e1f7ff;
+$gradient-ocean-shadow:linear-gradient(to bottom right, #35648d77, #32b7e080);

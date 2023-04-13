@@ -124,7 +124,7 @@ export default function TourOverviewProductCard(props) {
           <div className={style["card-images"]}>
             <img
               className={style["img1"]}
-              src={`${process.env.REACT_APP_DOMAIN_NAME}/img/logo-green-round.png`}
+              src={`${process.env.REACT_APP_DOMAIN_NAME}/img/tourista-white.png`}
               alt="tour"
             />
             <img

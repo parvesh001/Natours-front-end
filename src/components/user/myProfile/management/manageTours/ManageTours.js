@@ -85,6 +85,7 @@ export default function ManageTours() {
         className="management"
         onEdit={(tourEditData) => editTourHandler(tourEditData)}
         onTourDelete={(tourId) => tourDeleteHandler(tourId)}
+        managing ={true}
       />
     </>
   );

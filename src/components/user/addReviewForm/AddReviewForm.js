@@ -76,8 +76,8 @@ export default function AddReview(props) {
     props.setIsLoading(false);
   };
 
-  const reviewInputClasses = reviewInputHasError ? "invalid" : "";
-  const ratingInputClasses = ratingInputHasError ? "invalid" : "";
+  const reviewInputClasses = reviewInputHasError ? "invalid" : "light";
+  const ratingInputClasses = ratingInputHasError ? "invalid" : "light";
   return (
     <Model>
       <div className={style["review-box"]}>

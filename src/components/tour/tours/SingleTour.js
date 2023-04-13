@@ -83,7 +83,7 @@ export default function SingleTour(props) {
               <span>rating({props.ratingsQuantity})</span>
             </div>
           </div>
-          {authCtx.user.role === "admin" && (
+          {authCtx.user.role === "admin" && props.managing &&  (
             <div className={style["tour-menu"]}>
               <CgMenuRound className={style["menu-icon"]} />
               <div className={style["menu-controllers"]}>
@@ -107,7 +107,7 @@ export default function SingleTour(props) {
               </div>
             </div>
           )}
-          {authCtx.user.role !== "admin" && (
+          {(authCtx.user.role !== "admin" || !props.managing) && (
             <StandardBtn
               type="button"
               onClick={() => navigate(`/tour/${props.slug}`)}

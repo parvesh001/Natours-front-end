@@ -5,7 +5,7 @@ export default function Footer() {
   return (
     <footer className={style['footer']}>
       <div className={style["brand-logo"]}>
-        <img src={`${process.env.REACT_APP_DOMAIN_NAME}/img/logo-green.png`} alt="logo" />
+        <img src={`${process.env.REACT_APP_DOMAIN_NAME}/img/tourista-colored-logo.png`} alt="logo" />
       </div>
       <div>
         <nav className={style['footer-nav']}>

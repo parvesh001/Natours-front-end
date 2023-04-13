@@ -1,5 +1,9 @@
 @import '../../assets/sass/variables';
 
+.tour-overview{
+  background:$gradient-ocean-light;
+}
+
 .reviews {
   display: flex;
   align-items: center;
@@ -12,7 +16,7 @@
   padding: 0 3rem;
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 920px) {
   .reviews {
     height: 70vh;
   }

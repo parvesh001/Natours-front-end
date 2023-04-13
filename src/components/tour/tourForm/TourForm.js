@@ -132,10 +132,11 @@ export default function TourForm(props) {
         throw new Error(errorData.message);
       }
       const finalData = await results.json();
+      console.log(finalData)
       if(!slug && !id){
         dispatch(tourSliceActions.createTour(finalData.data.data));
       }else{
-        dispatch(tourSliceActions.updateTour(finalData.data.data))
+        dispatch(tourSliceActions.updateTour(finalData.data.data));
       }
       props.onClose();
     } catch (err) {

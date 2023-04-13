@@ -52,7 +52,7 @@
   }
   .body-section-b2 {
     width: 100%;
-    background-color: $color-text-dark-4;
+    background:$gradient-ocean-light;
     padding: 5rem;
     .sub-box {
       transform:skewY(6deg);
@@ -60,6 +60,7 @@
         text-align: center;
         font-weight: 800;
         font-size: 1.2rem;
+        margin-bottom: 1rem;
        @include ocean-gradient-text;
       }
       .text {
@@ -70,14 +71,20 @@
   }
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 780px) {
   .tour-overview-body {
     flex-direction: row;
-    height: 100vh;
+    height: 70vh;
     .body-section-b1,
     .body-section-b2 {
       width: 50%;
       padding:10rem 5rem;
     }
+  }
+}
+@media screen and (min-width: 920px) {
+  .tour-overview-body {
+    height: 100vh;
+    
   }
 }

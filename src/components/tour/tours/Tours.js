@@ -11,7 +11,6 @@ import HasError from "../../error/HasError";
 export default function Tours(props) {
   const tourData = useSelector(state => state.tour)
   const authCtx = useContext(AuthContext)
-
   if (tourData.isLoading)
     return (
       <Model>
@@ -24,6 +23,7 @@ export default function Tours(props) {
     }
 
   return (
+    
     <div className={`${style["tours-container"]} ${style[props.className]}`}>
       {tourData.tours.map((tour) => {
         return (
@@ -48,6 +48,7 @@ export default function Tours(props) {
             fullyBookedTour = {tour.tourBookingsDetails.availableCapacity <= 0}
             onEdit={props.onEdit}
             onTourDelete={props.onTourDelete}
+            managing = {props.managing}
           />
         );
       })}

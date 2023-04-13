@@ -13,7 +13,7 @@
         position: absolute;
         height: 100%;
         width: 100%;
-        background-image: $gradient-ocean-light;
+        background-image: $gradient-ocean-shadow;
       }
       img {
         -o-object-fit: cover;
@@ -29,6 +29,8 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
+      max-width: 97vw;
+      min-width: 20rem;
       .hero-content-title {
         transform:skewY(6deg);
         color: #fff;
@@ -54,6 +56,12 @@
   }
   
   @media only screen and(min-width:768px) {
+    .tour-overview-hero {
+      position: relative;
+      height: 70vh;
+    }
+  }
+  @media screen and(min-width:920px) {
     .tour-overview-hero {
       position: relative;
       height: 100vh;

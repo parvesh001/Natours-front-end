@@ -109,26 +109,28 @@ export default function Reviews() {
           editing={true}
         />
       )}
-      <div className={style["my-reviews-container"]}>
-        {myReviews.map((review) => {
-          return (
-            <SingleReview
-              key={review._id}
-              review={review.review}
-              user={review.user}
-              rating={review.rating}
-              onEditingReview={() =>
-                setReviewState({
-                  _id: review._id,
-                  review: review.review,
-                  rating: review.rating,
-                })
-              }
-              onDeletingReview={() => reviewDeleteHandler(review._id)}
-            />
-          );
-        })}
-      </div>
+      {myReviews.length !== 0 && (
+        <div className={style["my-reviews-container"]}>
+          {myReviews.map((review) => {
+            return (
+              <SingleReview
+                key={review._id}
+                review={review.review}
+                user={review.user}
+                rating={review.rating}
+                onEditingReview={() =>
+                  setReviewState({
+                    _id: review._id,
+                    review: review.review,
+                    rating: review.rating,
+                  })
+                }
+                onDeletingReview={() => reviewDeleteHandler(review._id)}
+              />
+            );
+          })}
+        </div>
+      )}
     </>
   );
 }

@@ -66,10 +66,10 @@ export default function LoginForm() {
         authCtx.setToken(token);
         authCtx.setUser(data.user);
         navigate("/");
-      }, 1000);
+      }, 2000);
     } catch (err) {
       setNotification({ status: "fail", message: err.message });
-      setTimeout(() => setNotification(null), 1000);
+      setTimeout(() => setNotification(null), 2000);
     }
     setIsLoading(false);
   };
@@ -94,6 +94,7 @@ export default function LoginForm() {
         onSubmit={formSubmitHandler}
         authFormTitle="PLEASE LOGIN"
         authFormBtn="Login"
+        formIsValid={formIsValid}
       >
         <Input
           className={emailInputClasses}

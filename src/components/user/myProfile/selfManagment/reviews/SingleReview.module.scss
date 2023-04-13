@@ -1,9 +1,12 @@
+@import '../../../../../assets/sass/mixins';
+@import '../../../../../assets/sass/variables';
+
 .my-review {
   width: 18rem;
   min-width: 18rem;
   height: 16rem;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);
-  background-color: #fff;
+  background-color: $color-text-white;
   padding: 2rem;
   display: grid;
   grid-template-rows: 20% 60% 20%;
@@ -35,7 +38,7 @@
     margin-top: 1rem;
     font-size: 1.5rem;
     .star-active {
-      color: rgb(0, 202, 135);
+      color: $color-ocean-2;
     }
     .star-inactive {
       color: #999;
@@ -44,7 +47,7 @@
   .review-controllers {
     color: #fff;
     font-size: 1.5rem;
-    background: linear-gradient(to bottom right, #7dd56fd9, #28b487d9);
+    background: $gradient-ocean;
     position: absolute;
     right: -60px;
     bottom: 0;

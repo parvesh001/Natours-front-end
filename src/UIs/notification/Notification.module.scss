@@ -1,8 +1,10 @@
+@import '../../assets/sass/variables';
+
 .notification{
-    width: object-fit;
-    max-width: 90vw;
-    background: linear-gradient(to bottom right, #77d269, #27ab81);
-        padding: 1rem 2rem;
+    width: 32rem;
+    max-width: 97vw;
+    background: $gradient-ocean;
+    padding: 1rem 2rem;
     position: fixed;
     top:5rem;
     left: 50%;
@@ -12,8 +14,8 @@
     z-index: 9999;
     color: #fff;
     &.error{
-        background: linear-gradient(to bottom right, #9e1616, #6b1212);
-         color:#d69393;
+        background: $error-background;
+         color:$color-text-white;
     }
     p{
         font-weight: 600;

@@ -63,10 +63,10 @@ export default function UpdatePassword() {
       setTimeout(() => {
         setNotification(null);
         authCtx.setToken(data.token);
-      }, 1000);
+      }, 2000);
     }catch(err){
       setNotification({ status: "fail", message: err.message});
-      setTimeout(() => setNotification(null), 1000);
+      setTimeout(() => setNotification(null),2000);
     }
   };
 
@@ -80,6 +80,7 @@ export default function UpdatePassword() {
       onSubmit={formSubmitHandler}
       authFormTitle="RESET YOUR PASSWORD"
       authFormBtn="Reset"
+      formIsValid={formIsValid}
     >
       {notification && <Notification notification={notification} />}
       <Input

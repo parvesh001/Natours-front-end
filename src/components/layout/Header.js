@@ -14,17 +14,13 @@ export default function Header() {
 
   return (
     <header className={style["main-header"]}>
-      <h4 className={style["brand-name"]}>
-        <Link to="/">Tourista</Link>
-      </h4>
       <div className={style["brand-logo"]}>
-        <img
-          src={`${process.env.REACT_APP_DOMAIN_NAME}/img/logo-white.png`}
-          alt="logo"
-        />
-        <h4>
-          <Link to="/">Tourista</Link>
-        </h4>
+        <Link to="/home">
+          <img
+            src={`${process.env.REACT_APP_DOMAIN_NAME}/img/tourista-white-logo.png`}
+            alt="logo"
+          />
+        </Link>
       </div>
       <div
         className={`${style["navbar-toggle"]} ${isOpen ? style["active"] : ""}`}
@@ -37,20 +33,32 @@ export default function Header() {
       <nav className={`${style["main-nav"]} ${isOpen ? style["active"] : ""}`}>
         {!authCtx.isLoggedIn && (
           <ul className={style["main-nav-list"]}>
-            <li className={style["main-nav-list-item"]} onClick={navbarToggleHandler}>
+            <li
+              className={style["main-nav-list-item"]}
+              onClick={navbarToggleHandler}
+            >
               <Link to="/login">Login</Link>
             </li>
-            <li className={style["main-nav-list-item"]} onClick={navbarToggleHandler}>
+            <li
+              className={style["main-nav-list-item"]}
+              onClick={navbarToggleHandler}
+            >
               <Link to="/signup">Sign Up</Link>
             </li>
           </ul>
         )}
         {authCtx.isLoggedIn && (
           <ul className={style["main-nav-list"]}>
-            <li className={style["main-nav-list-item"]} onClick={navbarToggleHandler}>
+            <li
+              className={style["main-nav-list-item"]}
+              onClick={navbarToggleHandler}
+            >
               <button onClick={() => authCtx.logout()}>Logout</button>
             </li>
-            <li className={style["main-nav-list-item"]} onClick={navbarToggleHandler}>
+            <li
+              className={style["main-nav-list-item"]}
+              onClick={navbarToggleHandler}
+            >
               <Link to="/my-profile/settings" className={style["user-profile"]}>
                 <img
                   className={style.userPhoto}

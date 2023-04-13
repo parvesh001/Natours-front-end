@@ -90,11 +90,11 @@ export default function SignupForm() {
         authCtx.setToken(data.token);
         authCtx.setUser(data.data.user);
         navigate("/");
-      }, 1000);
+      }, 2000);
     } catch (err) {
       console.log(err)
       setNotification({ status: "fail", message: err.message });
-      setTimeout(() => setNotification(null), 1000);
+      setTimeout(() => setNotification(null), 2000);
     }
     setIsLoading(false);
   };
@@ -120,6 +120,7 @@ export default function SignupForm() {
         onSubmit={formSubmitHandler}
         authFormTitle="CREATE YOUR ACCOUNT"
         authFormBtn="Signup"
+        formIsValid={formIsValid}
       >
         {notification && <Notification notification={notification} />}
         <Input
