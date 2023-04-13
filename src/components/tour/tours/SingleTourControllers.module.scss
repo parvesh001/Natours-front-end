@@ -1,0 +1,38 @@
+@import '../../../assets/sass/variables';
+
+.tour-menu {
+    position: relative;
+    cursor: pointer;
+    &:hover .menu-controllers {
+      right: -20px;
+    }
+    .menu-icon {
+      align-self: flex-end;
+      color: $color-ocean-2;
+      font-size: 2rem;
+    }
+    .menu-controllers {
+      background: $gradient-ocean;
+      position: absolute;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      bottom: -20px;
+      border-radius: 50% 0 0 50%;
+      right: -132px;
+      transition: all 0.4s ease-in-out;
+      .controller {
+        color: #fff;
+        font-size: 1.5rem;
+        padding: 0.5rem;
+        transition: all 0.2s ease-in-out;
+        &:hover {
+          transform: scale(1.2);
+        }
+      }
+    }
+  }
+  .controller {
+    font-size: 16px;
+  }

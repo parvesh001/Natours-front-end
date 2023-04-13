@@ -23,6 +23,7 @@ export default function ManageTours() {
     setShowForm(true);
     setTourEditData(null);
   };
+  
   const editTourHandler = (tourEditData) => {
     setShowForm(true);
     setTourEditData(tourEditData);

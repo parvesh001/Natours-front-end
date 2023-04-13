@@ -7,6 +7,7 @@ import Loader from "../../../../../UIs/loader/Loader";
 import Notification from "../../../../../UIs/notification/Notification";
 import NoDataFound from "../../../../../UIs/noDataFound/NoDataFound";
 import style from "./Reviews.module.scss";
+import LoadingPage from "../../../../../UIs/LoadingPage/LoadingPage";
 
 export default function Reviews() {
   const { token } = useContext(AuthContext);
@@ -89,9 +90,12 @@ export default function Reviews() {
 
   if (isLoading) {
     return (
-      <Model>
-        <Loader />
-      </Model>
+      <>
+        <Model>
+          <Loader />
+        </Model>
+        <LoadingPage />
+      </>
     );
   }
 

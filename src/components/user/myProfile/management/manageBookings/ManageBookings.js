@@ -4,9 +4,10 @@ import Loader from "../../../../../UIs/loader/Loader";
 import Model from "../../../../../UIs/Model/Model";
 import Notification from "../../../../../UIs/notification/Notification";
 import StandardBtn from "../../../../../UIs/StandardBtn/StandardBtn";
-import Booking from "./Booking";
 import BookingForm from "../../../bookingForm/BookingForm";
 import NoDataFound from "../../../../../UIs/noDataFound/NoDataFound";
+import Bookings from "./Bookings";
+import LoadingPage from '../../../../../UIs/LoadingPage/LoadingPage'
 import style from "./ManageBookings.module.scss";
 
 export default function ManageBookings() {
@@ -144,9 +145,12 @@ export default function ManageBookings() {
 
   if (isLoading) {
     return (
-      <Model>
-        <Loader />
-      </Model>
+      <>
+        <Model>
+          <Loader />
+        </Model>
+        <LoadingPage/>
+      </>
     );
   }
 
@@ -202,31 +206,15 @@ export default function ManageBookings() {
           )}
         </div>
         {bookings.length === 0 && <NoDataFound />}
-        <div className={style["bookings-container"]}>
-          {bookings.map((booking) => (
-            <Booking
-              key={booking._id}
-              productPhoto={booking.tour.imageCover}
-              productName={booking.tour.name}
-              startDate={new Date(booking.startDate).toDateString()}
-              customerName={booking.user.name}
-              customerEmail={booking.user.email}
-              productPrice={booking.price}
-              onUpdateBooking={() => {
-                setFiltering(false);
-                setUpdating(true);
-                setUpdatingBooking({
-                  id: booking._id,
-                  tour: booking.tour._id,
-                  user: booking.user._id,
-                  price: booking.price,
-                  startDate: booking.startDate,
-                });
-              }}
-              onDeleteBooking={() => deleteBookingHandler(booking._id)}
-            />
-          ))}
-        </div>
+        <Bookings
+          bookings={bookings}
+          onUpdateBooking={(updateData) => {
+            setFiltering(false);
+            setUpdating(true);
+            setUpdatingBooking(updateData);
+          }}
+          onDeleteBooking={(bookingId) => deleteBookingHandler(bookingId)}
+        />
         <div className={style["pagination"]}>
           {totalPages.map((page, ind) => (
             <div

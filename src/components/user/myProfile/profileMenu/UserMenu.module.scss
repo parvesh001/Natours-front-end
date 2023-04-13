@@ -1,0 +1,30 @@
+@import '../../../../assets/sass/variables';
+
+
+.profile-menu-items-list {
+    list-style: none;
+    .profile-menu-item {
+        border-left: 0 solid $color-text-white;
+        padding: .5rem 2rem;
+        margin-block: 1.5rem;
+        display: flex;
+        align-items: center;
+        gap:1.5rem;
+        transition: all .1s ease-in;
+        &:hover, &:has(a.active){
+            border-left: 5px solid $color-text-white;
+
+        }
+      .icon{
+        color: $color-text-white;
+        font-size: 1.5rem;
+        font-weight: 800;
+      }
+      a {
+        color: $color-text-white;
+        text-decoration: none;
+        font-weight: 600;
+      }
+    }
+  
+  }

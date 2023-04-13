@@ -5,11 +5,14 @@ import { useDispatch } from "react-redux";
 import { fetchAllTours } from "./store/tour-actions";
 import Layout from "./components/layout/Layout";
 import Home from "./pages/home/Home";
-import TourOverview from "./pages/tourOverview/TourOverview";
 import Login from "./pages/authentication/Login";
 import Signup from "./pages/authentication/Signup";
 import UserProfile from "./pages/userProfile/UserProfile";
 import NotFound from "./pages/notFound/NotFound";
+import BookingSuccess from "./pages/booking/BookingSuccess";
+import MyBookings from "./pages/userProfile/selfManagment/MyBookings";
+import MyReviews from "./pages/userProfile/selfManagment/MyReviews";
+import MyBilling from "./pages/userProfile/selfManagment/MyBilling";
 import ForgetPassword from "./pages/authentication/ForgetPassword";
 import ResetPassword from "./pages/authentication/ResetPassword";
 import ManageToursPage from "./pages/userProfile/managment/ManageToursPage";
@@ -17,10 +20,9 @@ import ManageUsersPage from "./pages/userProfile/managment/ManageUsersPage";
 import ManageReviewsPage from "./pages/userProfile/managment/ManageReviewsPage";
 import ManageBookingsPage from "./pages/userProfile/managment/ManageBookingsPage";
 import ProfileSettingsPage from "./pages/userProfile/selfManagment/ProfileSettingsPage";
-import BookingSuccess from "./pages/booking/BookingSuccess";
-import MyBookings from "./pages/userProfile/selfManagment/MyBookings";
-import MyReviews from "./pages/userProfile/selfManagment/MyReviews";
-import MyBilling from "./pages/userProfile/selfManagment/MyBilling";
+import TourOverviewPage from "./pages/tourOverview/TourOverviewPage";
+
+
 
 function App() {
   const authCtx = useContext(AuthContext);
@@ -34,7 +36,7 @@ function App() {
     <Layout>
       <Routes>
         <Route path="/home" element={<Home />} />
-        <Route path="/tour/:slug" element={<TourOverview />} />
+        <Route path="/tour/:slug" element={<TourOverviewPage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/forget-password" element={<ForgetPassword />} />

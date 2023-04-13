@@ -6,6 +6,7 @@ import Loader from "../../../../../UIs/loader/Loader";
 import Notification from "../../../../../UIs/notification/Notification";
 import NoDataFound from '../../../../../UIs/noDataFound/NoDataFound'
 import style from "./Bookings.module.scss";
+import LoadingPage from "../../../../../UIs/LoadingPage/LoadingPage";
 
 export default function MyBookings() {
   const { token } = useContext(AuthContext);
@@ -42,9 +43,12 @@ export default function MyBookings() {
 
   if (isLoading) {
     return (
+      <>
       <Model>
         <Loader />
       </Model>
+      <LoadingPage/>
+      </>
     );
   }
 

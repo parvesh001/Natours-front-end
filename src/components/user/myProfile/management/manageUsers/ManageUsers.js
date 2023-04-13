@@ -2,12 +2,13 @@ import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../../../../context/auth-ctx";
 import Model from "../../../../../UIs/Model/Model";
 import Loader from "../../../../../UIs/loader/Loader";
-import User from "./User";
 import Notification from "../../../../../UIs/notification/Notification";
 import StandardBtn from "../../../../../UIs/StandardBtn/StandardBtn";
 import UserForm from "../../../userForm/UserForm";
 import style from "./ManageUsers.module.scss";
 import NoDataFound from "../../../../../UIs/noDataFound/NoDataFound";
+import Users from "./Users";
+import LoadingPage from "../../../../../UIs/LoadingPage/LoadingPage";
 
 export default function ManageUsers() {
   const { token } = useContext(AuthContext);
@@ -51,7 +52,7 @@ export default function ManageUsers() {
   };
 
   const userDeleteHandler = async (userId) => {
-    setIsLoading(true)
+    setIsLoading(true);
     try {
       const response = await fetch(
         `${process.env.REACT_APP_DOMAIN_NAME}/api/v1/users/${userId}`,
@@ -76,7 +77,7 @@ export default function ManageUsers() {
       setNotification({ status: "fail", message: err.message });
       setTimeout(() => setNotification(null), 3000);
     }
-    setIsLoading(false)
+    setIsLoading(false);
   };
 
   const userFormSubmitHandler = (user) => {
@@ -94,9 +95,12 @@ export default function ManageUsers() {
 
   if (isLoading) {
     return (
+      <>
       <Model>
         <Loader />
       </Model>
+      <LoadingPage/>
+      </>
     );
   }
 
@@ -125,33 +129,16 @@ export default function ManageUsers() {
       >
         Add New User
       </StandardBtn>
-      {users.length === 0 && (
-        <NoDataFound/>
-      )}
-      <div className={style["users-container"]}>
-        {users.map((user) => {
-          return (
-            <User
-              key={user._id}
-              id={user._id}
-              name={user.name}
-              email={user.email}
-              photo={user.photo}
-              onEditing={() => {
-                setUserForm(true);
-                setUpdating(true);
-                setUpdateData({
-                  id: user._id,
-                  name: user.name,
-                  email: user.email,
-                  role: user.role,
-                });
-              }}
-              onDeleting={() => userDeleteHandler(user._id)}
-            />
-          );
-        })}
-      </div>
+      {users.length === 0 && <NoDataFound />}
+      <Users
+        users={users}
+        onEditing={(updateData) => {
+          setUserForm(true);
+          setUpdating(true);
+          setUpdateData(updateData);
+        }}
+        onDeleting={(userId) => userDeleteHandler(userId)}
+      />
     </>
   );
 }

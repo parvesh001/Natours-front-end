@@ -11,6 +11,7 @@ import HasError from "../../error/HasError";
 export default function Tours(props) {
   const tourData = useSelector(state => state.tour)
   const authCtx = useContext(AuthContext)
+  
   if (tourData.isLoading)
     return (
       <Model>

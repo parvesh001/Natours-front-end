@@ -1,20 +1,15 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { AuthContext } from "../../context/auth-ctx";
-import TourOverviewBody from "../../components/tour/tourOverview/tourOverviewBody/TourOverviewBody";
-import TourOverviewHero from "../../components/tour/tourOverview/tourOverviewHero/TourOverviewHero";
-import TourOverviewMap from "../../components/tour/tourOverview/tourOverviewMap/TourOverviewMap";
-import TourOverviewProductCard from "../../components/tour/tourOverview/tourOverviewProductCard/TourOverviewProductCard";
-import TourOverviewReview from "../../components/tour/tourOverview/tourOverviewReview/TourOverviewReview";
-import TourOverviewTemplate from "../../components/tour/tourOverview/tourOverviewTemplate/TourOverviewTemplate";
 import AddReviewForm from "../../components/user/addReviewForm/AddReviewForm";
 import Model from "../../UIs/Model/Model";
 import Loader from "../../UIs/loader/Loader";
 import HasError from "../../components/error/HasError";
 import Notification from "../../UIs/notification/Notification";
-import style from "./TourOverview.module.scss";
+import TourOverview from "../../components/tour/tourOverview/TourOverview";
+// import style from "./TourOverviewPage.module.scss";
 
-export default function TourOverview() {
+export default function TourOverviewPage() {
   const authCtx = useContext(AuthContext);
   const { slug } = useParams();
   const [tour, setTour] = useState(null);
@@ -70,33 +65,19 @@ export default function TourOverview() {
 
   if (error) return <HasError message={error} />;
 
-  let tourOverviewReviews;
-  if (!isLoading && !error) {
-    tourOverviewReviews = tour.reviews.map((review) => {
-      return (
-        <TourOverviewReview
-          key={review._id}
-          review={review.review}
-          user={review.user}
-          rating={review.rating}
-        />
-      );
-    });
-  }
-
   let bookedByCurrentUser = false;
-if(!isLoading && tour !== null){
-  for (let i = 0; i < tour.bookingsPerStartDate.length; i++) {
-    const BPSD = tour.bookingsPerStartDate[i];
-    if (BPSD.participants.includes(authCtx.user._id)) {
-      bookedByCurrentUser = true;
-      break;
+  if (!isLoading && tour !== null) {
+    for (let i = 0; i < tour.bookingsPerStartDate.length; i++) {
+      const BPSD = tour.bookingsPerStartDate[i];
+      if (BPSD.participants.includes(authCtx.user._id)) {
+        bookedByCurrentUser = true;
+        break;
+      }
     }
   }
-}
 
   let userCanAddReview = false;
-  if(!isLoading && tour !== null){
+  if (!isLoading && tour !== null) {
     for (let i = 0; i < tour.bookingsPerStartDate.length; i++) {
       const BPSD = tour.bookingsPerStartDate[i];
       if (
@@ -110,7 +91,7 @@ if(!isLoading && tour !== null){
   }
 
   let currentUserAlreadyAddedReview = false;
-  if (!isLoading && tour!==null) {
+  if (!isLoading && tour !== null) {
     for (let i = 0; i < tour.reviews.length; i++) {
       const review = tour.reviews[i];
       if (review.user._id === authCtx.user._id) {
@@ -119,7 +100,6 @@ if(!isLoading && tour !== null){
       }
     }
   }
-
 
   return (
     <>
@@ -133,40 +113,7 @@ if(!isLoading && tour !== null){
           setNotification={(value) => setNotification(value)}
         />
       )}
-      <div className={style["tour-overview"]}>
-        <TourOverviewHero
-          imageCover={tour.imageCover}
-          name={tour.name}
-          duration={tour.duration}
-          startLocation={tour.startLocation}
-        />
-        <TourOverviewBody
-          guides={tour.guides}
-          difficulty={tour.difficulty}
-          maxGroupSize={tour.maxGroupSize}
-          ratingsAverage={tour.ratingsAverage}
-          ratingsQuantity={tour.ratingsQuantity}
-          date={new Date(tour.startDates[0]).toLocaleString("ind", {
-            month: "short",
-            year: "numeric",
-          })}
-          name={tour.name}
-          description={tour.description}
-        />
-        <TourOverviewTemplate images={tour.images} name={tour.name} />
-        <TourOverviewMap />
-        {tour.reviews.length !== 0 && (
-          <section className={style["reviews"]}>{tourOverviewReviews}</section>
-        )}
-        {!bookedByCurrentUser && (
-          <TourOverviewProductCard
-            images={tour.images}
-            duration={tour.duration}
-            tourId={tour._id}
-            bookingsPerStartDate={tour.bookingsPerStartDate}
-          />
-        )}
-      </div>
+      <TourOverview tour={tour} bookedByCurrentUser={bookedByCurrentUser} />
     </>
   );
 }
