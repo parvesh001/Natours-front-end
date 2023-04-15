@@ -23,7 +23,7 @@ export default function TourOverviewPage() {
       setIsLoading(true);
       try {
         const response = await fetch(
-          `http://localhost:8080/api/v1/tours/${slug}`
+          `${process.env.REACT_APP_DOMAIN_NAME}/api/v1/tours/${slug}`
         );
         if (!response.ok) {
           const errorData = await response.json();

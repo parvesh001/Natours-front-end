@@ -118,7 +118,7 @@ export default function UserForm(props) {
     } catch (err) {
       props.setNotification({ status: "fail", message: err.message });
       setTimeout(() => props.setNotification(null), 3000);
-      console.log(err);
+      
     }
     props.setIsLoading(false);
     props.onCancel();

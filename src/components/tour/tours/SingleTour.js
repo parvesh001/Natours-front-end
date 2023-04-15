@@ -2,8 +2,9 @@ import React from "react";
 import { BiCurrentLocation } from "react-icons/bi";
 import { BsFillPeopleFill } from "react-icons/bs";
 import { AiOutlineCalendar, AiOutlineFlag } from "react-icons/ai";
-import style from "./SingleTour.module.scss";
 import SingleTourControllers from "./SingleTourControllers";
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import style from "./SingleTour.module.scss";
 
 export default function SingleTour(props) {
   const bookedByCurrentUser = props.bookedByCurrentUser;
@@ -29,9 +30,10 @@ export default function SingleTour(props) {
         <div className={style["card-header"]}>
           <div className={style["card-picture"]}>
             <div className={style["card-picture-overlay"]} />
-            <img
+            <LazyLoadImage
               src={`${process.env.REACT_APP_DOMAIN_NAME}/img/tours/${props.imageCover}`}
               alt={props.name}
+              effect="blur"
             />
           </div>
           <div className={style["card-heading"]}>

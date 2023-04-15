@@ -89,6 +89,7 @@ export default function ResetPasswordForm(props) {
         onSubmit={formSubmitHandler}
         authFormTitle="RESET YOUR PASSWORD"
         authFormBtn="Reset"
+        formIsValid={formIsValid}
       >
         <Input
           className={passwordInputClasses}

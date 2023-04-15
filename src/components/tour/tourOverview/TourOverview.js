@@ -41,7 +41,7 @@ export default function TourOverview({ tour, bookedByCurrentUser }) {
         description={tour.description}
       />
       <TourOverviewTemplate images={tour.images} name={tour.name} />
-      <TourOverviewMap />
+      {/* <TourOverviewMap /> */}
       {tour.reviews.length !== 0 && (
         <section className={style["reviews"]}>{tourOverviewReviews}</section>
       )}

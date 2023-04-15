@@ -39,15 +39,6 @@ const tourSlice = createSlice({
     populateTours(state, action) {
       state.tours = [...action.payload];
     },
-    bookTour(state, action) {
-      let bookedTourIndex = state.tours.findIndex(
-        (tour) => tour._id === action.payload.tourId
-      );
-      state.tours[bookedTourIndex].tourBookingsDetails.participants.push(
-        action.payload.userId
-      );
-      state.tours[bookedTourIndex].tourBookingsDetails.availableCapacity -= 1;
-    },
     setIsLoading(state, action) {
       state.isLoading = action.payload;
     },

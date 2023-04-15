@@ -10,32 +10,30 @@ import { AuthContext } from "../../../context/auth-ctx";
 import { tourSliceActions } from "../../../store/tour-slice";
 import style from "./TourForm.module.scss";
 
-export default function TourForm(props) {
+export default function TourForm({onClose,tourEditData}) {
   const dispatch = useDispatch();
   const { token } = useContext(AuthContext);
+
   const [tour, setTour] = useState({});
   const [guides, setGuides] = useState([]);
+
   const [basicFormInputs, setBasicFormInputs] = useState({});
   const [geoFormInputs, setGeoFormInputs] = useState({});
+
   const [basicFormIsCompleted, setBasicFormIsCompleted] = useState(false);
   const [geoFormIsCompleted, setGeoFormIsCompleted] = useState(false);
+
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
-
-  let slug;
-  let id;
-  if(props.tourEditData){
-    slug = props.tourEditData.slug
-    id = props.tourEditData.id
-  }
   
   useEffect(() => {
     async function fetchingRelevantData() {
+      setIsLoading(true)
       try {
-        if (slug && id) {
+        if (tourEditData) {
           const response1 = await fetch(
-            `${process.env.REACT_APP_DOMAIN_NAME}/api/v1/tours/${slug}`
+            `${process.env.REACT_APP_DOMAIN_NAME}/api/v1/tours/${tourEditData.slug}`
           );
           if (!response1.ok) {
             const errorData = await response1.json();
@@ -66,7 +64,7 @@ export default function TourForm(props) {
     }
 
     fetchingRelevantData();
-  }, [token, slug, id]);
+  }, [token, tourEditData]);
 
   const tourFormSubmitHandler = async (visualInfo) => {
     setIsLoading(true);
@@ -89,8 +87,8 @@ export default function TourForm(props) {
     };
     let url;
     let method;
-    if (slug && id) {
-      url = `${process.env.REACT_APP_DOMAIN_NAME}/api/v1/tours/${id}`;
+    if (tourEditData) {
+      url = `${process.env.REACT_APP_DOMAIN_NAME}/api/v1/tours/${tourEditData.id}`;
       method = "PATCH";
     } else {
       url = `${process.env.REACT_APP_DOMAIN_NAME}/api/v1/tours`;
@@ -132,16 +130,15 @@ export default function TourForm(props) {
         throw new Error(errorData.message);
       }
       const finalData = await results.json();
-      console.log(finalData)
-      if(!slug && !id){
+     
+      if(!tourEditData){
         dispatch(tourSliceActions.createTour(finalData.data.data));
       }else{
         dispatch(tourSliceActions.updateTour(finalData.data.data));
       }
-      props.onClose();
+      onClose();
     } catch (err) {
       setError(err.message);
-      console.log(err)
     }
     setIsLoading(false);
   };

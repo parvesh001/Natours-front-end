@@ -59,7 +59,7 @@ export default function UpdatePassword() {
         throw new Error(errorData.message)
       }
       const data = await response.json()
-      setNotification({ status: "success", message: "Password Resetted!" });
+      setNotification({ status: "success", message: "Password Changed!" });
       setTimeout(() => {
         setNotification(null);
         authCtx.setToken(data.token);
