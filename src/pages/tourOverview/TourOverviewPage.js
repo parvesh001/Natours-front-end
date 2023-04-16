@@ -7,6 +7,7 @@ import Loader from "../../UIs/loader/Loader";
 import HasError from "../../components/error/HasError";
 import Notification from "../../UIs/notification/Notification";
 import TourOverview from "../../components/tour/tourOverview/TourOverview";
+import LoadingPage from "../../UIs/LoadingPage/LoadingPage";
 // import style from "./TourOverviewPage.module.scss";
 
 export default function TourOverviewPage() {
@@ -58,9 +59,12 @@ export default function TourOverviewPage() {
   };
   if (isLoading)
     return (
+      <>
       <Model>
         <Loader />
       </Model>
+      <LoadingPage/>
+      </>
     );
 
   if (error) return <HasError message={error} />;

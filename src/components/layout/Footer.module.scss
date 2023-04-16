@@ -4,8 +4,9 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 3rem 2rem;
-    height: 15rem;
+    justify-content: center;
+    height: 20rem;
+    gap:10px;
     background: $gradient-ocean-light;
     .brand-logo{
         width: 120px;
@@ -15,7 +16,11 @@
     }
     .footer-navlist{
         display: flex;
+        flex-direction: column;
         list-style: none;
+        @media screen and(min-width:760px) {
+            flex-direction: row;
+        }
         .footer-navlist-item:not(:last-child){
             margin-right:.5rem ;
         }
@@ -33,16 +38,3 @@
     }
 }
 
-@media only screen and (min-width: 481px){
-    .footer{
-        flex-direction: row;
-        justify-content: space-between;
-        padding: 1rem 3rem;
-        .brand-logo{
-            width: 150px;
-            img{
-                width: 100%;
-            }
-        }
-    }
-}

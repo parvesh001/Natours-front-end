@@ -2,10 +2,11 @@ import { useSelector } from "react-redux";
 import { useContext } from "react";
 import { AuthContext } from "../../../context/auth-ctx";
 import SingleTour from "./SingleTour";
-import Loader from "../../../UIs/loader/Loader";
-import Model from "../../../UIs/Model/Model";
-import style from "./Tours.module.scss";
+import Loader from "../../../UIs/loader/Loader"
 import HasError from "../../error/HasError";
+import Model from "../../../UIs/Model/Model";
+import LoadingPage from '../../../UIs/LoadingPage/LoadingPage'
+import style from "./Tours.module.scss";
 
 
 export default function Tours(props) {
@@ -14,9 +15,12 @@ export default function Tours(props) {
   
   if (tourData.isLoading)
     return (
+      <>
       <Model>
         <Loader />
       </Model>
+      <LoadingPage/>
+      </>
     );
 
     if(tourData.error){

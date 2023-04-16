@@ -4,17 +4,20 @@
     padding: 1rem 0rem;
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: 10px;
+    max-width: 97%;
     img{
-      width: 60px;
+      width: 40px;
       border-radius: 50%;
     }
     .form-control{
       position: relative;
+      width: 100%;
         input{
           position: absolute;
           opacity: 0;
           left: 0;
+         width: 100%;
           z-index: -1;
         }
         label{
@@ -33,9 +36,19 @@
     }
     
   }
+
+  @media screen and(min-width:390px) {
+    .change-profile{
+      gap:.5rem;
+      img{
+        width: 55px;
+      }
+    }
+  }
   
   @media screen and(min-width:768px) {
     .change-profile{
+      gap:1rem;
       img{
         width: 100px;
         border-radius: 50%;
