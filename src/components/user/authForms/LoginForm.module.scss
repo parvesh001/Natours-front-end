@@ -3,7 +3,7 @@
 .login-form{
     background: $gradient-ocean-light;
     width: 100vw;
-    height: 75vh;
+    height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -12,7 +12,7 @@
         position: absolute;
         left: 50%;
         transform: translateX(-50%);
-        top:77%;
+        top:74%;
         white-space: nowrap;
         a{
           color:#999;

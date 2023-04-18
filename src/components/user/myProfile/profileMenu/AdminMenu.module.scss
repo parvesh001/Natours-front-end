@@ -3,7 +3,7 @@
 
 .admin-block{
     .admin-block-title{
-      padding:.5rem 2rem;
+      padding:.2rem 2rem;
       h4{
         color:$color-text-white;
         border-bottom: 2px solid $color-text-white;
@@ -13,9 +13,8 @@
     .profile-menu-items-list {
         list-style: none;
         .profile-menu-item {
-            border-left: 0 solid $color-text-white;
-            padding: .5rem 2rem;
-            margin-block: 1.5rem;
+            padding: .2rem 2rem;
+            margin-block: 1rem;
             display: flex;
             align-items: center;
             gap:1.5rem;
@@ -36,4 +35,19 @@
           }
         }
       }
+  }
+
+  @media screen and (min-width:786px) {
+    .admin-block{
+      .admin-block-title{
+        padding:.5rem 2rem;
+      }
+      .profile-menu-items-list {
+          .profile-menu-item {
+              padding: .5rem 2rem;
+              margin-block: 1.5rem;
+          }
+        }
+    }
+  
   }

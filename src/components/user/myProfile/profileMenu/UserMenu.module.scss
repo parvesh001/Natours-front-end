@@ -5,12 +5,16 @@
     list-style: none;
     .profile-menu-item {
         border-left: 0 solid $color-text-white;
-        padding: .5rem 2rem;
-        margin-block: 1.5rem;
+        padding: .2rem 2rem;
+        margin-block: 1rem;
         display: flex;
         align-items: center;
         gap:1.5rem;
         transition: all .1s ease-in;
+        @media screen and(min-width:768px) {
+          padding: .5rem 2rem;
+          margin-block: 1.5rem;
+        }
         &:hover, &:has(a.active){
             border-left: 5px solid $color-text-white;
 
