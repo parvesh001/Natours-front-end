@@ -8,6 +8,7 @@ import Model from "../../../UIs/Model/Model";
 import Loader from "../../../UIs/loader/Loader";
 import { AuthContext } from "../../../context/auth-ctx";
 import { tourSliceActions } from "../../../store/tour-slice";
+import {MdOutlineCancel} from 'react-icons/md'
 import style from "./TourForm.module.scss";
 
 export default function TourForm({onClose,tourEditData}) {
@@ -154,6 +155,7 @@ export default function TourForm({onClose,tourEditData}) {
 
   return (
     <div className={style["tour-form"]}>
+      <MdOutlineCancel className={style["close-form"]} onClick={()=>onClose()}/>
       {!basicFormIsCompleted && (
         <BasicInfoForm
           tourGuides={guides}

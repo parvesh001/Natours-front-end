@@ -7,14 +7,18 @@ const FormModelBackdropShadow = (props) => {
 };
 
 const FormModelContent = (props) => {
-  return <div className={style["model-content"]}>{props.children}</div>;
+  return (
+    <div className={style["model-content"]}>
+      {props.children}
+    </div>
+  );
 };
 
 const FormModel = (props) => {
   return (
     <React.Fragment>
       {ReactDOM.createPortal(
-        <FormModelBackdropShadow onClose={props.onClose}/>,
+        <FormModelBackdropShadow onClose={props.onClose} />,
         document.getElementById("form-model-root")
       )}
       {ReactDOM.createPortal(

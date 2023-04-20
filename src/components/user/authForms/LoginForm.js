@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../context/auth-ctx";
 import useInput from "../../../hooks/use-input";
 import AuthFormLayout from "../../../UIs/authFormLayout/AuthFormLayout";
@@ -23,7 +23,7 @@ export default function LoginForm() {
     userInputBlurHandler: emailBlurHandler,
   } = useInput((value) =>
     /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(value)
-  ); 
+  );
   const {
     userInput: passwordInput,
     userInputIsValid: passwordInputIsValid,
@@ -85,16 +85,15 @@ export default function LoginForm() {
       </Model>
     );
 
-
-
   return (
-    <div className={style['login-form']}>
+    <div className={style["login-form"]}>
       {notification && <Notification notification={notification} />}
       <AuthFormLayout
         onSubmit={formSubmitHandler}
         authFormTitle="PLEASE LOGIN"
         authFormBtn="Login"
         formIsValid={formIsValid}
+        isLogginIn = {true}
       >
         <Input
           className={emailInputClasses}
@@ -118,9 +117,6 @@ export default function LoginForm() {
           label="Password"
         />
       </AuthFormLayout>
-      <div className={style["reset-password-link"]}>
-        <Link to="/forget-password">Forget Your Password</Link>
-      </div>
     </div>
   );
 }

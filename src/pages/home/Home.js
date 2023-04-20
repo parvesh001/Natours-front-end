@@ -3,5 +3,5 @@ import Tours from "../../components/tour/tours/Tours";
 
 export default function Home() {
 
-  return <Tours managing={false}/>;
+  return <Tours managing={false} className="home-tours"/>;
 }

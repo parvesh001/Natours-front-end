@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300&display=swap');
+@import './assets/sass/variables';
 
 
 *,::after,::before{
@@ -9,10 +10,6 @@
 }
 
 html{
-    scroll-behavior: smooth;
+    scroll-behavior: smooth
 }
 
-
-::-webkit-scrollbar {
-    width: 0;
-  }

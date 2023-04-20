@@ -8,28 +8,11 @@
     align-items: center;
     justify-content: center;
     position: relative;
-    .reset-password-link{
-        position: absolute;
-        left: 50%;
-        transform: translateX(-50%);
-        top:74%;
-        white-space: nowrap;
-        a{
-          color:#999;
-          text-decoration: none;
-          &:hover{
-            color:#444;
-          }
-        }
-      }
 }
 
 @media screen and(min-width:768px) {
   .login-form{
     height: 81vh;
-    .reset-password-link{
-      top:67%;
-    }
   }
 }
 @media screen and(min-width:920px) {

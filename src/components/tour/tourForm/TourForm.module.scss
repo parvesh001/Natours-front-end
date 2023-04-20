@@ -4,6 +4,16 @@
   border-radius: 5px;
   width: 96vw;
   height: fit-content;
+  position: relative;
+  .close-form{
+    position: absolute;
+    right: 0;
+    top:0;
+    font-size: 3rem;
+    color: #3e3e3e2e;
+    cursor: pointer;
+
+  }
   @media screen and (min-width: 760px) {
     padding: 2rem;
     width: 90vw;

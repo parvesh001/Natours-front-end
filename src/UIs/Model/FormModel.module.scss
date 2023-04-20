@@ -7,18 +7,16 @@
   }
   
   .model-content {
-    background-color: #fff;
-    position: fixed;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 9999999;
-    transition: all 0.4s ease;
-    height: 100%;
-    overflow-x: scroll;
-    @media screen and (min-width:760px) {
-        height: auto;
-        top: 50%;
-        transform: translateX(-50%) translateY(-50%);
-    }
+      background-color: #fff;
+      position: fixed;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 9999999;
+      transition: all 0.4s ease;
+      overflow-y: scroll;
+      max-height: 90vh;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      border-radius: 5px;
   }
   
