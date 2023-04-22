@@ -1,0 +1,26 @@
+@import '../../assets/sass/variables';
+@import '../../assets/sass/mixins';
+
+.standard-btn-tp{
+    padding: .5rem 1rem;
+    background: transparent;
+    border: 2px solid $color-ocean-2;
+    color: $color-ocean-2;
+    font-weight: 800;
+    font-size: 1rem;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all .2s ease-in-out;
+    z-index: 999;
+    &:hover{
+        transform: translateY(-.2rem);
+        box-shadow:0px 2px 10px $color-ocean-3;
+        text-shadow: 1px 1px 10px $color-ocean-3;
+    }
+}
+
+@media screen and(min-width:768px) {
+    .standard-btn-tp{
+        padding: .8rem 1.5rem;
+    }
+}

@@ -1,0 +1,53 @@
+@import "../../assets/sass/variables";
+@import "../../assets/sass/mixins";
+@import url("https://fonts.googleapis.com/css2?family=Fjalla+One&family=Oswald:wght@700&display=swap");
+
+.content {
+    z-index: 200;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 95vw;
+    width: 65rem;
+    margin-top: 1rem;
+    h1 {
+      font-size: 5rem;
+      text-transform: capitalize;
+      font-family: "Fjalla One", sans-serif;
+      -webkit-text-stroke: 1px $color-ocean-2;
+      color: transparent;
+      position: relative;
+      @media screen and(min-width:915px) {
+        font-size: 6rem;
+        &::before {
+          content: attr(data-text);
+          font-family: "Fjalla One", sans-serif;
+          font-size: 6rem;
+          text-transform: capitalize;
+          position: absolute;
+          width: 0%;
+          height: 100%;
+          top: 0;
+          left: 0;
+          color: $color-ocean-3;
+          -webkit-text-stroke: 1px $color-ocean-2;
+          border-right: 4px solid $color-ocean-3;
+          overflow: hidden;
+          animation: welcome 6s linear infinite;
+          @keyframes welcome {
+            0%,
+            10%,
+            100% {
+              width: 0;
+            }
+            50%,
+            70%,
+            90% {
+              width: 100%;
+            }
+          }
+        }
+      }
+    }
+  }

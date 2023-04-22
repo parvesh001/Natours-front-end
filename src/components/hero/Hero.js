@@ -1,29 +1,34 @@
 import React from "react";
-import { MdOutlineKeyboardDoubleArrowUp } from "react-icons/md";
+import { useSwipeable } from "react-swipeable";
+import HeroVideo from "./HeroVideo";
+import HeroSlogan from "./HeroSlogan";
+import HeroSwipe from "./HeroSwipe";
+import StandardBtnTP from "../../UIs/StandardBtn/StandardBtnTP";
 import styles from "./Hero.module.scss";
 
-export default function Hero() {
+export default function Hero({onSwipeUp, className, style}) {
+  const handlers = useSwipeable(
+    {
+      onSwipedUp: (eventData) => onSwipeUp(),
+    },
+    { preventScrollOnSwipe: true }
+  );
   return (
-    <div className={styles["site-hero"]}>
+    <div className={`${styles['site-hero']} ${styles[className]}`} {...handlers} style={style}>
       <img
-        src={`http://localhost:8080/img/tourista-colored-logo.png`}
+        src={`${process.env.REACT_APP_DOMAIN_APP}/img/tourista-colored-logo.png`}
         alt="site-logo"
       />
-      <div className={styles['hero-overlay']}/>
-      <video className={styles["site-hero-video"]} loop muted autoPlay>
-        <source
-          src={`http://localhost:8080/api/v1/tourista-tours-video`}
-          type="video/mp4"
-        />
-      </video>
-      <div className={styles.swipeUp}>
-        <div className={styles.swipeUp}>
-          <MdOutlineKeyboardDoubleArrowUp className={styles.arrow} />
-        </div>
-      </div>
-      <div className={styles['content']}>
-        <h1 data-text="welcome to tourista tours...">Welcome to tourista tours...</h1>
-      </div>
+      <div className={styles["hero-overlay"]} />
+      <HeroVideo />
+      <HeroSlogan />
+      <HeroSwipe />
+      <StandardBtnTP
+        className={styles["hero-controller"]}
+        onClick={() => onSwipeUp()}
+      >
+        Explore Tours
+      </StandardBtnTP>
     </div>
   );
 }

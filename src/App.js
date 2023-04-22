@@ -8,8 +8,9 @@ import { fetchAllTours } from "./store/tour-actions";
 import Layout from "./components/layout/Layout";
 import Model from "./UIs/Model/Model";
 import Loader from "./UIs/loader/Loader";
+import Home from "./pages/home/Home";
 
-const Home = React.lazy(() => import("./pages/home/Home"));
+
 const Login = React.lazy(() => import("./pages/authentication/Login"));
 const Signup = React.lazy(() => import("./pages/authentication/Signup"));
 const UserProfile = React.lazy(() => import("./pages/userProfile/UserProfile"));
@@ -66,8 +67,8 @@ function App() {
   );
 
   return (
-    <Layout>
-      <Suspense fallback={fallbackContent}>
+    <Suspense fallback={fallbackContent}>
+      <Layout>
         <Routes>
           <Route path="/home" element={<Home />} />
           <Route path="/tour/:slug" element={<TourOverviewPage />} />
@@ -105,8 +106,8 @@ function App() {
           <Route path="/" element={<Navigate replace to="/home" />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
-      </Suspense>
-    </Layout>
+      </Layout>
+    </Suspense>
   );
 }
 
