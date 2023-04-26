@@ -8,7 +8,7 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    max-width: 95vw;
+    max-width: 96vw;
     width: 65rem;
     margin-top: 1rem;
     h1 {
@@ -18,7 +18,7 @@
       -webkit-text-stroke: 1px $color-ocean-2;
       color: transparent;
       position: relative;
-      @media screen and(min-width:915px) {
+      @media screen and(min-width:1080px) {
         font-size: 6rem;
         &::before {
           content: attr(data-text);
