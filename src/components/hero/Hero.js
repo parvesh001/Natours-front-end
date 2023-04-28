@@ -18,6 +18,7 @@ export default function Hero({onSwipeUp, className, style}) {
       <img
         src={`${process.env.REACT_APP_DOMAIN_NAME}/img/tourista-colored-logo.png`}
         alt="site-logo"
+        className={styles['logo']}
       />
       <div className={styles["hero-overlay"]} />
       <HeroVideo />
