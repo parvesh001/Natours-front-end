@@ -5,13 +5,7 @@ export default function HeroVideo() {
   const [videoLoaded, setVideoLoaded] = useState(false);
   return (
     <>
-      {!videoLoaded && (
-        <img
-          className={styles["site-hero-background"]}
-          src={`${process.env.REACT_APP_DOMAIN_NAME}/img/hero.jpg`}
-          alt="hero-background"
-        />
-      )}
+      {!videoLoaded && <div className={styles["site-hero-background"]}/>}
       <video
         className={styles["site-hero-background"]}
         loop

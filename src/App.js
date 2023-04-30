@@ -10,7 +10,6 @@ import Model from "./UIs/Model/Model";
 import Loader from "./UIs/loader/Loader";
 import Home from "./pages/home/Home";
 
-
 const Login = React.lazy(() => import("./pages/authentication/Login"));
 const Signup = React.lazy(() => import("./pages/authentication/Signup"));
 const UserProfile = React.lazy(() => import("./pages/userProfile/UserProfile"));
@@ -67,8 +66,8 @@ function App() {
   );
 
   return (
-    <Suspense fallback={fallbackContent}>
-      <Layout>
+    <Layout>
+      <Suspense fallback={fallbackContent}>
         <Routes>
           <Route path="/home" element={<Home />} />
           <Route path="/tour/:slug" element={<TourOverviewPage />} />
@@ -106,8 +105,8 @@ function App() {
           <Route path="/" element={<Navigate replace to="/home" />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
-      </Layout>
-    </Suspense>
+      </Suspense>
+    </Layout>
   );
 }
 
